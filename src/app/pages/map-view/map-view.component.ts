@@ -28,6 +28,7 @@ export class MapViewComponent {
                 this.map.removeLayer(el);
             }
         });
+        this.mask = '';
     }
     constructor( ) { }
 
