@@ -19,7 +19,7 @@ export class MapWrapperDirective implements OnInit, OnChanges, OnDestroy {
     position: 'topright',
     edit: {
       featureGroup: new L.FeatureGroup(),
-      remove: true,
+      remove: false,
       edit: false
     },
     draw: <L.Control.DrawOptions>{
@@ -50,10 +50,13 @@ export class MapWrapperDirective implements OnInit, OnChanges, OnDestroy {
   ) {
     this.mapWrapper = new LeafletDirectiveWrapper(this._ld);
   }
-
+  getView(): void {
+    console.log('test delete button')
+  }
   ngOnInit() {
 
     this.map = this.mapWrapper.getMap();
+    // initialize the feature group
     this.map.addLayer(this.drawOptions.edit.featureGroup);
 
 
@@ -85,7 +88,9 @@ export class MapWrapperDirective implements OnInit, OnChanges, OnDestroy {
         this.drawOptions.edit.featureGroup.removeLayer(this.layer);
       }
       this.layer = newLayer;
-      this.drawOptions.edit.featureGroup.addLayer(newLayer);
+      this.drawOptions.edit.featureGroup.addLayer(newLayer.bindTooltip('<button class="delete -on" onclick="console.log( ">Delete</button>', {
+        permanent: false
+      }));
     });
   }
 

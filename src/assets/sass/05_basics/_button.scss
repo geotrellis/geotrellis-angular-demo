@@ -1,4 +1,5 @@
 button {
+    font-family: inherit;
     background: none;
     border: none;
     outline: none;
@@ -8,9 +9,9 @@ button {
         color: $icon-hover;
     }
     &.-light {
-        @include buttonify($white);        
+        @include buttonify($white);
     }
     &.-dark {
-        @include buttonify($black);        
+        @include buttonify($black);
     }
 }

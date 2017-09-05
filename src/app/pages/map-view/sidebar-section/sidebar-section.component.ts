@@ -158,7 +158,7 @@ export class SidebarSectionComponent implements OnChanges {
             }
         }));
         this.cards.forEach((el, i) => {
-            if (el.mask !== '') {
+            if (el.hasOwnProperty('mask')) {
                 el.mask = view;
                 this._layerService.getBreaks(el.info.name, el.weights).subscribe(res => {
                     const wms = L.tileLayer.wms(el.wmsServer, {

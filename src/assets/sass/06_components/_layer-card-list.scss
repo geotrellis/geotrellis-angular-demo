@@ -16,7 +16,7 @@
             > .layer-actions {
                 @include disabled;
             }
-            > .layer-text {
+            > .layer-header {
                 > .model-actions {
                     @include disabled;
                 }
@@ -29,7 +29,7 @@
                 }
             }
             &.-on {
-                > .layer-text > .checkbox-label {
+                > .layer-header > .checkbox-label {
                     > .checkbox {
                         + .icon:after {
                             content: "\2002\2002";
@@ -39,7 +39,7 @@
             }
             &.-selected {
                 order: 1;
-                > .layer-text > .checkbox-label {
+                > .layer-header > .checkbox-label {
                     > .checkbox {
                         + .icon:after {
                             color: $black;

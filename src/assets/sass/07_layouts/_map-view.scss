@@ -6,12 +6,13 @@
     > .sidebar-section {
         width: 36rem;
         flex: none;
+        left: 0;
+        
         &.-collapsed {
             position: absolute;
             z-index: 10000;
             width: 10rem;
             height: auto;
-            left: 0;
         }
     }   
     > .map-container {
