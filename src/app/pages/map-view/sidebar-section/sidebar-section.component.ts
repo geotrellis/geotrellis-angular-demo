@@ -39,7 +39,7 @@ export interface LayerCard {
 })
 export class SidebarSectionComponent implements OnChanges {
     @Input() map: L.Map;
-    @Input() mask: L.GeoJSON;
+    @Input() mask = '';
     @Output() onSummaryChange = new EventEmitter<object>();
 
     isCollapsed = false;
@@ -158,7 +158,7 @@ export class SidebarSectionComponent implements OnChanges {
             }
         }));
         this.cards.forEach((el, i) => {
-            if (el.mask !== undefined) {
+            if (el.mask !== '') {
                 el.mask = view;
                 this._layerService.getBreaks(el.info.name, el.weights).subscribe(res => {
                     const wms = L.tileLayer.wms(el.wmsServer, {
@@ -311,7 +311,7 @@ export class SidebarSectionComponent implements OnChanges {
                 }, console.error);
             });
         }
-        if (changes.mask && changes.mask.currentValue !== undefined) {
+        if (changes.mask && changes.mask.currentValue.length > 0) {
             const card = this.filterByName(name, this.cards);
             this.cards.forEach((el, i) => {
                 if (el.mask !== undefined) {
@@ -342,6 +342,35 @@ export class SidebarSectionComponent implements OnChanges {
                             el.summary = res;
                         }, console.error);
                     }
+                }
+            });
+        }
+        if (changes.mask && changes.mask.currentValue.length === 0) {
+            const card = this.filterByName(name, this.cards);
+            this.cards.forEach((el, i) => {
+                if (el.mask !== undefined) {
+                    el.mask = changes.mask.currentValue;
+                    this._layerService.getBreaks(el.info.name, el.weights).subscribe(res => {
+                        const wms = L.tileLayer.wms(el.wmsServer, {
+                            breaks: res,
+                            layers: el.params,
+                            format: 'image/png',
+                            weights: el.weights,
+                            colorRamp: el.palette ? el.palette : '',
+                            mask: '',
+                            transparent: true,
+                            attribution: 'Azavea',
+                            uppercase: el.info.name === 'lm' ? true : false,
+                            opacity: 1,
+                            pane: el.info.name
+                        });
+                        this.map.addLayer(wms);
+                        this.layersMap.set(el.info.name, wms);
+                        if (i === this.cards.length - 1) {
+                            this.layers = Array.from(this.layersMap.values());
+                        }
+                        this.onOpacityChange(el.info.name, el.opacity);
+                    }, console.error);
                 }
             });
         }

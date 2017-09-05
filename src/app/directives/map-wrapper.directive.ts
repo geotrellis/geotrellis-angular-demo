@@ -41,7 +41,7 @@ export class MapWrapperDirective implements OnInit, OnChanges, OnDestroy {
   };
   @Input() isCollapsed = false;
 
-  @Input() mask: string;
+  @Input() mask = '';
   @Output() maskChange = new EventEmitter<string>();
   @Output() polygonCreated = new EventEmitter<boolean>();
 

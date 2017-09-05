@@ -7,7 +7,7 @@ import 'leaflet-draw';
 })
 export class MapViewComponent {
     map: L.Map;
-    mask: string;
+    mask = '';
     options = {
         layers: [
             L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
