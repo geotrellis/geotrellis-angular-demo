@@ -1,0 +1,49 @@
+.params-list {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    list-style: none;
+    > .param-item {
+        display: block;
+        > .desc {
+            width: 5.4rem;
+            margin-right: 1rem;
+        }
+        > .name {
+            display: inline-flex;
+            width: 13rem;
+        }
+        > .num {
+            float: right;
+            border: 0.05rem solid $grey-medium;
+        }
+    }
+}
+
+.scores-list {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    list-style: none;
+    padding: 0 3.5rem 1rem 4rem;;
+    > .score-item {
+        position: relative;
+        display: inline-flex;
+        font-size: 1.3rem;
+        > .weight {
+            margin-right: 1rem;
+            width: 2rem;
+            text-align: right;
+        }
+        > .name {
+            display: inline-flex;
+            width: 20rem;
+        }
+        > .score {
+            right: 0;
+            top: 0;
+            position: absolute;
+            font-weight: $font-weight-bold;
+        }
+    }
+}

@@ -1,0 +1,111 @@
+<!-- layer-text -->
+<div class="layer-text js-location-modeling">
+    <label class="checkbox-label">
+        <input #checkLayer class="checkbox js-location-modeling" type="checkbox" [checked]="show" (click)="showChange.emit(checkLayer.checked)">                       
+        <span class="icon"></span>
+  {{title}}
+  </label>
+
+    <select #preset jsClass="location-modeling" class="dropdown" (input)="getPreset(preset.value)">
+        <option *ngFor="let preset of presets; index as i" [value]="preset.weights" [selected]="i==0">{{preset.text}}</option>
+        <option #custom value="undefined">Custom</option>                            
+    </select>
+    <!-- model-actions -->
+    <span class="model-actions">
+        <ng-container *ngFor="let action of optional">
+            <button gdActionBtn [action]="action" [(expanded)]="this.expanded" [ngClass]="{'-disabled': !this.summary, '-clicked': action==expanded}" [class]="'action icon-'+action"></button>
+        </ng-container>
+    </span>
+    <!-- end of model-actions -->
+</div>
+<!-- end of layer-text -->
+<!-- layer-actions -->
+<div class="layer-actions">
+    <button gdActionBtn [action]="action" [(expanded)]="this.expanded" *ngFor="let action of actions" [class.-clicked]="action==expanded"
+        [class]="'action icon-'+action"></button>
+
+</div>
+<!-- end of layer-actions -->
+<!-- action-panel group -->
+<!-- action-panel -->
+<div class="action-panel" [class.-expanded]="actions[0]==expanded">
+    <p class="text">
+        This model uses the weighted overlay method, which break the location selection problem into three factors.
+    </p>
+    <p class="legend">
+        Avoid
+        <span [ngSwitch]="name" class="colorspan">
+            <ng-container *ngSwitchCase="'lm'">
+                <span class="color" *ngFor="let color of palette" [style.background-color]="color"></span>
+        </ng-container>
+        <ng-container *ngSwitchCase="'chatta'">
+            <button class="selector" (click)="showMenu=!showMenu">
+                    <img class="legend" [src]="'http://demo.geotrellis.com/chatta/img/ramps/'+palette+'.png'">
+                </button>
+            <div *ngIf="showMenu" class="panel">
+                <button *ngFor="let color of palettes" class="legend-btn" (click)="paletteChange.emit(color)">
+                        <img #selection class="image" [src]="'http://demo.geotrellis.com/chatta/img/ramps/'+color+'.png'">
+                    </button>
+            </div>
+        </ng-container>
+        </span>
+        Prefer
+    </p>
+</div>
+<!-- end of action-panel -->
+<!-- action-panel -->
+<div class="action-panel" [class.-expanded]="actions[1]==expanded">
+    <header class="title">
+        <h4 class="heading">Factor</h4>
+        <h4 class="heading">Weight</h4>
+    </header>
+    <ul class="params-list">
+        <gd-param-item *ngFor="let param of params; index as i;" [(weight)]="weights[i]" (weightChange)="this.itemWeightChange()"
+            [param]="param" [class]="'param-item '+param" [range]="range">
+        </gd-param-item>
+    </ul>
+</div>
+<!-- end of action-panel -->
+<!-- action-panel -->
+<div class="action-panel" [class.-expanded]="actions[2]==expanded">
+    <label class="slider-label">
+        Opacity:<span class="value">{{slider.value | percent:0}}</span>
+        <input #slider class="slider" type="range" min="0" max="1" step="0.01" value="0.6" (mouseup)="opacityChange.emit(slider.value)">
+    </label>
+</div>
+<!-- end of action-panel -->
+<!-- summary-panel (optional) -->
+<div *ngIf="summary" class="action-panel" [class.-expanded]="'summary'===expanded">
+    <!-- <table class="summary-table">
+        <tbody>
+            <tr *ngFor="let param of params; index as i">
+                <td style="text-align:right;">{{this.weights[i]}}</td>
+                <td>{{param | rejoin:"_" | titlecase}}</td>
+                <td class="bold" style="text-align:right;">{{this.summary.layers[i]}}</td>
+            </tr>
+            <tr class="warning">
+                <td></td>
+                <td class="bold">Score:</td>
+                <td class="bold" style="text-align:right;">{{this.summary.total}}</td>
+            </tr>
+        </tbody>
+    </table> -->
+    <!-- <header class="title">
+    <h4 class="heading">Factor</h4>
+    <h4 class="heading">Score</h4>
+</header> -->
+    <header class="title">
+        <h4 class="heading">Total Score</h4>
+        <h4 class="heading">{{this.summary.total}}</h4>
+    </header>
+    <ul class="scores-list">
+        <li *ngFor="let param of params; index as i" class="score-item">
+            <span class="weight">{{this.weights[i]}}</span>
+            <span class="name">{{param | rejoin:"_" | titlecase}}</span>
+            <span class="score">{{this.summary.layers[i]}}</span>
+        </li>
+        <!-- <li class="total">Total Score: {{this.summary.total}}</li> -->
+    </ul>
+
+</div>
+<!-- end of summary-panel (optional) -->

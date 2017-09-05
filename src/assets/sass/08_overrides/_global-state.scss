@@ -1,0 +1,10 @@
+
+.-show {
+    @include visible;
+}
+.-hide {
+    @include invisible;
+}
+.-disabled {
+    @include disabled;
+}

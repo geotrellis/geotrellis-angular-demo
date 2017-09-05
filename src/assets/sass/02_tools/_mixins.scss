@@ -1,0 +1,108 @@
+@mixin disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+// for slider
+@mixin shadow($shadow-size, $shadow-blur, $shadow-color) {
+    box-shadow: $shadow-size $shadow-size $shadow-blur $shadow-color, 0 0 $shadow-size lighten($shadow-color, 5%);
+}
+
+@mixin track {
+    cursor: pointer;
+    height: $track-height;
+    transition: all .2s ease;
+    width: $track-width;
+}
+
+@mixin thumb {
+    background: $thumb-color;
+    border: $thumb-border-width solid $thumb-border-color;
+    border-radius: $thumb-radius;
+    cursor: pointer;
+    height: $thumb-height;
+    width: $thumb-width;
+}
+
+// for icon button
+@mixin iconify {
+    outline: none;   
+    &:hover, &.-clicked, &:active {
+        cursor: pointer;
+        color: $icon-hover;
+    }
+    &:before {
+        cursor: pointer;
+        margin-right: 0.5em;
+    }
+}
+
+@mixin delinkify($color : inherit) {
+    &:link, &:visited, &:focus, &:hover, &:active {
+        color: $color;
+        text-decoration: none;
+    }
+}
+
+@mixin buttonify($btncolor : '') {
+    text-align: center;
+    background-color: $btncolor;
+    color: invert($btncolor);    
+    padding: 0.5em 1em;
+    border-radius: 3px;
+    border: 1px solid invert($btncolor);
+    cursor: pointer;
+    &:hover {
+      background-color: invert($btncolor);
+      color: $btncolor;
+    }
+}
+
+@mixin invisible {
+    display: none;
+    pointer-events: none;
+}
+
+@mixin visible {
+    display: block;
+    pointer-events: auto;
+}
+
+@mixin icon-font($content : ' ') {
+    content: $content;
+
+    position: absolute;
+
+    font-family: "fontello";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    /* opacity: .8; */
+
+    /* For safety - reset parent styles, that can break glyph codes*/
+    font-variant: normal;
+    text-transform: none;
+
+    /* fix buttons height, for twitter bootstrap */
+    line-height: 1em;
+
+    /* Animation center compensation - margins should be symmetric */
+    /* remove if not needed */
+    margin-left: .2em;
+
+    /* you can be more comfortable with increased icons size */
+    /* font-size: 120%; */
+
+    /* Font smoothing. That was taken from TWBS */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Uncomment for 3D effect */
+    /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}

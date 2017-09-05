@@ -1,0 +1,32 @@
+.layer-card {
+    background-color: $white;
+    box-shadow: 0.5px 2px 2px 0 rgba(0,0,0,.1), 0 3px 1px -2px rgba(0,0,0,.01), 0 1px 5px 0 rgba(0,0,0,.01); 
+    position: relative;
+    > .layer-actions {
+        position: absolute;
+        float: right;        
+        top: 1.4rem;
+        right: 1.6rem;
+        > .action:before {
+            margin-left: 0.6rem;
+            font-size: 1.8rem;
+            line-height: 2rem;
+        }
+    }
+    &.-on > .layer-text > .checkbox-label {
+        > .checkbox {
+            + .icon:after {
+                content: "\e808";
+                color: $white;      
+                background-color: $black;    
+            }
+        }
+    }
+    &.-removed > .layer-text > .checkbox-label {
+        > .checkbox {
+            + .icon:after {
+                content: "\2002\2002"; 
+            }
+        }
+    }
+}

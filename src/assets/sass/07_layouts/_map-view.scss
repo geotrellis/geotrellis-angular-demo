@@ -1,0 +1,20 @@
+.map-view {
+    display: flex;
+    flex-flow: row-reverse nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    > .sidebar-section {
+        width: 36rem;
+        flex: none;
+        &.-collapsed {
+            position: absolute;
+            z-index: 10000;
+            width: 10rem;
+            height: auto;
+            left: 0;
+        }
+    }   
+    > .map-container {
+        flex: auto;
+    } 
+}

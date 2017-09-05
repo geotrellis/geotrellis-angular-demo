@@ -1,0 +1,9 @@
+select {
+    background: none;
+    outline: none;
+    border-color: lighten($grey-medium, 10%);
+    border-radius: 3px;
+    &.desc, &.num {
+        border: none;
+    }
+}

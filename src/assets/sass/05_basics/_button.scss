@@ -1,0 +1,16 @@
+button {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    cursor: pointer;
+    &:hover, &.-clicked {
+        color: $icon-hover;
+    }
+    &.-light {
+        @include buttonify($white);        
+    }
+    &.-dark {
+        @include buttonify($black);        
+    }
+}

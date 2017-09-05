@@ -1,0 +1,24 @@
+.sidebar-section {    
+    background-color: $grey-light;
+    o
+    > .actions-bar {
+        margin: 0 0 0.5rem;
+    }       
+    &.-collapsed {
+        > .actions-bar, .layer-card-list {
+            @include invisible;            
+        };
+        > .sidebar-header > .projectinfo, .brandinfo {
+            @include invisible;
+        };
+    }
+    > .summary-panel {
+        height: 100%;
+        width: 25rem;
+        position: absolute;
+        top: 0;
+        left: 33rem;
+        background-color: $grey-heavy;
+        z-index: 500;
+    }
+}

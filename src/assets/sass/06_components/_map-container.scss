@@ -1,0 +1,12 @@
+.map-container {
+    max-height: 100vh;
+}
+
+// temp
+.delete-draw {
+    position: absolute;
+    z-index: 1000;
+    left: 37rem;
+    bottom: 1rem;
+    @include buttonify($grey-heavy)
+}

@@ -1,0 +1,33 @@
+<gd-sidebar-header [class.-collaspsed]="isCollapsed" [(isCollapsed)]="isCollapsed"
+    class="sidebar-header">
+</gd-sidebar-header>
+<!-- actions-bar -->
+<div class="actions-bar">
+    <!-- group-actions -->
+    <div class="group-actions">
+        <button gdActionBtn [(expanded)]="this.expanded" [action]="'analyze'" [(expanded)]="expanded" [class]="'action icon-'+ 'analyze'">
+                    Analyze Area
+        </button>
+    </div>
+    <!-- end of group-actions -->
+    <!-- action-panel group-->
+    <!-- action-panel -->
+    <div class="action-panel" [class.-expanded]="expanded=='analyze'">
+        <button class="icon-close" (click)="expanded=undefined"></button>
+        <h3 class="header icon-analyze">Analyze an area of interest</h3>
+        <div class="btn-group">
+            <button class="action analyze-view -dark" (click)="getView()">Analyze current viewport</button>
+            <button class="action draw-area -dark" (click)="startDraw()">Draw area of interest</button>
+        </div>
+    </div>
+    <!-- end of action-panel -->
+    <!-- end of action-panel group -->
+</div>
+<!-- end of actions-bar -->
+<div class="layer-card-list" [class.-action]="action!==undefined&&expanded!=='analyze'">
+    <gd-layer-card *ngFor="let card of cards" [info]="card.info" [(show)]="card.show" (showChange)="onShowChange(card.info.name, card.show)"
+        [(weights)]="card.weights" (weightsChange)="onWeightsChange(card.info.name, card.weights)" [(opacity)]="card.opacity"
+        (opacityChange)="onOpacityChange(card.info.name, card.opacity)" [class]="'layer-card '+card.info.name" [(palette)]="card.palette"
+        (paletteChange)="onPaletteChange(card.info.name, card.palette)" [summary]="card.summary">
+    </gd-layer-card>
+</div>
