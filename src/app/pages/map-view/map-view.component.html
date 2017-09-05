@@ -1,6 +1,6 @@
-<!-- don't change the order, or the sidebar will get the map after being checked -->
-<div gdMapWrapper [(mask)]="mask" #mapContainer class="map-container" [isCollapsed]="sidebar.isCollapsed" [class.-collapsed]="sidebar.isCollapsed"
-    leaflet [leafletOptions]="options" [leafletLayers]="sidebar.layers" (leafletMapReady)="map=$event">
-</div>
-<button class="delete-draw" (click)="deleteDraw()">Clear Polygon</button>
-<gd-sidebar-section #sidebar [(mask)]="mask" [map]="map" class="sidebar-section" [class.-collapsed]="sidebar.isCollapsed"></gd-sidebar-section>
+    <!-- don't change the order, or the sidebar will get the map after being checked -->
+    <div gdMapWrapper [(mask)]="mask" #mapContainer class="map-container" [isCollapsed]="sidebar.isCollapsed" [class.-collapsed]="sidebar.isCollapsed"
+        leaflet [leafletOptions]="options" [leafletLayers]="sidebar.layers" (leafletMapReady)="map=$event">
+    </div>
+    <button class="delete-draw" (click)="deleteDraw()">Clear Polygon</button>
+    <gd-sidebar-section #sidebar [cards]="cards" [(mask)]="mask" [map]="map" class="sidebar-section" [class.-collapsed]="sidebar.isCollapsed"></gd-sidebar-section>

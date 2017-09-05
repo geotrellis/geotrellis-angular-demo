@@ -1,0 +1,15 @@
+<div class="cards-selector">
+    <header class="heading">
+        Demos and Case Studies
+    </header>
+    <!-- <nav>
+        <a routerLink="/mapview/lm" routerLinkActive="active">Philadelphia Location Modeling</a>
+        <a routerLink="/mapview/chatta" routerLinkActive="active">Chattanooga</a>
+    </nav> -->
+    <nav class="card-tiles">
+        <a *ngFor="let card of cards" class="tile" [routerLink]="'/mapview/'+card.info.name" routerLinkActive="active">
+            <div class="title">{{card.info.title}}</div>
+                <img class="thumb" src="http://via.placeholder.com/150x150" alt="Loading...">
+        </a>
+    </nav>
+</div>

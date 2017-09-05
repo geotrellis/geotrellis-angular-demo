@@ -3,6 +3,7 @@
     flex-flow: row-reverse nowrap;
     align-items: stretch;
     justify-content: flex-start;
+    min-height: 100vh;
     > .sidebar-section {
         width: 36rem;
         flex: none;

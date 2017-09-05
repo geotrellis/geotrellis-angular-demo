@@ -30,7 +30,7 @@ export class LayerService {
                         .set('weights', `${weights}`)
                         .set('numBreaks', '10')
                 })
-                    .debounceTime(1000)
+                    // .debounceTime(1000)
                     .retry(3)
                     .map(response => response['classBreaks']);
             default:
@@ -47,7 +47,7 @@ export class LayerService {
                         .set('weights', `${weights}`)
                         .set('polygon', `${polygon}`)
                 })
-                    .debounceTime(1000)
+                    // .debounceTime(1000)
                     .retry(3)
                     .map(response => {
                         return {

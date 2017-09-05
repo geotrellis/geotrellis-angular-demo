@@ -1,12 +1,21 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import * as L from 'leaflet';
-import 'leaflet-draw';
+import 'rxjs/add/operator/switchMap';
+
+import { Component, HostBinding, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+
+import { Location } from '@angular/common';
+
+import { LayerCard } from '../../layer-card.d';
+import { CardService } from '../../services/card.service';
+
 @Component({
     selector: 'gd-map-view',
     templateUrl: './map-view.component.html'
 })
-export class MapViewComponent {
+export class MapViewComponent implements OnInit {
+    @HostBinding('class.map-view') true;
     map: L.Map;
+    cards: LayerCard[] = [];
     mask = '';
     options = {
         layers: [
@@ -22,6 +31,7 @@ export class MapViewComponent {
         center: L.latLng([34.76192255039478, -85.35140991210938]),
         zoomControl: false
     };
+
     deleteDraw(): void {
         this.map.eachLayer(el => {
             if (el.hasOwnProperty('editing')) {
@@ -30,6 +40,23 @@ export class MapViewComponent {
         });
         this.mask = '';
     }
-    constructor( ) { }
+
+    constructor(
+        private cardService: CardService,
+        private route: ActivatedRoute,
+        private location: Location
+    ) {
+        this.route.paramMap
+        .switchMap((params: ParamMap) => this.cardService.getLayerCard(params.get('name')))
+        .subscribe(card => this.cards.push(card));
+    }
+
+    ngOnInit(): void {
+
+      }
+
+    goBack(): void {
+    this.location.back();
+    }
 
 }
