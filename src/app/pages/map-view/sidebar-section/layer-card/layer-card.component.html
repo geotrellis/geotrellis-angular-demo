@@ -14,28 +14,20 @@
 </div>
 <!-- end of layer-header -->
 <!-- layer-selector -->
-<div class="layer-selector">
+<div *ngIf="presets" class="layer-selector">
     <select #preset jsClass="location-modeling" class="dropdown" (input)="getPreset(preset.value)">
-        <option *ngFor="let preset of presets; index as i" [value]="preset.weights" [selected]="i==0">{{preset.text}}</option>
-        <option #custom value="undefined">Custom</option>                            
+        <option *ngFor="let preset of presets; index as i" [value]="preset.value" [selected]="i==0">{{preset.text}}</option>
+        <option *ngIf="preset.value==undefined" #custom [value]="undefined">{{preset.text}}</option>                            
     </select>
 </div>
 <!-- end of layer-selector -->
-<!-- model-actions -->
-<span class="model-actions">
-    <ng-container *ngFor="let action of optional">
-        <button gdActionBtn [action]="action" [(expanded)]="this.expanded" [ngClass]="{'-disabled': !this.summary, '-clicked': action==expanded}" [class]="'action -light icon-'+action">Model Summary</button>
-    </ng-container>
-</span>
-<!-- end of model-actions -->
-
 <!-- action-panel group -->
-<!-- action-panel -->
-<div class="action-panel" [class.-expanded]="actions[0]==expanded">
+<!-- info-action-panel -->
+<div class="action-panel" [class.-expanded]="'info'==expanded">
     <p class="text">
-        This model uses the weighted overlay method, which break the location selection problem into three factors.
+        {{infotext}}
     </p>
-    <p class="legend">
+    <p *ngIf="palette" class="legend">
         Avoid
         <span [ngSwitch]="name" class="colorspan">
             <ng-container *ngSwitchCase="'lm'">
@@ -55,28 +47,48 @@
         Prefer
     </p>
 </div>
-<!-- end of action-panel -->
-<!-- action-panel -->
-<div class="action-panel" [class.-expanded]="actions[1]==expanded">
+<!-- end of info-action-panel -->
+<!-- weight-action-panel -->
+<div class="action-panel" [class.-expanded]="'weight'==expanded">
     <header class="title">
         <h4 class="heading">Factor</h4>
         <h4 class="heading">Weight</h4>
     </header>
     <ul class="params-list">
-        <gd-param-item *ngFor="let param of params; index as i;" [(weight)]="weights[i]" (weightChange)="this.itemWeightChange()"
+        <gd-param-item *ngFor="let param of params; index as i;" [(value)]="values[i]" (valueChange)="this.itemValueChange()"
             [param]="param" [class]="'param-item '+param" [range]="range">
         </gd-param-item>
     </ul>
 </div>
-<!-- end of action-panel -->
-<!-- action-panel -->
-<div class="action-panel" [class.-expanded]="actions[2]==expanded">
+<!-- end of weight-action-panel -->
+<!-- params-action-panel -->
+<div class="action-panel" [class.-expanded]="'params'==expanded">
+        <header class="title">
+            <h4 class="heading">Factor</h4>
+            <h4 class="heading">Selection</h4>
+        </header>
+        <ul class="params-list">
+            <gd-param-item *ngFor="let param of params; index as i;" [(value)]="values[i]" (valueChange)="this.itemValueChange()"
+                [param]="param" [class]="'param-item '+param" [range]="range">
+            </gd-param-item>
+        </ul>
+    </div>
+    <!-- end of weight-action-panel -->
+<!-- opacity-action-panel -->
+<div class="action-panel" [class.-expanded]="'opacity'==expanded">
     <label class="slider-label">
         Opacity:<span class="value">{{slider.value | percent:0}}</span>
         <input #slider class="slider" type="range" min="0" max="1" step="0.01" value="0.6" (mouseup)="opacityChange.emit(slider.value)">
     </label>
 </div>
-<!-- end of action-panel -->
+<!-- end of opacity-action-panel -->
+<!-- model-actions -->
+<span class="model-actions">
+        <ng-container *ngFor="let action of optional">
+            <button gdActionBtn [action]="action" [(expanded)]="this.expanded" [ngClass]="{'-disabled': !this.summary, '-clicked': action==expanded}" [class]="'action -light icon-'+action">Model Summary</button>
+        </ng-container>
+    </span>
+<!-- end of model-actions -->
 <!-- summary-panel (optional) -->
 <div *ngIf="summary" class="action-panel" [class.-expanded]="'summary'===expanded">
     <table class="summary-table">
@@ -87,7 +99,7 @@
                 <th class="bold" style="text-align:right;">{{this.summary.total}}</th>
             </tr>
             <tr *ngFor="let param of params; index as i">
-                <td style="text-align:right;">{{this.weights[i]}}</td>
+                <td style="text-align:right;">{{this.values[i]}}</td>
                 <td>{{param | rejoin:"_" | titlecase}}</td>
                 <td class="bold" style="text-align:right;">{{this.summary.layers[i]}}</td>
             </tr>
@@ -100,7 +112,7 @@
     </header>
     <ul class="scores-list">
         <li *ngFor="let param of params; index as i" class="score-item">
-            <span class="weight">{{this.weights[i]}}</span>
+            <span class="weight">{{this.value[i]}}</span>
             <span class="name">{{param | rejoin:"_" | titlecase}}</span>
             <span class="score">{{this.summary.layers[i]}}</span>
         </li>

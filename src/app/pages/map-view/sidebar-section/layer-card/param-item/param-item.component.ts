@@ -5,10 +5,10 @@ import { Component, OnInit, EventEmitter, HostBinding, Input, Output } from '@an
   templateUrl: './param-item.component.html'
 })
 export class ParamItemComponent implements OnInit {
-  @Input() weight: number;
+  @Input() value: number;
   @Input() param: string;
   @Input() range: number;
-  @Output() weightChange = new EventEmitter<number>();
+  @Output() valueChange = new EventEmitter<number>();
   @HostBinding('class.-inactive') isInactive = false;
 
   abs(num: number): number {
@@ -21,20 +21,20 @@ export class ParamItemComponent implements OnInit {
   neglectParam(desc: number, num: number): void {
     // previous state
     if (this.isInactive) {
-      this.weightChange.emit(desc * num);
+      this.valueChange.emit(desc * num);
     } else {
-      this.weightChange.emit(0);
+      this.valueChange.emit(0);
     }
     this.isInactive  = !this.isInactive;
   }
 
-  updateWeight(desc: number, num: number): void {
-    this.weightChange.emit(desc * num);
+  updateValue(desc: number, num: number): void {
+    this.valueChange.emit(desc * num);
   }
   constructor() { }
 
   ngOnInit() {
-    
+
   }
 
 }

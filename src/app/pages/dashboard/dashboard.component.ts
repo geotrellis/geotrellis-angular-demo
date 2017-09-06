@@ -20,15 +20,18 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.cardService.getLayerCards().then(cards => {
+    this.cardService.getModel().then(cards => {
+      const cardsMap = new Map();
       cards.forEach(el => {
         // only get info to be displayed
-        const card = {
-          name: el.info.name,
-          title: el.info.title,
-          thumb: el.info.thumb
-        };
-        this.cards.push(card);
+        if (!cardsMap.has(el.info.name)) {
+          cardsMap.set(el.info.name, {
+            name: el.info.name,
+            title: el.info.title,
+            thumb: el.info.thumb
+          });
+        }
+        this.cards = Array.from(cardsMap.values());
       });
     });
   }

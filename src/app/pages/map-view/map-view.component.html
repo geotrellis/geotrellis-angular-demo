@@ -1,8 +1,10 @@
-    <!-- don't change the order, or the sidebar will get the map after being checked -->
-    <div gdMapWrapper [(mask)]="mask" [view]="sidebar.view" #mapContainer class="map-container" [isCollapsed]="sidebar.isCollapsed" [class.-collapsed]="sidebar.isCollapsed"
-        leaflet [leafletOptions]="options" [leafletLayers]="sidebar.layers" (leafletMapReady)="map=$event" [(hasMask)]="hasMask">
-    </div>
-    <button class="delete" (click)="deleteDraw()" *ngIf="hasMask">Reset Area</button>
-    <gd-sidebar-section #sidebar [cards]="cards" [(mask)]="mask" [map]="map" class="sidebar-section" [class.-collapsed]="sidebar.isCollapsed" (hasMaskChange)="hasMask=$event">
-    </gd-sidebar-section>
-
+<!-- don't change the order, or the sidebar will get the map after being checked -->
+<div #mapContainer class="map-container"
+    [class.-collapsed]="sidebar.isCollapsed" leaflet [leafletOptions]="options" [leafletLayers]="sidebar.layers" (leafletMapReady)="map=$event">
+    <!-- don't need to mount if no analyze function is provided in the model -->
+    <div *ngIf="cards[0].name!=='lm'" gdMapWrapper [(mask)]="mask" [view]="sidebar.view" [(hasMask)]="hasMask"></div>
+</div>
+<button class="delete" (click)="deleteDraw()" *ngIf="cards[0].name!=='lm'&&hasMask">Reset Area</button>
+<gd-sidebar-section #sidebar [cards]="cards" [(mask)]="mask" [map]="map" class="sidebar-section" [class.-collapsed]="sidebar.isCollapsed"
+    (hasMaskChange)="hasMask=$event">
+</gd-sidebar-section>

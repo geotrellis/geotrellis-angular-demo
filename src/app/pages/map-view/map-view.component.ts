@@ -48,10 +48,10 @@ export class MapViewComponent implements OnInit {
         this.route.paramMap
         .switchMap((params: ParamMap) => this.cardService.getLayerCard(params.get('name')))
         .subscribe(card => {
-            this.cards.push(card);
+            this.cards = card;
             this.options = Object.assign({}, this.options, {
-                zoom: card.info.zoom,
-                center: card.info.center
+                zoom: card[0].info.zoom,
+                center: card[0].info.center
             });
         });
     }

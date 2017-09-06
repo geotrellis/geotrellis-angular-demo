@@ -3,29 +3,26 @@ export interface LayerCard {
         name: string;
         title: string;
         presets?: {
-            weights: number[],
-            text: string,
+            text: string;
+            value: string[] | number[];
         }[];
+        actions: string[];
         optional?: string[];
+        infotext: string;
         prtext?: string[];
         range?: number;
         palettes?: string[];
         thumb: string;
         zoom: number;
         center: number[];
-        api: {
-            wms?: string;
-            point?: string;
-            poly?: string;
-        };
     };
-    weights: number[];
+    values: number[] | string[];
     show: boolean;
     opacity: number;
     mask?: string;
     params: string;
-    wmsServer: string;
-    palette: string[] | string;
+    server: string;
+    palette?: string[] | string;
     summary?: {
         layers: number[],
         total: number

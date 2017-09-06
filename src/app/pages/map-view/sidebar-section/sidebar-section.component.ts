@@ -1,5 +1,4 @@
 import { Component, ContentChild, ElementRef, EventEmitter, Input, OnInit, OnChanges, Output, Renderer2, ViewChild } from '@angular/core';
-import { Location } from '@angular/common';
 
 import { LayerService } from '../../../services/layer.service';
 import * as L from 'leaflet';
@@ -23,11 +22,6 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
 
     isCollapsed = false;
     expanded: string;
-
-    colorLM: string[] = ['#A65034', '#E3D3C2', '#D0DBE1', '#5891C1'];
-    colorDomain: number[] = [0, 0.5, 0.6, 1];
-    colorNumber = 10;
-    colorPalette: string[];
 
     layersMap: Map<string, L.Layer> = new Map();
 
@@ -57,12 +51,12 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
         this.cards.forEach((el, i) => {
             if (el.hasOwnProperty('mask')) {
                 el.mask = view;
-                this._layerService.getBreaks(el.info.name, el.weights).subscribe(res => {
-                    const wms = L.tileLayer.wms(el.wmsServer, {
+                this._layerService.getBreaks(el.info.name, el.values).subscribe(res => {
+                    const wms = L.tileLayer.wms(el.server, {
                         breaks: res,
                         layers: el.params,
                         format: 'image/png',
-                        weights: el.weights,
+                        weights: el.values,
                         colorRamp: el.palette ? el.palette : '',
                         mask: view,
                         transparent: true,
@@ -79,7 +73,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
                     this.onOpacityChange(el.info.name, el.opacity);
                 }, console.error);
                 if (el.hasOwnProperty('summary')) {
-                    this._layerService.getSummary(el.info.name, el.weights, el.mask).subscribe(res => {
+                    this._layerService.getSummary(el.info.name, el.values, el.mask).subscribe(res => {
                         el.summary = res;
                     }, console.error);
                 }
@@ -125,12 +119,12 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
     }
     onPaletteChange(name: string, palette: string): void {
         const card = this.filterByName(name, this.cards);
-        this._layerService.getBreaks(card.info.name, card.weights).subscribe(res => {
-            const wms = L.tileLayer.wms(card.wmsServer, {
+        this._layerService.getBreaks(card.info.name, card.values).subscribe(res => {
+            const wms = L.tileLayer.wms(card.server, {
                 breaks: res,
                 layers: card.params,
                 format: 'image/png',
-                weights: card.weights,
+                weights: card.values,
                 transparent: true,
                 colorRamp: palette,
                 mask: card.mask ? card.mask : '',
@@ -145,14 +139,14 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
         }, console.error);
         this.onOpacityChange(name, card.opacity);
     }
-    onWeightsChange(name: string, layer: L.Layer): void {
+    onValuesChange(name: string, layer: L.Layer): void {
         const card = this.filterByName(name, this.cards);
-        this._layerService.getBreaks(card.info.name, card.weights).subscribe(res => {
-            const wms = L.tileLayer.wms(card.wmsServer, {
+        this._layerService.getBreaks(card.info.name, card.values).subscribe(res => {
+            const wms = L.tileLayer.wms(card.server, {
                 breaks: res,
                 layers: card.params,
                 format: 'image/png',
-                weights: card.weights,
+                weights: card.values,
                 transparent: true,
                 colorRamp: card.palette ? card.palette : '',
                 mask: card.mask ? card.mask : '',
@@ -166,22 +160,17 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
 
         }, console.error);
         this.onOpacityChange(name, card.opacity);
-        if (card.hasOwnProperty('mask')) {
-            this._layerService.getSummary(card.info.name, card.weights, card.mask).subscribe(res => {
+        if (card.hasOwnProperty('mask') && card.mask !== '') {
+            this._layerService.getSummary(card.info.name, card.values, card.mask).subscribe(res => {
                 card.summary = res;
             }, console.error);
         }
-    }
-    // if there will be back button;
-    goBack(): void {
-        this.location.back();
     }
 
     constructor(
         private _el: ElementRef,
         private _rd: Renderer2,
         private _layerService: LayerService,
-        private location: Location
     ) {
     }
     ngOnInit() {
@@ -193,12 +182,12 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
         if (changes.map && changes.map.currentValue !== undefined) {
             this.cards.forEach(el => {
                 this.map.createPane(el.info.name);
-                this._layerService.getBreaks(el.info.name, el.weights).subscribe(res => {
-                    const wms = L.tileLayer.wms(el.wmsServer, {
+                this._layerService.getBreaks(el.info.name, el.values).subscribe(res => {
+                    const wms = L.tileLayer.wms(el.server, {
                         breaks: res,
                         layers: el.params,
                         format: 'image/png',
-                        weights: el.weights,
+                        weights: el.values,
                         colorRamp: el.palette ? el.palette : '',
                         mask: el.mask ? el.mask : '',
                         transparent: true,
@@ -216,18 +205,16 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
         }
 
         if (changes.mask && changes.mask.currentValue.length > 0) {
-            console.log(changes.mask)
-
             const card = this.filterByName(name, this.cards);
             this.cards.forEach((el, i) => {
                 if (el.hasOwnProperty('mask')) {
                     el.mask = changes.mask.currentValue;
-                    this._layerService.getBreaks(el.info.name, el.weights).subscribe(res => {
-                        const wms = L.tileLayer.wms(el.wmsServer, {
+                    this._layerService.getBreaks(el.info.name, el.values).subscribe(res => {
+                        const wms = L.tileLayer.wms(el.server, {
                             breaks: res,
                             layers: el.params,
                             format: 'image/png',
-                            weights: el.weights,
+                            weights: el.values,
                             colorRamp: el.palette ? el.palette : '',
                             mask: el.mask,
                             transparent: true,
@@ -244,7 +231,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
                         this.onOpacityChange(el.info.name, el.opacity);
                     }, console.error);
                     if (el.hasOwnProperty('summary')) {
-                        this._layerService.getSummary(el.info.name, el.weights, el.mask).subscribe(res => {
+                        this._layerService.getSummary(el.info.name, el.values, el.mask).subscribe(res => {
                             el.summary = res;
                         }, console.error);
                     }
@@ -256,12 +243,12 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
             this.cards.forEach((el, i) => {
                 if (el.hasOwnProperty('mask')) {
                     el.mask = changes.mask.currentValue;
-                    this._layerService.getBreaks(el.info.name, el.weights).subscribe(res => {
-                        const wms = L.tileLayer.wms(el.wmsServer, {
+                    this._layerService.getBreaks(el.info.name, el.values).subscribe(res => {
+                        const wms = L.tileLayer.wms(el.server, {
                             breaks: res,
                             layers: el.params,
                             format: 'image/png',
-                            weights: el.weights,
+                            weights: el.values,
                             colorRamp: el.palette ? el.palette : '',
                             mask: '',
                             transparent: true,

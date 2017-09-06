@@ -6,22 +6,34 @@
     position: relative;
     flex-flow: wrap;
 
-    > .brandlogo {
-        width: 2.5rem;
-        height: 2.5rem;
-    }
-    > .brandinfo {
-        display: inline-flex;
-        margin: 0;
-        padding-left: 1rem;
-        font: $font-title;
-        font-weight: $font-weight-bold;
-        > .subtitle {
+    > .home-link {
+        text-decoration: none;
+        color: inherit;
+
+        > .brandlogo {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+
+        > .brandinfo {
+            display: inline-flex;
+            margin: 0;
             padding-left: 1rem;
-            font-weight: $font-weight-normal;
-            color: $grey-medium;
+            font: $font-title;
+            font-weight: $font-weight-bold;
+
+            &:hover {
+                color: $icon-hover;
+            }
+
+            > .subtitle {
+                padding-left: 1rem;
+                font-weight: $font-weight-normal;
+                color: $grey-medium;
+            }
         }
     }
+    
     > .resizeicon {
         position: absolute;
         top: 1.8rem;

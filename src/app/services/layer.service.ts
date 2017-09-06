@@ -11,13 +11,13 @@ export class LayerService {
         private _http: HttpClient
     ) { }
 
-    getBreaks(name: string, weights: number[]): any {
+    getBreaks(name: string, values: number[] | string[]): any {
         switch (name) {
             case 'lm':
                 return this._http.get(`https://geotrellis.io/gt/weighted-overlay/breaks`, {
                     params: new HttpParams()
                         .set('layers', 'philly_bars,philly_grocery_stores,philly_rail_stops')
-                        .set('weights', `${weights}`)
+                        .set('weights', `${values}`)
                         .set('numBreaks', '20')
                 })
                     .debounceTime(1000)
@@ -27,7 +27,7 @@ export class LayerService {
                 return this._http.get(`http://demo.geotrellis.com/chatta/gt/breaks`, {
                     params: new HttpParams()
                         .set('layers', 'ImperviousSurfaces_Barren Lands_Open Water,DevelopedLand,Wetlands,ForestedLands,Non-workingProtectedOrPublicLands,PublicallyOwnedWorkingLands,PrivatelyOwnedWorkingLandsWithEasements,FarmlandWithoutPrimeAgriculturalSoils,FarmlandOrForestedLandsWithPrimeAgriculturalSoils')
-                        .set('weights', `${weights}`)
+                        .set('weights', `${values}`)
                         .set('numBreaks', '10')
                 })
                     // .debounceTime(1000)
@@ -38,13 +38,14 @@ export class LayerService {
         }
     }
 
-    getSummary(name: string, weights: number[], polygon: string): any {
+    getSummary(name: string, values: number[] | string[], polygon: string): any {
+
         switch (name) {
             case 'chatta':
                 return this._http.get(`http://demo.geotrellis.com/chatta/gt/sum`, {
                     params: new HttpParams()
                         .set('layers', 'ImperviousSurfaces_Barren Lands_Open Water,DevelopedLand,Wetlands,ForestedLands,Non-workingProtectedOrPublicLands,PublicallyOwnedWorkingLands,PrivatelyOwnedWorkingLandsWithEasements,FarmlandWithoutPrimeAgriculturalSoils,FarmlandOrForestedLandsWithPrimeAgriculturalSoils')
-                        .set('weights', `${weights}`)
+                        .set('weights', `${values}`)
                         .set('polygon', `${polygon}`)
                 })
                     // .debounceTime(1000)

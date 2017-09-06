@@ -12,16 +12,15 @@ export class LayerCardComponent implements OnInit, OnChanges {
     @Input() opacity: number;
     @Output() opacityChange = new EventEmitter<number>();
 
-    @Input() weights: number[] = [];
-    @Output() weightsChange = new EventEmitter<number[]>();
+    @Input() values: number[] = [];
+    @Output() valuesChange = new EventEmitter<number[]>();
 
     @Input() info: any;
     name: string;
     title: string;
-    presets: {
-        weights: number[],
-        text: string
-    };
+    presets: any[];
+    actions: string[];
+    infotext: string;
     range: number;
 
     params: string[];
@@ -34,11 +33,10 @@ export class LayerCardComponent implements OnInit, OnChanges {
     @Output() paletteChange = new EventEmitter<string>();
     palettes: string[];
 
-    actions: string[] = ['info', 'weight', 'opacity'];
     optional: string[];
 
-    itemWeightChange(): void {
-        this.weightsChange.emit(this.weights);
+    itemValueChange(): void {
+        this.valuesChange.emit(this.values);
     }
     toAbs(val: number): number {
         return Math.abs(val);
@@ -48,14 +46,18 @@ export class LayerCardComponent implements OnInit, OnChanges {
         const valArray = val.split(',').map(el => {
             return Number(el);
         });
-        if (valArray.length > 1) {
-            this.weightsChange.emit(valArray);
-        } else {
+        console.log(valArray);
+        if (!isNaN(valArray[0])) {
+            this.valuesChange.emit(valArray);
+
+        } else if (this.actions.includes('weight')) {
             this.expanded = 'weight';
+        } else if (this.actions.includes('params')) {
+            this.expanded = 'params';
         }
     }
 
-    constructor( ) { }
+    constructor() { }
 
     ngOnInit() {
         this.name = this.info.name;
@@ -65,6 +67,8 @@ export class LayerCardComponent implements OnInit, OnChanges {
         this.optional = this.info.optional;
         this.palettes = this.info.palettes;
         this.presets = this.info.presets;
+        this.actions = this.info.actions;
+        this.infotext = this.info.infotext;
     }
 
     ngOnChanges(changes) {

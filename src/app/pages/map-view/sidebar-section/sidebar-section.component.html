@@ -1,13 +1,13 @@
-<gd-sidebar-header [class.-collaspsed]="isCollapsed" [(isCollapsed)]="isCollapsed"
-    class="sidebar-header">
+<gd-sidebar-header [class.-collaspsed]="this.isCollapsed" [(isCollapsed)]="isCollapsed" class="sidebar-header">
 </gd-sidebar-header>
+
 <!-- actions-bar -->
-<div class="actions-bar">
+<div *ngIf="cards[0].info.name!=='lm'" class="actions-bar">
     <!-- group-actions -->
     <div class="group-actions">
-        <button gdActionBtn [(expanded)]="this.expanded" [action]="'analyze'" [(expanded)]="expanded" [class]="'action icon-'+ 'analyze'">
-                    Analyze Area
-        </button>
+        <button gdActionBtn [(expanded)]="expanded" [action]="'analyze'" [(expanded)]="expanded" [class]="'action icon-'+ 'analyze'">
+                        Analyze Area
+            </button>
     </div>
     <!-- end of group-actions -->
     <!-- action-panel group-->
@@ -26,9 +26,8 @@
 <!-- end of actions-bar -->
 <div class="layer-card-list" [class.-action]="action!==undefined&&expanded!=='analyze'">
     <gd-layer-card *ngFor="let card of cards" [info]="card.info" [(show)]="card.show" (showChange)="onShowChange(card.info.name, card.show)"
-        [(weights)]="card.weights" (weightsChange)="onWeightsChange(card.info.name, card.weights)" [(opacity)]="card.opacity"
-        (opacityChange)="onOpacityChange(card.info.name, card.opacity)" [class]="'layer-card '+card.info.name" [(palette)]="card.palette"
-        (paletteChange)="onPaletteChange(card.info.name, card.palette)" [summary]="card.summary">
+        [(values)]="card.values" (valuesChange)="onValuesChange(card.info.name, card.values)" [(opacity)]="card.opacity" (opacityChange)="onOpacityChange(card.info.name, card.opacity)"
+        [class]="'layer-card '+card.info.name" [(palette)]="card.palette" (paletteChange)="onPaletteChange(card.info.name, card.palette)"
+        [summary]="card.summary">
     </gd-layer-card>
 </div>
-<button class="back icon-caret-left" (click)="goBack()">Go Back</button>
