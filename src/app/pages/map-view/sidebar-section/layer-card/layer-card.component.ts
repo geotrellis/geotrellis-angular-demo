@@ -13,9 +13,11 @@ export class LayerCardComponent implements OnInit, OnChanges {
     @Output() opacityChange = new EventEmitter<number>();
 
     @Input() values: number[] = [];
-    @Output() valuesChange = new EventEmitter<number[]>();
+    @Output() valuesChange = new EventEmitter<any>();
 
     @Input() info: any;
+
+    @Input() isSingle: boolean;
     name: string;
     title: string;
     presets: any[];
@@ -44,16 +46,22 @@ export class LayerCardComponent implements OnInit, OnChanges {
 
     getPreset(val: string): void {
         const valArray = val.split(',').map(el => {
-            return Number(el);
-        });
-        console.log(valArray);
-        if (!isNaN(valArray[0])) {
+            if (el === 'undefined') {
+                if (this.actions.includes('weight')) {
+                    this.expanded = 'weight';
+                } else if (this.actions.includes('params')) {
+                    this.expanded = 'params';
+                }
+                return undefined;
+                // /\d/.exec('') - find number; /\D/.exec('') - find not number
+            } else if (/\d/.test(el)) {
+                    return Number(el);
+                } else {
+                    return el;
+                }
+            });
+        if (valArray[0] !== undefined) {
             this.valuesChange.emit(valArray);
-
-        } else if (this.actions.includes('weight')) {
-            this.expanded = 'weight';
-        } else if (this.actions.includes('params')) {
-            this.expanded = 'params';
         }
     }
 

@@ -35,7 +35,7 @@ export class MapWrapperDirective implements OnInit, OnChanges, OnDestroy {
       polygon: false
     }
   };
-  @Input() isCollapsed = false;
+  @Input() isCollapsed: boolean;
 
   @Input() mask = '';
   @Output() maskChange = new EventEmitter<string>();
@@ -102,7 +102,7 @@ export class MapWrapperDirective implements OnInit, OnChanges, OnDestroy {
       this.drawOptions.edit.featureGroup.addLayer(changes.view.currentValue);
     }
       if (changes.isCollapsed && !changes.isCollapsed.firstChange && changes.isCollapsed.currentValue !== changes.isCollapsed.previousValue) {
-          setTimeout(() => {
+        setTimeout(() => {
               this.map.invalidateSize({
                   animate: true,
                   duration: 0.1,

@@ -1,8 +1,11 @@
 <!-- layer-header -->
 <div class="layer-header js-location-modeling">
     <label class="checkbox-label">
-        <input #checkLayer class="checkbox js-location-modeling" type="checkbox" [checked]="show" (click)="showChange.emit(checkLayer.checked)">                       
-        <span class="icon"></span>
+        <ng-container *ngIf="!isSingle">
+                <input #checkLayer class="checkbox js-location-modeling" type="checkbox" [checked]="show" (click)="showChange.emit(checkLayer.checked)">                       
+                <span class="icon"></span>
+        </ng-container>
+             
   {{title}}
   </label>
     <!-- layer-actions -->
@@ -14,7 +17,7 @@
 </div>
 <!-- end of layer-header -->
 <!-- layer-selector -->
-<div *ngIf="presets" class="layer-selector">
+<div *ngIf="presets" class="layer-selector" [class.-single]="isSingle">
     <select #preset jsClass="location-modeling" class="dropdown" (input)="getPreset(preset.value)">
         <option *ngFor="let preset of presets; index as i" [value]="preset.value" [selected]="i==0">{{preset.text}}</option>
         <option *ngIf="preset.value==undefined" #custom [value]="undefined">{{preset.text}}</option>                            

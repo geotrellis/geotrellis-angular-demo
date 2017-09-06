@@ -101,17 +101,17 @@ export const LAYERCARDS: LayerCard[] = [
         info: {
             name: 'pointcloud',
             title: 'Point Cloud',
-            zoom: 8.4,
+            zoom: 12,
             center: [35.91157655376172, -106.55622482299805],
             presets: [{
                 text: 'TIN, Hillshade, Snow On',
-                value: ['TIN', 'Hillshade', 'Snow_On']
+                value: ['TIN', 'hillshade', 'mar10idw']
             }, {
                 text: 'IDW, Hillshade, Snow On',
-                value: ['IDW', 'Hillshade', 'Snow_On']
+                value: ['IDW', 'hillshade', 'mar10idw']
             }, {
                 text: 'TIN, Color Ramp, Snow Off',
-                value: ['TIN', 'Color_Ramp', 'Snow_Off']
+                value: ['TIN', 'png', 'jul10idw']
             }, {
                 text: 'Custom',
                 value: undefined
@@ -129,7 +129,7 @@ export const LAYERCARDS: LayerCard[] = [
         info: {
             name: 'pointcloud',
             title: 'Change Detection',
-            zoom: 8.4,
+            zoom: 12,
             center: [35.91157655376172, -106.55622482299805],
             actions: ['info', 'opacity'],
             infotext: 'compare two datasets',
@@ -139,7 +139,7 @@ export const LAYERCARDS: LayerCard[] = [
         values: ['TIN', 'Hillshade', 'Snow_On'],
         show: false,
         opacity: 0.6,
-        server: 'http://demo.geotrellis.com/chatta/gt/wo',
+        server: 'http://ec2-54-87-204-186.compute-1.amazonaws.com/tms/diff-tms/png/mar10idw/jul10idw/',
     },
 ];
 

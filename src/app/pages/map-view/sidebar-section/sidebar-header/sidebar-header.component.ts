@@ -1,5 +1,5 @@
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
-
+import { Location } from '@angular/common';
 @Component({
     selector: 'gd-sidebar-header',
     templateUrl: './sidebar-header.component.html'
@@ -11,6 +11,12 @@ export class SidebarHeaderComponent {
     resizeSidebar(): void {
         this.isCollapsedChange.emit(!this.isCollapsed);
     }
-    constructor() { }
+
+    goBack() {
+        this.location.back();
+    }
+    constructor(
+        private location: Location
+    ) { }
 
 }

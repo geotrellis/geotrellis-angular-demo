@@ -16,6 +16,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
     @Input() cards: LayerCard[];
     @Input() mask = '';
     view: L.Rectangle;
+    isSingle: boolean;
     @Output() maskChange = new EventEmitter<string>();
     @Output() onSummaryChange = new EventEmitter<object>();
     @Output() hasMaskChange = new EventEmitter<boolean>();
@@ -174,12 +175,17 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
     ) {
     }
     ngOnInit() {
+        this.isSingle = (this.cards && this.cards.length === 1) ? true : false;
         // for debugging
         // console.log(this.cards, 'init');
+       
     }
 
     ngOnChanges(changes) {
         if (changes.map && changes.map.currentValue !== undefined) {
+            const layer = L.tileLayer('http://ec2-54-87-204-186.compute-1.amazonaws.com/tms/diff-tms/png/mar10idw/jul10idw/{z}/{x}/{y}');
+            layer.addTo(this.map);
+            console.log('added');
             this.cards.forEach(el => {
                 this.map.createPane(el.info.name);
                 this._layerService.getBreaks(el.info.name, el.values).subscribe(res => {
