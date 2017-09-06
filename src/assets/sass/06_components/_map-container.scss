@@ -3,10 +3,10 @@
 }
 
 // temp
-.delete-draw {
+.delete {
     position: absolute;
-    z-index: 1000;
     left: 37rem;
-    bottom: 1rem;
+    z-index: 1000;
+    margin-top: 1rem;
     @include buttonify($grey-heavy)
 }

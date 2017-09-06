@@ -3,10 +3,10 @@ import 'rxjs/add/operator/switchMap';
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
-import { Location } from '@angular/common';
-
 import { LayerCard } from '../../layer-card.d';
 import { CardService } from '../../services/card.service';
+
+import * as L from 'leaflet';
 
 @Component({
     selector: 'gd-map-view',
@@ -14,6 +14,7 @@ import { CardService } from '../../services/card.service';
 })
 export class MapViewComponent implements OnInit {
     @HostBinding('class.map-view') true;
+    hasMask = false;
     map: L.Map;
     cards: LayerCard[] = [];
     mask = '';
@@ -25,10 +26,8 @@ export class MapViewComponent implements OnInit {
                 maxZoom: 19
             })
         ],
-        // zoom: 11,
-        zoom: 8.4,
-        // center: L.latLng([39.992114502787494, -75.13412475585939])
-        center: L.latLng([34.76192255039478, -85.35140991210938]),
+        zoom: undefined,
+        center: undefined,
         zoomControl: false
     };
 
@@ -39,24 +38,25 @@ export class MapViewComponent implements OnInit {
             }
         });
         this.mask = '';
+        this.hasMask = false;
     }
 
     constructor(
         private cardService: CardService,
         private route: ActivatedRoute,
-        private location: Location
     ) {
         this.route.paramMap
         .switchMap((params: ParamMap) => this.cardService.getLayerCard(params.get('name')))
-        .subscribe(card => this.cards.push(card));
+        .subscribe(card => {
+            this.cards.push(card);
+            this.options = Object.assign({}, this.options, {
+                zoom: card.info.zoom,
+                center: card.info.center
+            });
+        });
     }
 
     ngOnInit(): void {
 
       }
-
-    goBack(): void {
-    this.location.back();
-    }
-
 }

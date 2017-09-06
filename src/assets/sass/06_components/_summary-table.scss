@@ -1,0 +1,11 @@
+.summary-table > tbody > tr {
+    vertical-align: top;
+
+    &.heading {
+        font: $font-subheader
+    }
+    
+    > :nth-child(2) {
+        padding: 0 1rem;
+    }
+}

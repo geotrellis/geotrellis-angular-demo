@@ -2,14 +2,22 @@ export interface LayerCard {
     info: {
         name: string;
         title: string;
-        presets: [{
+        presets?: {
             weights: number[],
             text: string,
-        }];
+        }[];
         optional?: string[];
-        prtext: string[];
-        range: number;
+        prtext?: string[];
+        range?: number;
         palettes?: string[];
+        thumb: string;
+        zoom: number;
+        center: number[];
+        api: {
+            wms?: string;
+            point?: string;
+            poly?: string;
+        };
     };
     weights: number[];
     show: boolean;
@@ -17,11 +25,9 @@ export interface LayerCard {
     mask?: string;
     params: string;
     wmsServer: string;
-    sumServer?: string;
     palette: string[] | string;
     summary?: {
         layers: number[],
         total: number
     };
 }
-

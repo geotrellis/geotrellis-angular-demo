@@ -1,4 +1,6 @@
 import { Component, ContentChild, ElementRef, EventEmitter, Input, OnInit, OnChanges, Output, Renderer2, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
+
 import { LayerService } from '../../../services/layer.service';
 import * as L from 'leaflet';
 import 'leaflet-draw';
@@ -14,7 +16,10 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
     @Input() map: L.Map;
     @Input() cards: LayerCard[];
     @Input() mask = '';
+    view: L.Rectangle;
+    @Output() maskChange = new EventEmitter<string>();
     @Output() onSummaryChange = new EventEmitter<object>();
+    @Output() hasMaskChange = new EventEmitter<boolean>();
 
     isCollapsed = false;
     expanded: string;
@@ -35,12 +40,20 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
             }
         });
         const bounds = L.rectangle(this.map.getBounds()).toGeoJSON();
+        const coords = (bounds.geometry.coordinates[0].slice(1) as number[][]).map(el => {
+            return el.reverse();
+        });
+        // 'draw' the area as the other button do;
+        this.view = L.rectangle(this.map.getBounds());
+        // L.rectangle(this.map.getBounds()).addTo(this.map);
         const view = JSON.stringify(Object.assign(bounds, {
             geometry: {
                 type: 'Polygon',
-                coordinates: (bounds.geometry.coordinates as number[][][]).map(el => el.map(item => item.reverse()))
+                coordinates: [coords]
             }
         }));
+        this.maskChange.emit(view);
+        this.hasMaskChange.emit(true);
         this.cards.forEach((el, i) => {
             if (el.hasOwnProperty('mask')) {
                 el.mask = view;
@@ -65,7 +78,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
                     }
                     this.onOpacityChange(el.info.name, el.opacity);
                 }, console.error);
-                if (el.summary !== undefined) {
+                if (el.hasOwnProperty('summary')) {
                     this._layerService.getSummary(el.info.name, el.weights, el.mask).subscribe(res => {
                         el.summary = res;
                     }, console.error);
@@ -153,17 +166,22 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
 
         }, console.error);
         this.onOpacityChange(name, card.opacity);
-        if (card.mask !== '') {
+        if (card.hasOwnProperty('mask')) {
             this._layerService.getSummary(card.info.name, card.weights, card.mask).subscribe(res => {
                 card.summary = res;
             }, console.error);
         }
+    }
+    // if there will be back button;
+    goBack(): void {
+        this.location.back();
     }
 
     constructor(
         private _el: ElementRef,
         private _rd: Renderer2,
         private _layerService: LayerService,
+        private location: Location
     ) {
     }
     ngOnInit() {
@@ -196,10 +214,13 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
                 }, console.error);
             });
         }
+
         if (changes.mask && changes.mask.currentValue.length > 0) {
+            console.log(changes.mask)
+
             const card = this.filterByName(name, this.cards);
             this.cards.forEach((el, i) => {
-                if (el.mask !== undefined) {
+                if (el.hasOwnProperty('mask')) {
                     el.mask = changes.mask.currentValue;
                     this._layerService.getBreaks(el.info.name, el.weights).subscribe(res => {
                         const wms = L.tileLayer.wms(el.wmsServer, {
@@ -208,7 +229,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
                             format: 'image/png',
                             weights: el.weights,
                             colorRamp: el.palette ? el.palette : '',
-                            mask: changes.mask.currentValue,
+                            mask: el.mask,
                             transparent: true,
                             attribution: 'Azavea',
                             uppercase: el.info.name === 'lm' ? true : false,
@@ -222,7 +243,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
                         }
                         this.onOpacityChange(el.info.name, el.opacity);
                     }, console.error);
-                    if (el.summary !== undefined) {
+                    if (el.hasOwnProperty('summary')) {
                         this._layerService.getSummary(el.info.name, el.weights, el.mask).subscribe(res => {
                             el.summary = res;
                         }, console.error);
@@ -233,7 +254,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
         if (changes.mask && changes.mask.currentValue.length === 0) {
             const card = this.filterByName(name, this.cards);
             this.cards.forEach((el, i) => {
-                if (el.mask !== undefined) {
+                if (el.hasOwnProperty('mask')) {
                     el.mask = changes.mask.currentValue;
                     this._layerService.getBreaks(el.info.name, el.weights).subscribe(res => {
                         const wms = L.tileLayer.wms(el.wmsServer, {

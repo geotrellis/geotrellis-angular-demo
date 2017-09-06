@@ -1,0 +1,15 @@
+.cards-selector {
+    display: inline-flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    padding: 2.4rem;
+    border: 1px solid $grey-light;
+    background-color: $white;
+    @include shadow(0.1rem, 1rem, rgba(0,0,0,0.1));
+
+    > .heading {
+        padding-bottom: 2.4rem;
+        font: $font-title;
+        font-weight: $font-weight-bold;
+    }
+}

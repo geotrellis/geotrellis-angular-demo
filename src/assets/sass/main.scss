@@ -23,19 +23,25 @@
 
 @import
 '06_components/actions-bar',
+'06_components/card-tiles',
+'06_components/cards-selector',
 '06_components/layer-action-panel',
 '06_components/layer-card-list',
 '06_components/layer-card',
 '06_components/layer-header',
 '06_components/layer-selector',
+'06_components/layer-text',
 '06_components/map-container',
 '06_components/params-list',
 '06_components/sidebar-header',
-'06_components/sidebar-section';
+'06_components/sidebar-section',
+'06_components/summary-table',
+'06_components/tile-item';
 
 @import
 '07_layouts/root',
-'07_layouts/map-view';
+'07_layouts/map-view',
+'07_layouts/dashboard';
 
 @import
 '08_overrides/global-state';

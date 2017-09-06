@@ -3,7 +3,12 @@
     
     > .actions-bar {
         margin: 0 0 0.5rem;
-    }      
+    }
+    
+    > .back {
+        margin: 1.6rem 0 0 .8rem;
+        font-weight: $font-weight-bold;
+    }
 
     &.-collapsed {
         > .actions-bar, .layer-card-list {

@@ -1,4 +1,4 @@
-import { Directive, Input, Output, EventEmitter, OnChanges, OnInit, OnDestroy, SimpleChange } from '@angular/core';
+import { Directive, Input, Output, EventEmitter, OnChanges, OnInit, OnDestroy, SimpleChange, HostBinding } from '@angular/core';
 
 import * as L from 'leaflet';
 import 'leaflet-draw';
@@ -9,11 +9,15 @@ import { LeafletDirective, LeafletDirectiveWrapper } from '@asymmetrik/ngx-leafl
   selector: '[gdMapWrapper]'
 })
 export class MapWrapperDirective implements OnInit, OnChanges, OnDestroy {
+  @Input() hasMask: boolean;
+  @Output() hasMaskChange = new EventEmitter<boolean>();
   mapWrapper: LeafletDirectiveWrapper;
 
   drawControl: L.Control.Draw;
   zoomControl: L.Control.Zoom;
+  // store the last drawn item or viewport
   layer: L.Layer;
+  
   map: L.Map;
   drawOptions: L.Control.DrawConstructorOptions = {
     position: 'topright',
@@ -28,15 +32,7 @@ export class MapWrapperDirective implements OnInit, OnChanges, OnDestroy {
       circle: false,
       circlemarker: false,
       polyline: false,
-      polygon: {
-        drawError: {
-          color: '#e1e100', // Color the shape will turn when intersects
-          message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
-        },
-        shapeOptions: {
-          color: '#bada55'
-        }
-      }
+      polygon: false
     }
   };
   @Input() isCollapsed = false;
@@ -45,20 +41,19 @@ export class MapWrapperDirective implements OnInit, OnChanges, OnDestroy {
   @Output() maskChange = new EventEmitter<string>();
   @Output() polygonCreated = new EventEmitter<boolean>();
 
+  @Input() view: L.Polygon;
+
   constructor(
     private _ld: LeafletDirective
   ) {
     this.mapWrapper = new LeafletDirectiveWrapper(this._ld);
   }
-  getView(): void {
-    console.log('test delete button')
-  }
+
   ngOnInit() {
 
     this.map = this.mapWrapper.getMap();
     // initialize the feature group
     this.map.addLayer(this.drawOptions.edit.featureGroup);
-
 
     this.zoomControl = new L.Control.Zoom({
       position: 'topright'
@@ -82,15 +77,18 @@ export class MapWrapperDirective implements OnInit, OnChanges, OnDestroy {
         }
       });
       this.maskChange.emit(JSON.stringify(mask));
+      this.hasMaskChange.emit(true);
 
       const bool = this.drawOptions.edit.featureGroup.hasLayer(this.layer);
       if (bool) {
         this.drawOptions.edit.featureGroup.removeLayer(this.layer);
       }
       this.layer = newLayer;
-      this.drawOptions.edit.featureGroup.addLayer(newLayer.bindTooltip('<button class="delete -on" onclick="console.log( ">Delete</button>', {
-        permanent: false
-      }));
+      // ?'delete' button as tooltip?
+      // this.drawOptions.edit.featureGroup.addLayer(newLayer.bindTooltip('<button class="delete -on" onclick="console.log( ">Delete</button>', {
+      //   permanent: false
+      // }));
+      this.drawOptions.edit.featureGroup.addLayer(newLayer);
     });
   }
 
@@ -99,6 +97,10 @@ export class MapWrapperDirective implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: { [key: string]: SimpleChange }) {
+    if (changes.view && changes.view.currentValue !== undefined) {
+      this.layer = changes.view.currentValue;
+      this.drawOptions.edit.featureGroup.addLayer(changes.view.currentValue);
+    }
       if (changes.isCollapsed && !changes.isCollapsed.firstChange && changes.isCollapsed.currentValue !== changes.isCollapsed.previousValue) {
           setTimeout(() => {
               this.map.invalidateSize({

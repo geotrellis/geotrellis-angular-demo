@@ -1,10 +1,10 @@
-import { Component, EventEmitter, HostBinding, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output, OnInit, OnChanges } from '@angular/core';
 
 @Component({
     selector: 'gd-layer-card',
     templateUrl: './layer-card.component.html'
 })
-export class LayerCardComponent implements OnInit {
+export class LayerCardComponent implements OnInit, OnChanges {
 
     @HostBinding('class.-on') @Input() show = true;
     @Output() showChange = new EventEmitter<boolean>();
@@ -65,5 +65,11 @@ export class LayerCardComponent implements OnInit {
         this.optional = this.info.optional;
         this.palettes = this.info.palettes;
         this.presets = this.info.presets;
+    }
+
+    ngOnChanges(changes) {
+        if (changes.summary && changes.summary.currentValue !== undefined) {
+            this.expanded = 'summary';
+        }
     }
 }

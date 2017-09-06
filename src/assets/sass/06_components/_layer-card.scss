@@ -7,4 +7,13 @@
     > * {
         margin-bottom: 1.6rem;
     }
+
+    > .model-actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        > .action {
+            padding: .9rem;
+        }
+    }
 }
