@@ -3,6 +3,9 @@ import * as chroma from 'chroma-js';
 
 export const LAYERCARDS: LayerCard[] = [
     {
+        model: 'lm',
+        title: 'Philly Location Modeling',
+        thumb: 'https://geotrellis.io/gt/weighted-overlay/wms?SERVICE=WMS&REQUEST=GetMap&VERSION=1.1.1&LAYERS=philly_bars%2Cphilly_grocery_stores%2Cphilly_rail_stops&STYLES=&FORMAT=image%2Fpng&TRANSPARENT=true&HEIGHT=256&WIDTH=256&BREAKS=-41%2C-12%2C0%2C8%2C21%2C32%2C43%2C52%2C62%2C71%2C80%2C91%2C102%2C115%2C129%2C144%2C159%2C177%2C202%2C298&WEIGHTS=2%2C1%2C-2&SRS=EPSG%3A3857&BBOX=-8375052.315150191,4852834.051769271,-8365268.375529689,4862617.991389772',
         info: {
             name: 'lm',
             title: 'Philly Location Modeling',
@@ -30,15 +33,19 @@ export const LAYERCARDS: LayerCard[] = [
             infotext: 'This model uses the weighted overlay method, which break the location selection problem into three factors.',
             prtext: ['bars', 'grocery_stores', 'rail_stops'],
             range: 4,
-            thumb: 'https://geotrellis.io/gt/weighted-overlay/wms?SERVICE=WMS&REQUEST=GetMap&VERSION=1.1.1&LAYERS=philly_bars%2Cphilly_grocery_stores%2Cphilly_rail_stops&STYLES=&FORMAT=image%2Fpng&TRANSPARENT=true&HEIGHT=256&WIDTH=256&BREAKS=-41%2C-12%2C0%2C8%2C21%2C32%2C43%2C52%2C62%2C71%2C80%2C91%2C102%2C115%2C129%2C144%2C159%2C177%2C202%2C298&WEIGHTS=2%2C1%2C-2&SRS=EPSG%3A3857&BBOX=-8375052.315150191,4852834.051769271,-8365268.375529689,4862617.991389772'
         },
-        params: 'philly_bars,philly_grocery_stores,philly_rail_stops',
+        params: {
+            layers: 'philly_bars,philly_grocery_stores,philly_rail_stops'
+        },
         values: [3, -3, 0],
         show: true,
         opacity: 0.6,
         server: 'https://geotrellis.io/gt/weighted-overlay/wms',
         palette: chroma.scale(['#A65034', '#E3D3C2', '#D0DBE1', '#5891C1']).mode('lab').domain([0, 0.5, 0.6, 1]).colors(10)
     }, {
+        model: 'chatta',
+        title: 'Chattanooga Agriculture & Forestry Value Model',
+        thumb: 'https://geotrellis.io/img/demo_02.jpg',
         info: {
             name: 'chatta',
             title: 'Chattanooga Agriculture & Forestry Value Model',
@@ -87,9 +94,10 @@ export const LAYERCARDS: LayerCard[] = [
                 'blue-to-orange',
                 'bold-land-use-qualitative'
             ],
-            thumb: 'https://geotrellis.io/img/demo_02.jpg'
         },
-        params: 'ImperviousSurfaces_Barren Lands_Open Water,DevelopedLand,Wetlands,ForestedLands,Non-workingProtectedOrPublicLands,PublicallyOwnedWorkingLands,PrivatelyOwnedWorkingLandsWithEasements,FarmlandWithoutPrimeAgriculturalSoils,FarmlandOrForestedLandsWithPrimeAgriculturalSoils',
+        params: {
+            layers: 'ImperviousSurfaces_Barren Lands_Open Water,DevelopedLand,Wetlands,ForestedLands,Non-workingProtectedOrPublicLands,PublicallyOwnedWorkingLands,PrivatelyOwnedWorkingLandsWithEasements,FarmlandWithoutPrimeAgriculturalSoils,FarmlandOrForestedLandsWithPrimeAgriculturalSoils'
+        },
         values: [-5, -4, -2, 1, -1, 2, 4, 3, 5],
         show: true,
         opacity: 0.6,
@@ -98,8 +106,11 @@ export const LAYERCARDS: LayerCard[] = [
         palette: 'yellow-to-red-heatmap',
         summary: undefined,
     }, {
+        model: 'pointcloud',
+        title: 'Point Cloud',
+        thumb: 'https://potsdam.geotrellis.io/tms/hillshade/isprs-potsdam-dsm/18/140577/86109',
         info: {
-            name: 'pointcloud',
+            name: 'point-cloud',
             title: 'Point Cloud',
             zoom: 12,
             center: [35.91157655376172, -106.55622482299805],
@@ -118,25 +129,26 @@ export const LAYERCARDS: LayerCard[] = [
             }],
             actions: ['info', 'params', 'opacity'],
             infotext: 'pointcloud pointcloud',
-            thumb: 'https://potsdam.geotrellis.io/tms/hillshade/isprs-potsdam-dsm/18/140577/86109'
         },
-        params: 'ImperviousSurfaces_Barren Lands_Open Water,DevelopedLand,Wetlands,ForestedLands,Non-workingProtectedOrPublicLands,PublicallyOwnedWorkingLands,PrivatelyOwnedWorkingLandsWithEasements,FarmlandWithoutPrimeAgriculturalSoils,FarmlandOrForestedLandsWithPrimeAgriculturalSoils',
+        params: {
+            colorRamp: 'blue-to-red'
+        },
         values: ['TIN', 'Hillshade', 'Snow_On'],
         show: true,
         opacity: 0.6,
         server: 'http://demo.geotrellis.com/chatta/gt/wo',
     }, {
+        model: 'pointcloud',
+        title: 'Point Cloud',
+        thumb: 'https://potsdam.geotrellis.io/tms/hillshade/isprs-potsdam-dsm/18/140577/86109',
         info: {
-            name: 'pointcloud',
+            name: 'change-detection',
             title: 'Change Detection',
             zoom: 12,
             center: [35.91157655376172, -106.55622482299805],
             actions: ['info', 'opacity'],
             infotext: 'compare two datasets',
-            thumb: 'https://potsdam.geotrellis.io/tms/hillshade/isprs-potsdam-dsm/18/140577/86109'
         },
-        params: 'ImperviousSurfaces_Barren Lands_Open Water,DevelopedLand,Wetlands,ForestedLands,Non-workingProtectedOrPublicLands,PublicallyOwnedWorkingLands,PrivatelyOwnedWorkingLandsWithEasements,FarmlandWithoutPrimeAgriculturalSoils,FarmlandOrForestedLandsWithPrimeAgriculturalSoils',
-        values: ['TIN', 'Hillshade', 'Snow_On'],
         show: false,
         opacity: 0.6,
         server: 'http://ec2-54-87-204-186.compute-1.amazonaws.com/tms/diff-tms/png/mar10idw/jul10idw/',

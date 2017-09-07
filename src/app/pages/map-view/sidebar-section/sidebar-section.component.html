@@ -25,7 +25,8 @@
 </div>
 <!-- end of actions-bar -->
 <div class="layer-card-list" [class.-action]="action!==undefined&&expanded!=='analyze'">
-    <gd-layer-card *ngFor="let card of cards" [isSingle]="this.isSingle" [info]="card.info" [(show)]="card.show" (showChange)="onShowChange(card.info.name, card.show)"
+    <gd-layer-card *ngFor="let card of cards" [isLoading]="this.isLoading" [isSingle]="this.isSingle" [info]="card.info" [(show)]="card.show" (showChange)="onShowChange(card.info.name, card.show)"
+        [(expanded)]="this.expanded"    
         [(values)]="card.values" (valuesChange)="onValuesChange(card.info.name, card.values)" [(opacity)]="card.opacity" (opacityChange)="onOpacityChange(card.info.name, card.opacity)"
         [class]="'layer-card '+card.info.name" [(palette)]="card.palette" (paletteChange)="onPaletteChange(card.info.name, card.palette)"
         [summary]="card.summary">

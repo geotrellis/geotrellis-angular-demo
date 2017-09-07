@@ -24,11 +24,11 @@ export class DashboardComponent implements OnInit {
       const cardsMap = new Map();
       cards.forEach(el => {
         // only get info to be displayed
-        if (!cardsMap.has(el.info.name)) {
-          cardsMap.set(el.info.name, {
-            name: el.info.name,
-            title: el.info.title,
-            thumb: el.info.thumb
+        if (!cardsMap.has(el.model)) {
+          cardsMap.set(el.model, {
+            model: el.model,
+            title: el.title,
+            thumb: el.thumb
           });
         }
         this.cards = Array.from(cardsMap.values());

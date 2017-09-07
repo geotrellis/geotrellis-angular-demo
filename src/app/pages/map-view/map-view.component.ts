@@ -31,7 +31,7 @@ export class MapViewComponent implements OnInit {
         zoomControl: false
     };
 
-    deleteDraw(): void {
+    resetArea(): void {
         this.map.eachLayer(el => {
             if (el.hasOwnProperty('editing')) {
                 this.map.removeLayer(el);
@@ -46,12 +46,12 @@ export class MapViewComponent implements OnInit {
         private route: ActivatedRoute,
     ) {
         this.route.paramMap
-        .switchMap((params: ParamMap) => this.cardService.getLayerCard(params.get('name')))
-        .subscribe(card => {
-            this.cards = card;
+        .switchMap((params: ParamMap) => this.cardService.getCards(params.get('name')))
+        .subscribe(cards => {
+            this.cards = cards;
             this.options = Object.assign({}, this.options, {
-                zoom: card[0].info.zoom,
-                center: card[0].info.center
+                zoom: cards[0].info.zoom,
+                center: cards[0].info.center
             });
         });
     }

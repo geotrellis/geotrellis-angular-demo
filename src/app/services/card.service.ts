@@ -4,13 +4,14 @@ import { LAYERCARDS } from '../layer-cards';
 
 @Injectable()
 export class CardService {
+  // keep for now
   getModel(): Promise<LayerCard[]> {
     return Promise.resolve(LAYERCARDS);
   }
 
-  getLayerCard(name: string): Promise<LayerCard[]> {
+  getCards(name: string): Promise<LayerCard[]> {
     return this.getModel()
-               .then(cards => cards.filter(card => card.info.name === name));
+               .then(cards => cards.filter(card => card.model === name));
   }
   constructor() { }
 

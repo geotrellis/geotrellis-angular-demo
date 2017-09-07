@@ -157,6 +157,12 @@
       "src": "iconic"
     },
     {
+      "uid": "9bc2902722abb366a213a052ade360bc",
+      "css": "loading",
+      "code": 59449,
+      "src": "fontelico"
+    },
+    {
       "uid": "d3189fcbc65fe4a187fe05433560a42d",
       "css": "bucket",
       "code": 59394,

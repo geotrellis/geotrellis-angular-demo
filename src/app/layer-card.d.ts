@@ -1,4 +1,7 @@
 export interface LayerCard {
+    model: string;
+    title: string;
+    thumb: string;
     info: {
         name: string;
         title: string;
@@ -12,15 +15,14 @@ export interface LayerCard {
         prtext?: string[];
         range?: number;
         palettes?: string[];
-        thumb: string;
         zoom: number;
         center: number[];
     };
-    values: number[] | string[];
+    values?: number[] | string[];
     show: boolean;
     opacity: number;
     mask?: string;
-    params: string;
+    params?: any;
     server: string;
     palette?: string[] | string;
     summary?: {

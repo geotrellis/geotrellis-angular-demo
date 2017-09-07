@@ -7,7 +7,7 @@
         <a routerLink="/mapview/chatta" routerLinkActive="active">Chattanooga</a>
     </nav> -->
     <nav class="card-tiles">
-        <a *ngFor="let card of cards" class="tile-item" [routerLink]="'/mapview/'+card.name" routerLinkActive="active">
+        <a *ngFor="let card of cards" class="tile-item" [routerLink]="'/mapview/'+card.model" routerLinkActive="active">
             <div class="title">{{card.title}}</div>
             <img class="thumb" [src]="card.thumb" alt="Loading...">
         </a>

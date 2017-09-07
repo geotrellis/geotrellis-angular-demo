@@ -18,6 +18,7 @@ export class LayerCardComponent implements OnInit, OnChanges {
     @Input() info: any;
 
     @Input() isSingle: boolean;
+    @Input() isLoading: boolean;
     name: string;
     title: string;
     presets: any[];
@@ -29,6 +30,7 @@ export class LayerCardComponent implements OnInit, OnChanges {
     @Input() summary: JSON;
 
     @Input() expanded: string;
+    @Output() expandedChange = new EventEmitter<string>();
     showMenu = false;
 
     @Input() palette: string[] | string;
@@ -83,5 +85,6 @@ export class LayerCardComponent implements OnInit, OnChanges {
         if (changes.summary && changes.summary.currentValue !== undefined) {
             this.expanded = 'summary';
         }
+        console.log(changes.expanded)
     }
 }
