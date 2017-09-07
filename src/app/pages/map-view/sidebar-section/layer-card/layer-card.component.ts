@@ -85,6 +85,5 @@ export class LayerCardComponent implements OnInit, OnChanges {
         if (changes.summary && changes.summary.currentValue !== undefined) {
             this.expanded = 'summary';
         }
-        console.log(changes.expanded)
     }
 }

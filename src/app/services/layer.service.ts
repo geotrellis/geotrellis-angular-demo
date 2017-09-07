@@ -16,7 +16,7 @@ export class LayerService {
         private _http: HttpClient
     ) { }
 
-    getLayer(card: LayerCard): Observable<L.Layer> {
+    getLayer(card: LayerCard): Observable<L.TileLayer> {
         switch (card.info.name) {
             case 'lm':
                 return this._http.get(`https://geotrellis.io/gt/weighted-overlay/breaks`, {
@@ -37,7 +37,6 @@ export class LayerService {
                             transparent: true,
                             attribution: 'Azavea',
                             uppercase: true,
-                            pane: card.info.name
                         });
                     });
 
@@ -58,9 +57,9 @@ export class LayerService {
                             format: 'image/png',
                             weights: card.values,
                             mask: card.mask,
+                            colorRamp: card.palette,
                             transparent: true,
                             attribution: 'Azavea',
-                            pane: card.info.name
                         });
                     });
             default:

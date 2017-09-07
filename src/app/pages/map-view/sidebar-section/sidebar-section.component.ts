@@ -1,4 +1,4 @@
-import { Component, ContentChild, ElementRef, EventEmitter, Input, OnInit, OnChanges, Output, Renderer2, ViewChild } from '@angular/core';
+import { Component, ContentChild, EventEmitter, Input, OnInit, OnChanges, Output, ViewChild } from '@angular/core';
 
 import { LayerService } from '../../../services/layer.service';
 import * as L from 'leaflet';
@@ -87,36 +87,52 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
     }
 
     onOpacityChange(name: string, opacity: number): void {
-        const el = this.filterByName(name, this.cards);
-        this._rd.setStyle(this.map.getPane(name), 'opacity', el.opacity);
+        const el = this.filterByName(name);
+        const lyr = this.layersMap.get(name);
+        (lyr as L.TileLayer).setOpacity(el.opacity);
+        this.layersMap.set(name, lyr);
+        this.layers = Array.from(this.layersMap.values());
     }
 
     onShowChange(name: string, show: boolean): void {
         const visible = show ? 'visible' : 'hidden';
-        this._rd.setStyle(this.map.getPane(name), 'visibility', visible);
+        const lyr = this.layersMap.get(name);
+        const el = this.filterByName(name);
+        if (show) {
+            this._layerService.getLayer(this.filterByName(name)).subscribe(res => {
+                (res as L.TileLayer).setOpacity(el.opacity);
+                this.layersMap.set(name, res);
+                this.layers = Array.from(this.layersMap.values());
+            });
+        } else {
+            this.layersMap.delete(name);
+            this.layers = Array.from(this.layersMap.values());
+        }
     }
 
-    filterByName(name: string, arr: LayerCard[]): LayerCard {
-        return arr.filter(el => {
+    filterByName(name: string): LayerCard {
+        return this.cards.filter(el => {
             if (el.info.name === name) {
                 return true;
             }
         })[0];
     }
     onPaletteChange(name: string, palette: string): void {
-        const el = this.filterByName(name, this.cards);
+        console.log('palette')
+        const el = this.filterByName(name);
         this._layerService.getLayer(el).subscribe(res => {
+            res.setOpacity(el.opacity);
             this.layersMap.set(el.info.name, res);
             this.layers = Array.from(this.layersMap.values());
-            this.onOpacityChange(el.info.name, el.opacity);
         });
     }
+
     onValuesChange(name: string, layer: L.Layer): void {
-        const el = this.filterByName(name, this.cards);
+        const el = this.filterByName(name);
         this._layerService.getLayer(el).subscribe(res => {
+            res.setOpacity(el.opacity);
             this.layersMap.set(el.info.name, res);
-                this.layers = Array.from(this.layersMap.values());
-            this.onOpacityChange(el.info.name, el.opacity);
+            this.layers = Array.from(this.layersMap.values());
         });
         if (el.hasOwnProperty('mask') && el.mask !== '') {
             this.isLoading = true;
@@ -129,8 +145,6 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
     }
 
     constructor(
-        private _el: ElementRef,
-        private _rd: Renderer2,
         private _layerService: LayerService,
     ) {
     }
@@ -138,33 +152,31 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
         this.isSingle = (this.cards && this.cards.length === 1) ? true : false;
         // for debugging
         // console.log(this.cards, 'init');
-       
     }
 
     ngOnChanges(changes) {
         if (changes.map && changes.map.currentValue !== undefined) {
             this.cards.forEach(el => {
-                this.map.createPane(el.info.name);
                 this._layerService.getLayer(el).subscribe(res => {
-                    this.map.addLayer(res);
+                    // this.map.addLayer(res);
+                    (res as L.TileLayer).setOpacity(el.opacity);
                     this.layersMap.set(el.info.name, res);
                     this.layers = Array.from(this.layersMap.values());
-                    this.onOpacityChange(el.info.name, el.opacity);
                 });
             });
         }
 
         if (changes.mask && changes.mask.currentValue.length > 0) {
-            const card = this.filterByName(name, this.cards);
+            const card = this.filterByName(name);
             this.cards.forEach((el, i) => {
                 if (el.hasOwnProperty('mask')) {
                     el.mask = changes.mask.currentValue;
                     this._layerService.getLayer(el).subscribe(res => {
+                        res.setOpacity(el.opacity);
                         this.layersMap.set(el.info.name, res);
                         if (i === this.cards.length - 1) {
                             this.layers = Array.from(this.layersMap.values());
                         }
-                        this.onOpacityChange(el.info.name, el.opacity);
                     });
                     if (el.hasOwnProperty('summary')) {
                         this.isLoading = true;
@@ -178,11 +190,11 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
             });
         }
         if (changes.mask && changes.mask.currentValue.length === 0) {
-            // no summary panel;
+            // close summary panel if is opened;
             if (this.expanded === 'summary') {
                 this.expanded = '';
             }
-            const card = this.filterByName(name, this.cards);
+            const card = this.filterByName(name);
             // const layer = L.tileLayer('http://ec2-54-87-204-186.compute-1.amazonaws.com/tms/diff-tms/png/mar10idw/jul10idw/{z}/{x}/{y}');
             // layer.addTo(this.map);
             // console.log('added');
@@ -191,11 +203,11 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
                     el.mask = changes.mask.currentValue;
                     el.summary = undefined;
                     this._layerService.getLayer(el).subscribe(res => {
+                        res.setOpacity(el.opacity);
                         this.layersMap.set(el.info.name, res);
                         if (i === this.cards.length - 1) {
                             this.layers = Array.from(this.layersMap.values());
                         }
-                        this.onOpacityChange(el.info.name, el.opacity);
                     });
                 }
             });
