@@ -1,7 +1,7 @@
 import { LayerCard } from './layer-card.d';
 import * as chroma from 'chroma-js';
 
-export const LAYERCARDS: LayerCard[] = [
+export const LAYERCARDS: any[] = [
     {
         model: 'lm',
         title: 'Philly Location Modeling',
@@ -33,6 +33,7 @@ export const LAYERCARDS: LayerCard[] = [
             infotext: 'This model uses the weighted overlay method, which break the location selection problem into three factors.',
             prtext: ['bars', 'grocery_stores', 'rail_stops'],
             range: 4,
+            expanded: undefined
         },
         params: {
             layers: 'philly_bars,philly_grocery_stores,philly_rail_stops'
@@ -105,38 +106,48 @@ export const LAYERCARDS: LayerCard[] = [
         mask: undefined,
         palette: 'yellow-to-red-heatmap',
         summary: undefined,
+        expanded: undefined
     }, {
         model: 'pointcloud',
         title: 'Point Cloud',
         thumb: 'https://potsdam.geotrellis.io/tms/hillshade/isprs-potsdam-dsm/18/140577/86109',
         info: {
-            name: 'point-cloud',
-            title: 'Point Cloud',
+            name: 'creation-render',
+            title: 'DEM Creation Method & Render Options',
             zoom: 12,
-            center: [35.91157655376172, -106.55622482299805],
+            center: [35.866144, -106.595149],
             presets: [{
                 text: 'TIN, Hillshade, Snow On',
-                value: ['TIN', 'hillshade', 'mar10idw']
+                value: ['tin', 'hillshade', 'mar10']
             }, {
                 text: 'IDW, Hillshade, Snow On',
-                value: ['IDW', 'hillshade', 'mar10idw']
+                value: ['idw', 'hillshade', 'mar10']
             }, {
                 text: 'TIN, Color Ramp, Snow Off',
-                value: ['TIN', 'png', 'jul10idw']
+                value: ['tin', 'png', 'jul10']
             }, {
                 text: 'Custom',
                 value: undefined
             }],
-            actions: ['info', 'params', 'opacity'],
+            actions: ['info', 'weight', 'opacity'],
+            optional: ['summary'],            
             infotext: 'pointcloud pointcloud',
+            prtext: [
+                'DEM Creation Method',
+                'Render Options',
+                'Dataset',
+            ],
         },
         params: {
             colorRamp: 'blue-to-red'
         },
-        values: ['TIN', 'Hillshade', 'Snow_On'],
+        values: ['tin', 'hillshade', 'mar10'],
         show: true,
         opacity: 0.6,
-        server: 'http://demo.geotrellis.com/chatta/gt/wo',
+        server: `http://ec2-54-87-204-186.compute-1.amazonaws.com/tms/values[1]/values[2]values[0]/{z}/{x}/{y}?colorRamp=blue-to-red`,
+        mask: undefined,        
+        summary: undefined,
+        expanded: undefined
     }, {
         model: 'pointcloud',
         title: 'Point Cloud',
@@ -145,13 +156,17 @@ export const LAYERCARDS: LayerCard[] = [
             name: 'change-detection',
             title: 'Change Detection',
             zoom: 12,
-            center: [35.91157655376172, -106.55622482299805],
+            center: [35.866144, -106.595149],
             actions: ['info', 'opacity'],
+            optional: ['summary'],
             infotext: 'compare two datasets',
         },
         show: false,
         opacity: 0.6,
-        server: 'http://ec2-54-87-204-186.compute-1.amazonaws.com/tms/diff-tms/png/mar10idw/jul10idw/',
+        server: 'http://ec2-54-87-204-186.compute-1.amazonaws.com/tms/diff-tms/png/mar10idw/jul10idw/{z}/{x}/{y}',
+        mask: undefined,
+        summary: undefined,
+        expanded: undefined
     },
 ];
 

@@ -21,7 +21,7 @@ export class LayerService {
             case 'lm':
                 return this._http.get(`https://geotrellis.io/gt/weighted-overlay/breaks`, {
                     params: new HttpParams()
-                        .set('layers', 'philly_bars,philly_grocery_stores,philly_rail_stops')
+                        .set('layers', `${card.params.layers}`)
                         .set('weights', `${card.values}`)
                         .set('numBreaks', '20')
                 })
@@ -43,7 +43,7 @@ export class LayerService {
             case 'chatta':
                 return this._http.get(`http://demo.geotrellis.com/chatta/gt/breaks`, {
                     params: new HttpParams()
-                        .set('layers', 'ImperviousSurfaces_Barren Lands_Open Water,DevelopedLand,Wetlands,ForestedLands,Non-workingProtectedOrPublicLands,PublicallyOwnedWorkingLands,PrivatelyOwnedWorkingLandsWithEasements,FarmlandWithoutPrimeAgriculturalSoils,FarmlandOrForestedLandsWithPrimeAgriculturalSoils')
+                        .set('layers', `${card.params.layers}`)
                         .set('weights', `${card.values}`)
                         .set('numBreaks', '10')
                 })
@@ -62,19 +62,43 @@ export class LayerService {
                             attribution: 'Azavea',
                         });
                     });
+            case 'creation-render':
+                const url = card.server.replace('values[0]', `${card.values[0]}`)
+                    .replace('values[1]', `${card.values[1]}`)
+                    .replace('values[2]', `${card.values[2]}`);
+                return new Observable<L.TileLayer>(observer => observer.next(L.tileLayer(url)))
+                    .debounceTime(1000)
+                    .retry(3)
+                    .map(res => res);
+            case 'change-detection':
+                return new Observable<L.TileLayer>(observer => observer.next(L.tileLayer(card.server)))
+                    .debounceTime(1000)
+                    .retry(3)
+                    .map(res => res);
             default:
                 break;
         }
     }
 
-    getSummary(name: string, values: number[] | string[], polygon: string): Observable<any> {
+    getSummary(card: LayerCard, values: string[] | number[], zoom: number): Observable<any> {
+        const name = card.info.name;
+        let mask = card.mask;
+        let url: string;
+        if (card.model === 'pointcloud') {
+            mask = JSON.stringify(Object.assign(JSON.parse(card.mask), {
+                geometry: {
+                    type: 'Polygon',
+                    coordinates: JSON.parse(card.mask).geometry.coordinates.map(datum => datum.map(data => data.reverse()))
+                }
+            }));
+        }
         switch (name) {
             case 'chatta':
                 return this._http.get(`http://demo.geotrellis.com/chatta/gt/sum`, {
                     params: new HttpParams()
                         .set('layers', 'ImperviousSurfaces_Barren Lands_Open Water,DevelopedLand,Wetlands,ForestedLands,Non-workingProtectedOrPublicLands,PublicallyOwnedWorkingLands,PrivatelyOwnedWorkingLandsWithEasements,FarmlandWithoutPrimeAgriculturalSoils,FarmlandOrForestedLandsWithPrimeAgriculturalSoils')
                         .set('weights', `${values}`)
-                        .set('polygon', `${polygon}`)
+                        .set('polygon', `${mask}`)
                 })
                     .debounceTime(1000)
                     .retry(3)
@@ -87,6 +111,35 @@ export class LayerService {
                             total: Number(response['total'])
                         };
                     });
+
+            case 'creation-render':
+
+                url = 'http://ec2-54-87-204-186.compute-1.amazonaws.com/api/stats/poly/single/values[2]values[0]/zoom'
+                    .replace('values[0]', `${values[0]}`)
+                    .replace('values[2]', `${values[2]}`)
+                    .replace('zoom', `${zoom}`);
+                return this._http.get(url, {
+                    params: new HttpParams()
+                        .set('poly', `${mask}`)
+                })
+                    .debounceTime(1000)
+                    .retry(3)
+                    .map(res => res);
+
+            case 'change-detection':
+            console.log('change-detection');
+
+                url = 'http://ec2-54-87-204-186.compute-1.amazonaws.com/api/stats/poly/diff/mar10values[0]/jul10values[0]/zoom'
+                    .replace('values[0]', `${values[0]}`)
+                    .replace('values[0]', `${values[0]}`)
+                    .replace('zoom', `${zoom}`);
+                return this._http.get(url, {
+                    params: new HttpParams()
+                        .set('poly', `${mask}`)
+                })
+                    .debounceTime(1000)
+                    .retry(3)
+                    .map(res => res);
             default:
                 break;
         }

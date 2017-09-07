@@ -27,6 +27,12 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
     layersMap: Map<string, L.Layer> = new Map();
     layers: L.Layer[] = [];
 
+    // when group action panel is opened, all card layer's panels should be closed
+    onExpandedChange() {
+        this.cards.forEach(el => {
+            el.expanded = '';
+        });
+    }
     getView(): void {
         this.map.eachLayer(el => {
             if (el.hasOwnProperty('editing')) {
@@ -58,32 +64,51 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
                 });
                 if (el.hasOwnProperty('summary')) {
                     this.isLoading = true;
-                    this._layerService.getSummary(el.info.name, el.values, el.mask).subscribe(res => {
+                    const zoom = this.map.getZoom();                        
+                    let values = el.values;
+                    if (el.info.name === 'change-detection') {
+                        values = this.cards.filter(pt => pt.info.name === 'creation-render')[0].values;
+                    }
+                    this._layerService.getSummary(el, values, zoom).subscribe(res => {
                         el.summary = res;
-                        this.expanded = 'summary';
+                        if (el.show) {
+                            el.expanded = 'summary';
+                        }
                         this.isLoading = false;
                     }, console.error);
                 }
             }
         });
     }
-    startDraw(): void {
-        const polygon_options = {
-            showArea: false,
-            // shapeOptions: {
-            //     stroke: true,
-            //     color: '#6e83f0',
-            //     weight: 4,
-            //     opacity: 0.5,
-            //     fill: true,
-            //     fillColor: null,
-            //     fillOpacity: 0.2,
-            //     clickable: true
-            // }
-        };
-        // added a few lines in leaflet-draw.d.ts;
-        const polygonDrawer = new L.Draw.Polygon(this.map, polygon_options);
-        (polygonDrawer as L.Handler).enable();
+    startDraw(type: string): void {
+        // const polygon_options = {
+        //     showArea: false,
+        //     // shapeOptions: {
+        //     //     stroke: true,
+        //     //     color: '#6e83f0',
+        //     //     weight: 4,
+        //     //     opacity: 0.5,
+        //     //     fill: true,
+        //     //     fillColor: null,
+        //     //     fillOpacity: 0.2,
+        //     //     clickable: true
+        //     // }
+        // };
+                // added a few lines in leaflet-draw.d.ts;
+                const polygonDrawer = new L.Draw.Polygon(this.map);
+                
+                            const pointDrawer = new L.Draw.CircleMarker(this.map);
+                
+        if (type === 'poly') {
+            (pointDrawer as L.Handler).disable();
+            (polygonDrawer as L.Handler).enable();
+            
+        } else {
+            (polygonDrawer as L.Handler).disable();
+            (pointDrawer as L.Handler).enable();
+            
+            
+        }
     }
 
     onOpacityChange(name: string, opacity: number): void {
@@ -99,7 +124,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
         const lyr = this.layersMap.get(name);
         const el = this.filterByName(name);
         if (show) {
-            this._layerService.getLayer(this.filterByName(name)).subscribe(res => {
+            this._layerService.getLayer(el).subscribe(res => {
                 (res as L.TileLayer).setOpacity(el.opacity);
                 this.layersMap.set(name, res);
                 this.layers = Array.from(this.layersMap.values());
@@ -108,6 +133,8 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
             this.layersMap.delete(name);
             this.layers = Array.from(this.layersMap.values());
         }
+        // all card panels should be closed;
+        el.expanded = '';
     }
 
     filterByName(name: string): LayerCard {
@@ -118,7 +145,6 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
         })[0];
     }
     onPaletteChange(name: string, palette: string): void {
-        console.log('palette')
         const el = this.filterByName(name);
         this._layerService.getLayer(el).subscribe(res => {
             res.setOpacity(el.opacity);
@@ -136,9 +162,16 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
         });
         if (el.hasOwnProperty('mask') && el.mask !== '') {
             this.isLoading = true;
-            this._layerService.getSummary(el.info.name, el.values, el.mask).subscribe(res => {
+            const zoom = this.map.getZoom();                        
+            let values = el.values;
+            if (el.info.name === 'change-detection') {
+                values = this.cards.filter(pt => pt.info.name === 'creation-render')[0].values;
+            }
+            this._layerService.getSummary(el, values, zoom).subscribe(res => {
                 el.summary = res;
-                this.expanded = 'summary';
+                if (el.show) {
+                    el.expanded = 'summary';
+                }
                 this.isLoading = false;
             }, console.error);
         }
@@ -146,6 +179,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
 
     constructor(
         private _layerService: LayerService,
+
     ) {
     }
     ngOnInit() {
@@ -156,7 +190,8 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
 
     ngOnChanges(changes) {
         if (changes.map && changes.map.currentValue !== undefined) {
-            this.cards.forEach(el => {
+            const cards = this.cards.filter(el => el.show === true);
+            cards.forEach(el => {
                 this._layerService.getLayer(el).subscribe(res => {
                     // this.map.addLayer(res);
                     (res as L.TileLayer).setOpacity(el.opacity);
@@ -166,9 +201,9 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
             });
         }
 
-        if (changes.mask && changes.mask.currentValue.length > 0) {
-            const card = this.filterByName(name);
-            this.cards.forEach((el, i) => {
+        if (changes.mask && changes.mask.currentValue.length >= 0) {
+            const cards = this.cards.filter(el => el.show === true);
+            cards.forEach((el, i) => {
                 if (el.hasOwnProperty('mask')) {
                     el.mask = changes.mask.currentValue;
                     this._layerService.getLayer(el).subscribe(res => {
@@ -178,37 +213,29 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
                             this.layers = Array.from(this.layersMap.values());
                         }
                     });
-                    if (el.hasOwnProperty('summary')) {
+                    if (changes.mask.currentValue.length > 0 && el.hasOwnProperty('summary')) {
                         this.isLoading = true;
-                        this._layerService.getSummary(el.info.name, el.values, el.mask).subscribe(res => {
+                        const zoom = this.map.getZoom();
+                        
+                        let values = el.values;
+                        if (el.info.name === 'change-detection') {
+                            values = this.cards.filter(pt => pt.info.name === 'creation-render')[0].values;
+                        }
+                        console.log(values);
+                        this._layerService.getSummary(el, values, zoom).subscribe(res => {
                             el.summary = res;
-                            this.expanded = 'summary';
+                            if (el.show) {
+                                el.expanded = 'summary';
+                            }
                             this.isLoading = false;
                         }, console.error);
                     }
-                }
-            });
-        }
-        if (changes.mask && changes.mask.currentValue.length === 0) {
-            // close summary panel if is opened;
-            if (this.expanded === 'summary') {
-                this.expanded = '';
-            }
-            const card = this.filterByName(name);
-            // const layer = L.tileLayer('http://ec2-54-87-204-186.compute-1.amazonaws.com/tms/diff-tms/png/mar10idw/jul10idw/{z}/{x}/{y}');
-            // layer.addTo(this.map);
-            // console.log('added');
-            this.cards.forEach((el, i) => {
-                if (el.hasOwnProperty('mask')) {
-                    el.mask = changes.mask.currentValue;
-                    el.summary = undefined;
-                    this._layerService.getLayer(el).subscribe(res => {
-                        res.setOpacity(el.opacity);
-                        this.layersMap.set(el.info.name, res);
-                        if (i === this.cards.length - 1) {
-                            this.layers = Array.from(this.layersMap.values());
+                    if (changes.mask.currentValue.length === 0) {
+                        // close summary panel if is opened;
+                        if (el.expanded === 'summary') {
+                            el.expanded = '';
                         }
-                    });
+                    }
                 }
             });
         }

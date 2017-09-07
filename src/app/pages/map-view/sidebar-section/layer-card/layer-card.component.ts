@@ -6,13 +6,13 @@ import { Component, EventEmitter, HostBinding, Input, Output, OnInit, OnChanges 
 })
 export class LayerCardComponent implements OnInit, OnChanges {
 
-    @HostBinding('class.-on') @Input() show = true;
+    @HostBinding('class.-on') @Input() show: boolean;
     @Output() showChange = new EventEmitter<boolean>();
 
     @Input() opacity: number;
     @Output() opacityChange = new EventEmitter<number>();
 
-    @Input() values: number[] = [];
+    @Input() values: string[] | number[];
     @Output() valuesChange = new EventEmitter<any>();
 
     @Input() info: any;
@@ -25,6 +25,8 @@ export class LayerCardComponent implements OnInit, OnChanges {
     actions: string[];
     infotext: string;
     range: number;
+    fakeArr: number[];
+    type: string;
 
     params: string[];
     @Input() summary: JSON;
@@ -39,9 +41,6 @@ export class LayerCardComponent implements OnInit, OnChanges {
 
     optional: string[];
 
-    itemValueChange(): void {
-        this.valuesChange.emit(this.values);
-    }
     toAbs(val: number): number {
         return Math.abs(val);
     }
@@ -55,8 +54,8 @@ export class LayerCardComponent implements OnInit, OnChanges {
                     this.expanded = 'params';
                 }
                 return undefined;
-                // /\d/.exec('') - find number; /\D/.exec('') - find not number
-            } else if (/\d/.test(el)) {
+            } else if (Number.isInteger(Number(el))) {
+                // only string with pure number can be returned as Number
                     return Number(el);
                 } else {
                     return el;
@@ -82,8 +81,9 @@ export class LayerCardComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes) {
-        if (changes.summary && changes.summary.currentValue !== undefined) {
-            this.expanded = 'summary';
+        if (changes.values && changes.values.currentValue !== undefined) {
+        this.fakeArr = Array(this.values.length).fill(0);
+        this.type = Number.isInteger((Number(this.values[0]))) ? 'number' : 'string';
         }
     }
 }

@@ -10,8 +10,8 @@
   </label>
     <!-- layer-actions -->
     <div class="layer-actions">
-        <button gdActionBtn [action]="action" [(expanded)]="this.expanded" (expandedChange)="this.expandedChange.emit(action)" *ngFor="let action of actions" [class.-clicked]="action==expanded"
-            [class]="'action icon-'+action"></button>
+        <button gdActionBtn [action]="action" [(expanded)]="this.expanded" (expandedChange)="this.expandedChange.emit(action)" *ngFor="let action of actions"
+            [class.-clicked]="action==expanded" [class]="'action icon-'+action"></button>
     </div>
     <!-- end of layer-actions -->
 </div>
@@ -52,31 +52,19 @@
 </div>
 <!-- end of info-action-panel -->
 <!-- weight-action-panel -->
-<div class="action-panel" [class.-expanded]="'weight'==expanded">
+<!-- TO DO: rename: weight-panel since it contains more than 'weight' -->
+<div [class]="'action-panel '+type" [class.-expanded]="'weight'==expanded">
     <header class="title">
         <h4 class="heading">Factor</h4>
-        <h4 class="heading">Weight</h4>
+        <h4 class="heading">{{type==='number'?'Weight':'Selection'}}</h4>
     </header>
     <ul class="params-list">
-        <gd-param-item *ngFor="let param of params; index as i;" [(value)]="values[i]" (valueChange)="this.itemValueChange()"
-            [param]="param" [class]="'param-item '+param" [range]="range">
+        <gd-param-item *ngFor="let fakeId of fakeArr; index as i;" [type]="this.type" [(value)]="this.values[i]" (valueChange)="this.valuesChange.emit(this.values)"
+            [param]="this.params[i]" class="param-item" [range]="range">
         </gd-param-item>
     </ul>
 </div>
 <!-- end of weight-action-panel -->
-<!-- params-action-panel -->
-<div class="action-panel" [class.-expanded]="'params'==expanded">
-        <header class="title">
-            <h4 class="heading">Factor</h4>
-            <h4 class="heading">Selection</h4>
-        </header>
-        <ul class="params-list">
-            <gd-param-item *ngFor="let param of params; index as i;" [(value)]="values[i]" (valueChange)="this.itemValueChange()"
-                [param]="param" [class]="'param-item '+param" [range]="range">
-            </gd-param-item>
-        </ul>
-    </div>
-    <!-- end of weight-action-panel -->
 <!-- opacity-action-panel -->
 <div class="action-panel" [class.-expanded]="'opacity'==expanded">
     <label class="slider-label">
@@ -88,7 +76,7 @@
 <!-- model-actions -->
 <span class="model-actions">
         <ng-container *ngFor="let action of optional">
-            <button gdActionBtn [action]="action" [(expanded)]="this.expanded" [ngClass]="{'-disabled': !this.summary, '-clicked': action==expanded}" [class]="'action -light icon-'+action">Model Summary</button>
+            <button gdActionBtn [action]="action" [(expanded)]="this.expanded" [ngClass]="{'-disabled': !this.summary || !this.show, '-clicked': action==expanded}" [class]="'action -light icon-'+action">Model Summary</button>
         </ng-container>
     </span>
 <!-- end of model-actions -->
@@ -96,7 +84,7 @@
 <div *ngIf="summary" class="action-panel" [class.-expanded]="'summary'===expanded">
     <div *ngIf="isLoading" class="loading icon-loading animate-spin"></div>
     <table *ngIf="!isLoading" class="summary-table">
-        <tbody>
+        <tbody *ngIf="name==='chatta'">
             <tr class="heading">
                 <th></th>
                 <th class="bold">Total Score</th>
@@ -107,6 +95,56 @@
                 <td>{{param | rejoin:"_" | titlecase}}</td>
                 <td class="bold" style="text-align:right;">{{this.summary.layers[i]}}</td>
             </tr>
+        </tbody>
+        <tbody *ngIf="name==='creation-render'">
+            <tr class="heading">
+                <th></th>
+                <th class="bold">Average Elevation (m)</th>
+                <th class="bold" style="text-align:right;">{{this.summary.mean}}</th>
+            </tr>
+            <tr class="heading">
+                <th></th>
+                <th class="bold">Minimum Elevation (m)</th>
+                <th class="bold" style="text-align:right;">{{this.summary.min}}</th>
+            </tr>
+            <tr class="heading">
+                <th></th>
+                <th class="bold">Maximum Elevation (m)</th>
+                <th class="bold" style="text-align:right;">{{this.summary.max}}</th>
+            </tr>
+            <!-- <tr *ngFor="let param of params; index as i">
+                    <td style="text-align:right;">{{this.values[i]}}</td>
+                    <td>{{param | rejoin:"_" | titlecase}}</td>
+                    <td class="bold" style="text-align:right;">{{this.summary.layers[i]}}</td>
+                </tr> -->
+        </tbody>
+
+        <tbody *ngIf="name==='change-detection'">
+            <tr class="heading">
+                <th></th>
+                <th class="bold">Average Elevation (m)</th>
+                <th class="bold" style="text-align:right;">{{this.summary.mean}}</th>
+            </tr>
+            <tr class="heading">
+                <th></th>
+                <th class="bold">Minimum Elevation (m)</th>
+                <th class="bold" style="text-align:right;">{{this.summary.min}}</th>
+            </tr>
+            <tr class="heading">
+                <th></th>
+                <th class="bold">Maximum Elevation (m)</th>
+                <th class="bold" style="text-align:right;">{{this.summary.max}}</th>
+            </tr>
+            <tr class="heading">
+                <th></th>
+                <th class="bold">Volume Change (m3)</th>
+                <th class="bold" style="text-align:right;">{{this.summary.volume}}</th>
+            </tr>
+            <!-- <tr *ngFor="let param of params; index as i">
+                        <td style="text-align:right;">{{this.values[i]}}</td>
+                        <td>{{param | rejoin:"_" | titlecase}}</td>
+                        <td class="bold" style="text-align:right;">{{this.summary.layers[i]}}</td>
+                    </tr> -->
         </tbody>
     </table>
 </div>

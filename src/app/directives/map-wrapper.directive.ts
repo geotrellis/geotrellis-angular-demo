@@ -17,7 +17,7 @@ export class MapWrapperDirective implements OnInit, OnChanges, OnDestroy {
   zoomControl: L.Control.Zoom;
   // store the last drawn item or viewport
   layer: L.Layer;
-  
+
   map: L.Map;
   drawOptions: L.Control.DrawConstructorOptions = {
     position: 'topright',
@@ -67,17 +67,21 @@ export class MapWrapperDirective implements OnInit, OnChanges, OnDestroy {
 
     this.map.on(L.Draw.Event.CREATED, (e: any) => {
       const newLayer: L.Layer = (e as L.DrawEvents.Created).layer;
-
+      console.log(newLayer)
+      if (newLayer.hasOwnProperty('_latlng')) {
+        const pts = newLayer['_latlng'];
+      } else {
       // POLYLINE, must not be polygon, or the first coords and the last one will not be correct
-      const maskGeojson = L.polyline(newLayer['editing']['latlngs'][0]).toGeoJSON();
-      const mask = Object.assign(maskGeojson, {
+      const maskGeojson = L.polyline(newLayer['_latlngs']).toGeoJSON();
+      Object.assign(maskGeojson, {
         geometry: {
           type: 'Polygon',
           coordinates: (maskGeojson.geometry.coordinates as number[][][]).map(el => el.map(item => item.reverse()))
         }
       });
-      this.maskChange.emit(JSON.stringify(mask));
+      this.maskChange.emit(JSON.stringify(maskGeojson));
       this.hasMaskChange.emit(true);
+    }
 
       const bool = this.drawOptions.edit.featureGroup.hasLayer(this.layer);
       if (bool) {

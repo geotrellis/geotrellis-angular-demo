@@ -1,4 +1,6 @@
-export interface LayerCard {
+export interface LayerCard 
+
+{
     model: string;
     title: string;
     thumb: string;
@@ -26,7 +28,8 @@ export interface LayerCard {
     server: string;
     palette?: string[] | string;
     summary?: {
-        layers: number[],
+        layers: number[];
         total: number
     };
+    expanded: string;
 }

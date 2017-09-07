@@ -122,4 +122,25 @@
     &:not(.-expanded) {
         @include invisible;
     }  
+
+
+    &.string {
+        > .title {
+            padding-left : 2.4rem;
+        }
+
+        > .params-list > .param-item {
+            display: flex;
+            justify-content: space-between;
+
+            > .name {
+                white-space: nowrap;
+            }
+
+            > .string {
+                min-width: 8rem;
+            }
+        }
+    }
+    
 }

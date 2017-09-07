@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/switchMap';
 
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, ChangeDetectorRef, HostBinding, OnInit, OnChanges, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { LayerCard } from '../../layer-card.d';
@@ -12,7 +12,7 @@ import * as L from 'leaflet';
     selector: 'gd-map-view',
     templateUrl: './map-view.component.html'
 })
-export class MapViewComponent implements OnInit {
+export class MapViewComponent implements OnInit, AfterViewInit {
     @HostBinding('class.map-view') true;
     hasMask = false;
     map: L.Map;
@@ -38,25 +38,37 @@ export class MapViewComponent implements OnInit {
             }
         });
         this.mask = '';
+        // when reset area should clean the previous summary data;
+        this.cards.forEach(el => {
+            if (el.hasOwnProperty('summary')) {
+                el.summary = undefined;
+            }
+        });
         this.hasMask = false;
     }
 
     constructor(
         private cardService: CardService,
         private route: ActivatedRoute,
+        private cd: ChangeDetectorRef,
     ) {
         this.route.paramMap
-        .switchMap((params: ParamMap) => this.cardService.getCards(params.get('name')))
-        .subscribe(cards => {
-            this.cards = cards;
-            this.options = Object.assign({}, this.options, {
-                zoom: cards[0].info.zoom,
-                center: cards[0].info.center
+            .switchMap((params: ParamMap) => this.cardService.getCards(params.get('name')))
+            .subscribe(cards => {
+                this.cards = cards;
+                this.options = Object.assign({}, this.options, {
+                    zoom: cards[0].info.zoom,
+                    center: cards[0].info.center
+                });
             });
-        });
     }
 
     ngOnInit(): void {
 
-      }
+
+    }
+
+    ngAfterViewInit() {
+        this.cd.detectChanges();
+    }
 }

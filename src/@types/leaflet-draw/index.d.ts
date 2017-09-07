@@ -255,7 +255,11 @@ declare module 'leaflet' {
 		}
 		// edited
 		class Polygon {
-			constructor(map: L.Map, options: L.DrawOptions.PolygonOptions)
+			constructor(map: L.Map, options?: L.DrawOptions.PolygonOptions)
+		}
+
+		class CircleMarker {
+			constructor(map: L.Map, options?: L.DrawOptions.CircleOptions)
 		}
 	}
 
