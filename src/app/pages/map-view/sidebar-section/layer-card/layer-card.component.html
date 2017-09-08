@@ -18,7 +18,7 @@
 <!-- end of layer-header -->
 <!-- layer-selector -->
 <div *ngIf="presets" class="layer-selector" [class.-single]="isSingle">
-    <select #preset jsClass="location-modeling" class="dropdown" (input)="getPreset(preset.value)">
+    <select #preset jsClass="location-modeling" class="dropdown" (input)="getPreset(preset.value)" [disabled]="!show">
         <option *ngFor="let preset of presets; index as i" [value]="preset.value" [selected]="i==0">{{preset.text}}</option>
         <option *ngIf="preset.value==undefined" #custom [value]="undefined">{{preset.text}}</option>                            
     </select>
@@ -26,7 +26,7 @@
 <!-- end of layer-selector -->
 <!-- action-panel group -->
 <!-- info-action-panel -->
-<div class="action-panel" [class.-expanded]="'info'==expanded">
+<div *ngIf="checkAction('info')" class="action-panel" [class.-expanded]="'info'==expanded">
     <p class="text">
         {{infotext}}
     </p>
@@ -53,7 +53,7 @@
 <!-- end of info-action-panel -->
 <!-- weight-action-panel -->
 <!-- TO DO: rename: weight-panel since it contains more than 'weight' -->
-<div [class]="'action-panel '+type" [class.-expanded]="'weight'==expanded">
+<div *ngIf="checkAction('weight')" [class]="'action-panel '+type" [class.-expanded]="'weight'==expanded">
     <header class="title">
         <h4 class="heading">Factor</h4>
         <h4 class="heading">{{type==='number'?'Weight':'Selection'}}</h4>
@@ -66,7 +66,7 @@
 </div>
 <!-- end of weight-action-panel -->
 <!-- opacity-action-panel -->
-<div class="action-panel" [class.-expanded]="'opacity'==expanded">
+<div *ngIf="checkAction('opacity')" class="action-panel" [class.-expanded]="'opacity'==expanded">
     <label class="slider-label">
         Opacity:<span class="value">{{slider.value | percent:0}}</span>
         <input #slider class="slider" type="range" min="0" max="1" step="0.01" value="0.6" (mouseup)="opacityChange.emit(slider.value)">
@@ -76,7 +76,7 @@
 <!-- model-actions -->
 <span class="model-actions">
         <ng-container *ngFor="let action of optional">
-            <button gdActionBtn [action]="action" [(expanded)]="this.expanded" [ngClass]="{'-disabled': !summary||!this.show, '-clicked': this.show&&action==expanded}" [class]="'action -light icon-'+action">Model Summary</button>
+            <button gdActionBtn [action]="action" [(expanded)]="this.expanded" [ngClass]="{'-disabled': !summary||!this.show, '-clicked': action==expanded&&this.show}" [class]="'action -light icon-'+action">Model Summary</button>
         </ng-container>
     </span>
 <!-- end of model-actions -->
@@ -143,9 +143,8 @@
                 </tr>
 
             </ng-container>
-
             <!-- poly -->
-            <ng-container *ngIf="summary.mean">
+            <ng-container *ngIf="summary.volume">
                 <tr class="heading">
                     <th></th>
                     <th class="bold">Average Elevation (m)</th>

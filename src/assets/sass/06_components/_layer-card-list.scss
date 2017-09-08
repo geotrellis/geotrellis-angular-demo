@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    max-height: 85%;
+    overflow-y: overlay;
     > .layer-card {
         margin: 0.4rem 1rem;
     }

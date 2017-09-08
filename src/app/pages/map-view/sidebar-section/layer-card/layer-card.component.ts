@@ -41,6 +41,10 @@ export class LayerCardComponent implements OnInit, OnChanges {
 
     optional: string[];
 
+    checkAction(action: string): boolean {
+        return this.actions.includes(action);
+    }
+
     toAbs(val: number): number {
         return Math.abs(val);
     }

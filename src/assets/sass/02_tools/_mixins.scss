@@ -32,7 +32,7 @@
     }
     &:before {
         cursor: pointer;
-        margin-right: 0.5em;
+        padding-right: 0.5em;
     }
 }
 
@@ -48,8 +48,8 @@
     background-color: $btncolor;
     color: invert($btncolor);    
     padding: .4rem .8rem;
-    border-radius: 3px;
-    border: 1px solid invert($btncolor);
+    border-radius: .4rem;
+    border: .1rem solid invert($btncolor);
     cursor: pointer;
     &:hover {
       background-color: invert($btncolor);

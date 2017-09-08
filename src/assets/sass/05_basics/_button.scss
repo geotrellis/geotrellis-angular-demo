@@ -4,6 +4,7 @@ button {
     border: none;
     outline: none;
     padding: 0;
+    white-space: nowrap;
     cursor: pointer;
     &:hover, &.-clicked {
         color: $icon-hover;

@@ -127,6 +127,7 @@
     &.string {
         > .title {
             padding-left : 2.4rem;
+            padding-right: 6.4rem;
         }
 
         > .params-list > .param-item {
@@ -138,7 +139,7 @@
             }
 
             > .string {
-                min-width: 8rem;
+                min-width: 10rem;
             }
         }
     }

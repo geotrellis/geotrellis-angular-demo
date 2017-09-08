@@ -17,6 +17,7 @@ export class LayerService {
     ) { }
 
     getLayer(card: LayerCard): Observable<L.TileLayer> {
+        let url = card.server;
         switch (card.info.name) {
             case 'lm':
                 return this._http.get(`https://geotrellis.io/gt/weighted-overlay/breaks`, {
@@ -25,7 +26,7 @@ export class LayerService {
                         .set('weights', `${card.values}`)
                         .set('numBreaks', '20')
                 })
-                    .debounceTime(1000)
+                    .debounceTime(500)
                     .retry(3)
                     .map(response => response['classBreaks'])
                     .map(res => {
@@ -47,7 +48,7 @@ export class LayerService {
                         .set('weights', `${card.values}`)
                         .set('numBreaks', '10')
                 })
-                    .debounceTime(1000)
+                    .debounceTime(500)
                     .retry(3)
                     .map(response => response['classBreaks'])
                     .map(res => {
@@ -63,16 +64,99 @@ export class LayerService {
                         });
                     });
             case 'creation-render':
-                const url = card.server.replace('values[0]', `${card.values[0]}`)
-                    .replace('values[1]', `${card.values[1]}`)
-                    .replace('values[2]', `${card.values[2]}`);
+                url = card.server
+                    .replace('{values[0]}', `${card.values[0]}`)
+                    .replace('{values[1]}', `${card.values[1]}`)
+                    .replace('{values[2]}', `${card.values[2]}`);
                 return new Observable<L.TileLayer>(observer => observer.next(L.tileLayer(url)))
-                    .debounceTime(1000)
+                    .debounceTime(500)
                     .retry(3)
                     .map(res => res);
             case 'change-detection':
                 return new Observable<L.TileLayer>(observer => observer.next(L.tileLayer(card.server)))
-                    .debounceTime(1000)
+                    .debounceTime(500)
+                    .retry(3)
+                    .map(res => res);
+            case 'potsdam-imagery':
+                url = card.server
+                    .replace('{values[0]}', `${card.values[0]}`)
+                    .replace('{values[1]}', `${card.values[1]}`);
+                return new Observable<L.TileLayer>(observer => observer.next(L.tileLayer(url)))
+                    .debounceTime(500)
+                    .retry(3)
+                    .map(res => res);
+            case 'potsdam-dsm':
+                url = card.server
+                    .replace('{values[0]}', `${card.values[0]}`);
+                return new Observable<L.TileLayer>(observer => observer.next(L.tileLayer(url)))
+                    .debounceTime(500)
+                    .retry(3)
+                    .map(res => res);
+            case 'potsdam-dsm-gtn':
+                url = card.server
+                    .replace('{values[0]}', `${card.values[0]}`);
+                return new Observable<L.TileLayer>(observer => observer.next(L.tileLayer(url)))
+                    .debounceTime(500)
+                    .retry(3)
+                    .map(res => res);
+            case 'potsdam-labels':
+                return new Observable<L.TileLayer>(observer => observer.next(L.tileLayer(url)))
+                    .debounceTime(500)
+                    .retry(3)
+                    .map(res => res);
+            case 'potsdam-unet-predictions':
+                url = card.server
+                    .replace('{values[0]}', `${card.values[0]}`)
+                    .replace('{values[1]}', `${card.values[1]}`);
+                return new Observable<L.TileLayer>(observer => observer.next(L.tileLayer(url)))
+                    .debounceTime(500)
+                    .retry(3)
+                    .map(res => res);
+            case 'potsdam-unet-probabilities':
+                url = card.server
+                    .replace('{values[0]}', `${card.values[0]}`);
+                return new Observable<L.TileLayer>(observer => observer.next(L.tileLayer(url)))
+                    .debounceTime(500)
+                    .retry(3)
+                    .map(res => res);
+            case 'potsdam-fcn-predictions':
+                url = card.server
+                    .replace('{values[0]}', `${card.values[0]}`)
+                    .replace('{values[1]}', `${card.values[1]}`);
+                return new Observable<L.TileLayer>(observer => observer.next(L.tileLayer(url)))
+                    .debounceTime(500)
+                    .retry(3)
+                    .map(res => res);
+            case 'potsdam-fcn-probabilities':
+                url = card.server
+                    .replace('{values[0]}', `${card.values[0]}`);
+                return new Observable<L.TileLayer>(observer => observer.next(L.tileLayer(url)))
+                    .debounceTime(500)
+                    .retry(3)
+                    .map(res => res);
+            case 'potsdam-fcndsm-predictions':
+                url = card.server
+                    .replace('{values[0]}', `${card.values[0]}`)
+                    .replace('{values[1]}', `${card.values[1]}`);
+                return new Observable<L.TileLayer>(observer => observer.next(L.tileLayer(url)))
+                    .debounceTime(500)
+                    .retry(3)
+                    .map(res => res);
+            case 'potsdam-fcndsm-probabilities':
+                url = card.server
+                    .replace('{values[0]}', `${card.values[0]}`);
+                return new Observable<L.TileLayer>(observer => observer.next(L.tileLayer(url)))
+                    .debounceTime(500)
+                    .retry(3)
+                    .map(res => res);
+            case 'potsdam-fcn-unet':
+                return new Observable<L.TileLayer>(observer => observer.next(L.tileLayer(url)))
+                    .debounceTime(500)
+                    .retry(3)
+                    .map(res => res);
+            case 'potsdam-fcn-fcndsm':
+                return new Observable<L.TileLayer>(observer => observer.next(L.tileLayer(url)))
+                    .debounceTime(500)
                     .retry(3)
                     .map(res => res);
             default:
@@ -102,7 +186,7 @@ export class LayerService {
                         .set('weights', `${values}`)
                         .set('polygon', `${mask}`)
                 })
-                    .debounceTime(1000)
+                    .debounceTime(500)
                     .retry(3)
                     .map(response => {
                         return {
@@ -115,17 +199,17 @@ export class LayerService {
                     });
 
             case 'creation-render':
-                url = `http://ec2-54-87-204-186.compute-1.amazonaws.com/api/stats/${type}/single/values[2]values[0]/zoom`
-                    .replace('values[0]', `${values[0]}`)
-                    .replace('values[2]', `${values[2]}`)
-                    .replace('zoom', `${zoom}`);
+                url = `http://ec2-54-87-204-186.compute-1.amazonaws.com/api/stats/${type}/single/{values[2]}{values[0]}/{zoom}`
+                    .replace('{values[0]}', `${values[0]}`)
+                    .replace('{values[2]}', `${values[2]}`)
+                    .replace('{zoom}', `${zoom}`);
                 if (card.mask.hasOwnProperty('lat')) {
                     return this._http.get(url, {
                         params: new HttpParams()
                             .set('lat', `${mask.lat}`)
                             .set('lng', `${mask.lng}`)
                     })
-                        .debounceTime(1000)
+                        .debounceTime(500)
                         .retry(3)
                         .map(res => res);
                 } else {
@@ -133,25 +217,24 @@ export class LayerService {
                         params: new HttpParams()
                             .set('poly', `${mask}`)
                     })
-                        .debounceTime(1000)
+                        .debounceTime(500)
                         .retry(3)
                         .map(res => res);
                 }
 
 
             case 'change-detection':
-
-                url = `http://ec2-54-87-204-186.compute-1.amazonaws.com/api/stats/${type}/diff/mar10values[0]/jul10values[0]/zoom`
-                    .replace('values[0]', `${values[0]}`)
-                    .replace('values[0]', `${values[0]}`)
-                    .replace('zoom', `${zoom}`);
+                url = `http://ec2-54-87-204-186.compute-1.amazonaws.com/api/stats/${type}/diff/mar10{values[0]}/jul10{values[0]}/{zoom}`
+                    .replace('{values[0]}', `${values[0]}`)
+                    .replace('{values[0]}', `${values[0]}`)
+                    .replace('{zoom}', `${zoom}`);
                 if (card.mask.hasOwnProperty('lat')) {
                     return this._http.get(url, {
                         params: new HttpParams()
                             .set('lat', `${mask.lat}`)
                             .set('lng', `${mask.lng}`)
                     })
-                        .debounceTime(1000)
+                        .debounceTime(500)
                         .retry(3)
                         .map(res => res);
                 } else {
@@ -159,7 +242,7 @@ export class LayerService {
                         params: new HttpParams()
                             .set('poly', `${mask}`)
                     })
-                        .debounceTime(1000)
+                        .debounceTime(500)
                         .retry(3)
                         .map(res => res);
                 }

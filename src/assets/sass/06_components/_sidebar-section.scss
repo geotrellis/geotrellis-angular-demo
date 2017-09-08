@@ -1,13 +1,13 @@
-.sidebar-section {    
+.sidebar-section {
+    max-height: 100vh;    
     background-color: $grey-light;
     
     > .actions-bar {
-        margin: 0 0 0.5rem;
+        margin: 0;
     }
-    
-    > .back {
-        margin: 1.6rem 0 0 .8rem;
-        font-weight: $font-weight-bold;
+
+    > .layer-card-list {
+        margin: .8rem 0 0;
     }
 
     &.-collapsed {

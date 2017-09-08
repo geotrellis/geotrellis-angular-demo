@@ -71,9 +71,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
                     }
                     this._layerService.getSummary(el, values, zoom).subscribe(res => {
                         el.summary = res;
-                        if (el.show) {
-                            el.expanded = 'summary';
-                        }
+                        el.expanded = 'summary';
                         this.isLoading = false;
                     }, console.error);
                 }
@@ -135,7 +133,6 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
         }
         // all card panels should be closed;
         el.expanded = undefined;
-        console.log(el, el.expanded)
     }
 
     filterByName(name: string): LayerCard {
@@ -170,9 +167,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
             }
             this._layerService.getSummary(el, values, zoom).subscribe(res => {
                 el.summary = res;
-                if (el.show) {
-                    el.expanded = 'summary';
-                }
+                el.expanded = 'summary';
                 this.isLoading = false;
             }, console.error);
         }
@@ -223,9 +218,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
                         }
                         this._layerService.getSummary(el, values, zoom).subscribe(res => {
                             el.summary = res;
-                            if (el.show) {
-                                el.expanded = 'summary';
-                            }
+                            el.expanded = 'summary';
                             this.isLoading = false;
                         }, console.error);
                     }
