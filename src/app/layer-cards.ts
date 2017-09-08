@@ -108,7 +108,7 @@ export const LAYERCARDS: any[] = [
         summary: undefined,
         expanded: undefined
     }, {
-        model: 'pointcloud',
+        model: 'point-cloud',
         title: 'Point Cloud',
         thumb: 'http://ec2-54-87-204-186.compute-1.amazonaws.com/tms/hillshade/mar10tin/14/3340/6439?colorRamp=blue-to-red',
         info: {
@@ -131,7 +131,7 @@ export const LAYERCARDS: any[] = [
             }],
             actions: ['info', 'weight', 'opacity'],
             optional: ['summary'],
-            infotext: 'pointcloud pointcloud',
+            infotext: 'point-cloud point-cloud',
             prtext: [
                 'DEM Creation Method',
                 'Render Options',
@@ -149,7 +149,7 @@ export const LAYERCARDS: any[] = [
         summary: undefined,
         expanded: undefined
     }, {
-        model: 'pointcloud',
+        model: 'point-cloud',
         title: 'Point Cloud',
         thumb: 'http://ec2-54-87-204-186.compute-1.amazonaws.com/tms/hillshade/mar10tin/14/3340/6439?colorRamp=blue-to-red',
         // thumb: 'https://potsdam.geotrellis.io/tms/hillshade/isprs-potsdam-dsm/18/140577/86109',

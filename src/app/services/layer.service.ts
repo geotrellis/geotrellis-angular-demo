@@ -85,7 +85,7 @@ export class LayerService {
         let mask = card.mask;
         let url: string;
         let type: string;
-        if (card.model === 'pointcloud' && !card.mask.hasOwnProperty('lat')) {
+        if (card.model === 'point-cloud' && !card.mask.hasOwnProperty('lat')) {
             type = 'poly';
             mask = JSON.stringify(Object.assign(JSON.parse(card.mask), {
                 geometry: {

@@ -30,7 +30,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
     // when group action panel is opened, all card layer's panels should be closed
     onExpandedChange() {
         this.cards.forEach(el => {
-            el.expanded = '';
+            el.expanded = undefined;
         });
     }
     getView(): void {
@@ -64,7 +64,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
                 });
                 if (el.hasOwnProperty('summary')) {
                     this.isLoading = true;
-                    const zoom = this.map.getZoom();                        
+                    const zoom = this.map.getZoom();
                     let values = el.values;
                     if (el.info.name === 'change-detection') {
                         values = this.cards.filter(pt => pt.info.name === 'creation-render')[0].values;
@@ -134,7 +134,8 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
             this.layers = Array.from(this.layersMap.values());
         }
         // all card panels should be closed;
-        el.expanded = '';
+        el.expanded = undefined;
+        console.log(el, el.expanded)
     }
 
     filterByName(name: string): LayerCard {
@@ -202,8 +203,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
         }
 
         if (changes.mask && changes.mask.currentValue) {
-            const cards = this.cards.filter(el => el.show === true);
-            cards.forEach((el, i) => {
+            this.cards.forEach((el, i) => {
                 if (el.hasOwnProperty('mask')) {
                     el.mask = changes.mask.currentValue;
                     this._layerService.getLayer(el).subscribe(res => {
@@ -216,7 +216,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
                     if (changes.mask.currentValue && el.hasOwnProperty('summary')) {
                         this.isLoading = true;
                         const zoom = this.map.getZoom();
-                        
+
                         let values = el.values;
                         if (el.info.name === 'change-detection') {
                             values = this.cards.filter(pt => pt.info.name === 'creation-render')[0].values;
@@ -232,7 +232,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
                     if (!changes.mask.currentValue) {
                         // close summary panel if is opened;
                         if (el.expanded === 'summary') {
-                            el.expanded = '';
+                            el.expanded = undefined;
                         }
                     }
                 }

@@ -44,6 +44,7 @@ export class MapViewComponent implements OnInit, AfterViewInit {
                 el.summary = undefined;
             }
         });
+        console.log(this.cards)
         this.hasMask = false;
     }
 
@@ -55,6 +56,7 @@ export class MapViewComponent implements OnInit, AfterViewInit {
         this.route.paramMap
             .switchMap((params: ParamMap) => this.cardService.getCards(params.get('name')))
             .subscribe(cards => {
+                console.log(cards, 'cards')
                 this.cards = cards;
                 this.options = Object.assign({}, this.options, {
                     zoom: cards[0].info.zoom,

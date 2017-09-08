@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 @Component({
     selector: 'gd-sidebar-header',
@@ -7,16 +7,13 @@ import { Location } from '@angular/common';
 export class SidebarHeaderComponent {
     @HostBinding('class.-collapsed') @Input() isCollapsed = false;
     @Output() isCollapsedChange = new EventEmitter<boolean>();
-
-    resizeSidebar(): void {
-        this.isCollapsedChange.emit(!this.isCollapsed);
-    }
+    @Input() title: string;
 
     goBack() {
         this.location.back();
     }
+
     constructor(
         private location: Location
     ) { }
-
 }

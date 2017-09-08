@@ -8,7 +8,6 @@ import { MapViewComponent } from './pages/map-view/map-view.component';
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'mapview', component: MapViewComponent },
   { path: 'mapview/:name', component: MapViewComponent },
 ];
 
