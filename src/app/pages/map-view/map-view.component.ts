@@ -17,7 +17,7 @@ export class MapViewComponent implements OnInit, AfterViewInit {
     hasMask = false;
     map: L.Map;
     cards: LayerCard[] = [];
-    mask = '';
+    mask: any;
     options = {
         layers: [
             L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
@@ -37,7 +37,7 @@ export class MapViewComponent implements OnInit, AfterViewInit {
                 this.map.removeLayer(el);
             }
         });
-        this.mask = '';
+        this.mask = undefined;
         // when reset area should clean the previous summary data;
         this.cards.forEach(el => {
             if (el.hasOwnProperty('summary')) {

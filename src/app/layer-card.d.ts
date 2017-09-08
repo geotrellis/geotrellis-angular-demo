@@ -23,7 +23,7 @@ export interface LayerCard
     values?: number[] | string[];
     show: boolean;
     opacity: number;
-    mask?: string;
+    mask?: any;
     params?: any;
     server: string;
     palette?: string[] | string;

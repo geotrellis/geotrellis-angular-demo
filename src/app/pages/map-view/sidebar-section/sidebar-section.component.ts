@@ -14,7 +14,7 @@ import { LayerCard } from '../../../layer-card';
 export class SidebarSectionComponent implements OnInit, OnChanges {
     @Input() map: L.Map;
     @Input() cards: LayerCard[];
-    @Input() mask = '';
+    @Input() mask: any;
     view: L.Rectangle;
     isSingle: boolean;
     isLoading: boolean;
@@ -201,7 +201,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
             });
         }
 
-        if (changes.mask && changes.mask.currentValue.length >= 0) {
+        if (changes.mask && changes.mask.currentValue) {
             const cards = this.cards.filter(el => el.show === true);
             cards.forEach((el, i) => {
                 if (el.hasOwnProperty('mask')) {
@@ -213,7 +213,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
                             this.layers = Array.from(this.layersMap.values());
                         }
                     });
-                    if (changes.mask.currentValue.length > 0 && el.hasOwnProperty('summary')) {
+                    if (changes.mask.currentValue && el.hasOwnProperty('summary')) {
                         this.isLoading = true;
                         const zoom = this.map.getZoom();
                         
@@ -221,7 +221,6 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
                         if (el.info.name === 'change-detection') {
                             values = this.cards.filter(pt => pt.info.name === 'creation-render')[0].values;
                         }
-                        console.log(values);
                         this._layerService.getSummary(el, values, zoom).subscribe(res => {
                             el.summary = res;
                             if (el.show) {
@@ -230,7 +229,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
                             this.isLoading = false;
                         }, console.error);
                     }
-                    if (changes.mask.currentValue.length === 0) {
+                    if (!changes.mask.currentValue) {
                         // close summary panel if is opened;
                         if (el.expanded === 'summary') {
                             el.expanded = '';

@@ -76,7 +76,7 @@
 <!-- model-actions -->
 <span class="model-actions">
         <ng-container *ngFor="let action of optional">
-            <button gdActionBtn [action]="action" [(expanded)]="this.expanded" [ngClass]="{'-disabled': !this.summary || !this.show, '-clicked': action==expanded}" [class]="'action -light icon-'+action">Model Summary</button>
+            <button gdActionBtn [action]="action" [(expanded)]="this.expanded" [ngClass]="{'-disabled': !summary || !this.show, '-clicked': action==expanded}" [class]="'action -light icon-'+action">Model Summary</button>
         </ng-container>
     </span>
 <!-- end of model-actions -->
@@ -88,62 +88,90 @@
             <tr class="heading">
                 <th></th>
                 <th class="bold">Total Score</th>
-                <th class="bold" style="text-align:right;">{{this.summary.total}}</th>
+                <th class="bold" style="text-align:right;">{{summary.total}}</th>
             </tr>
             <tr *ngFor="let param of params; index as i">
                 <td style="text-align:right;">{{this.values[i]}}</td>
                 <td>{{param | rejoin:"_" | titlecase}}</td>
-                <td class="bold" style="text-align:right;">{{this.summary.layers[i]}}</td>
+                <td class="bold" style="text-align:right;">{{summary.layers[i]}}</td>
             </tr>
         </tbody>
         <tbody *ngIf="name==='creation-render'">
+            <!-- point -->
+            <ng-container *ngIf="summary.value">
+                <tr class="heading">
+                    <th></th>
+                    <th class="bold">Elevation (m)</th>
+                    <th class="bold" style="text-align:right;">{{summary.value}}</th>
+                </tr>
+
+            </ng-container>
+            <!-- poly -->
+                        <ng-container *ngIf="summary.mean">
+
             <tr class="heading">
                 <th></th>
                 <th class="bold">Average Elevation (m)</th>
-                <th class="bold" style="text-align:right;">{{this.summary.mean}}</th>
+                <th class="bold" style="text-align:right;">{{summary.mean}}</th>
             </tr>
             <tr class="heading">
                 <th></th>
                 <th class="bold">Minimum Elevation (m)</th>
-                <th class="bold" style="text-align:right;">{{this.summary.min}}</th>
+                <th class="bold" style="text-align:right;">{{summary.min}}</th>
             </tr>
             <tr class="heading">
                 <th></th>
                 <th class="bold">Maximum Elevation (m)</th>
-                <th class="bold" style="text-align:right;">{{this.summary.max}}</th>
+                <th class="bold" style="text-align:right;">{{summary.max}}</th>
             </tr>
+                        </ng-container>
+
             <!-- <tr *ngFor="let param of params; index as i">
                     <td style="text-align:right;">{{this.values[i]}}</td>
                     <td>{{param | rejoin:"_" | titlecase}}</td>
-                    <td class="bold" style="text-align:right;">{{this.summary.layers[i]}}</td>
+                    <td class="bold" style="text-align:right;">{{summary.layers[i]}}</td>
                 </tr> -->
         </tbody>
 
         <tbody *ngIf="name==='change-detection'">
-            <tr class="heading">
-                <th></th>
-                <th class="bold">Average Elevation (m)</th>
-                <th class="bold" style="text-align:right;">{{this.summary.mean}}</th>
-            </tr>
-            <tr class="heading">
-                <th></th>
-                <th class="bold">Minimum Elevation (m)</th>
-                <th class="bold" style="text-align:right;">{{this.summary.min}}</th>
-            </tr>
-            <tr class="heading">
-                <th></th>
-                <th class="bold">Maximum Elevation (m)</th>
-                <th class="bold" style="text-align:right;">{{this.summary.max}}</th>
-            </tr>
-            <tr class="heading">
-                <th></th>
-                <th class="bold">Volume Change (m3)</th>
-                <th class="bold" style="text-align:right;">{{this.summary.volume}}</th>
-            </tr>
+            <!-- point -->
+            <ng-container *ngIf="summary.value1">
+                <tr *ngFor="let i of ['value1', 'value2']" class="heading">
+                    <th></th>
+                    <th class="bold">Snow {{i==='value1'?'On':'Off'}} Elevation (m)</th>
+                    <th class="bold" style="text-align:right;">{{summary[i]}}</th>
+                </tr>
+
+            </ng-container>
+
+            <!-- poly -->
+            <ng-container *ngIf="summary.mean">
+                <tr class="heading">
+                    <th></th>
+                    <th class="bold">Average Elevation (m)</th>
+                    <th class="bold" style="text-align:right;">{{summary.mean}}</th>
+                </tr>
+                <tr class="heading">
+                    <th></th>
+                    <th class="bold">Minimum Elevation (m)</th>
+                    <th class="bold" style="text-align:right;">{{summary.min}}</th>
+                </tr>
+                <tr class="heading">
+                    <th></th>
+                    <th class="bold">Maximum Elevation (m)</th>
+                    <th class="bold" style="text-align:right;">{{summary.max}}</th>
+                </tr>
+                <tr class="heading">
+                    <th></th>
+                    <th class="bold">Volume Change (m3)</th>
+                    <th class="bold" style="text-align:right;">{{summary.volume}}</th>
+                </tr>
+            </ng-container>
+          
             <!-- <tr *ngFor="let param of params; index as i">
                         <td style="text-align:right;">{{this.values[i]}}</td>
                         <td>{{param | rejoin:"_" | titlecase}}</td>
-                        <td class="bold" style="text-align:right;">{{this.summary.layers[i]}}</td>
+                        <td class="bold" style="text-align:right;">{{summary.layers[i]}}</td>
                     </tr> -->
         </tbody>
     </table>

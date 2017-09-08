@@ -56,7 +56,7 @@ export class LayerService {
                             layers: card.params.layers,
                             format: 'image/png',
                             weights: card.values,
-                            mask: card.mask,
+                            mask: card.mask ? card.mask : '',
                             colorRamp: card.palette,
                             transparent: true,
                             attribution: 'Azavea',
@@ -84,14 +84,16 @@ export class LayerService {
         const name = card.info.name;
         let mask = card.mask;
         let url: string;
-        if (card.model === 'pointcloud') {
+        let type: string;
+        if (card.model === 'pointcloud' && !card.mask.hasOwnProperty('lat')) {
+            type = 'poly';
             mask = JSON.stringify(Object.assign(JSON.parse(card.mask), {
                 geometry: {
                     type: 'Polygon',
                     coordinates: JSON.parse(card.mask).geometry.coordinates.map(datum => datum.map(data => data.reverse()))
                 }
             }));
-        }
+        } else { type = 'point'; }
         switch (name) {
             case 'chatta':
                 return this._http.get(`http://demo.geotrellis.com/chatta/gt/sum`, {
@@ -113,33 +115,54 @@ export class LayerService {
                     });
 
             case 'creation-render':
-
-                url = 'http://ec2-54-87-204-186.compute-1.amazonaws.com/api/stats/poly/single/values[2]values[0]/zoom'
+                url = `http://ec2-54-87-204-186.compute-1.amazonaws.com/api/stats/${type}/single/values[2]values[0]/zoom`
                     .replace('values[0]', `${values[0]}`)
                     .replace('values[2]', `${values[2]}`)
                     .replace('zoom', `${zoom}`);
-                return this._http.get(url, {
-                    params: new HttpParams()
-                        .set('poly', `${mask}`)
-                })
-                    .debounceTime(1000)
-                    .retry(3)
-                    .map(res => res);
+                if (card.mask.hasOwnProperty('lat')) {
+                    return this._http.get(url, {
+                        params: new HttpParams()
+                            .set('lat', `${mask.lat}`)
+                            .set('lng', `${mask.lng}`)
+                    })
+                        .debounceTime(1000)
+                        .retry(3)
+                        .map(res => res);
+                } else {
+                    return this._http.get(url, {
+                        params: new HttpParams()
+                            .set('poly', `${mask}`)
+                    })
+                        .debounceTime(1000)
+                        .retry(3)
+                        .map(res => res);
+                }
+
 
             case 'change-detection':
-            console.log('change-detection');
 
-                url = 'http://ec2-54-87-204-186.compute-1.amazonaws.com/api/stats/poly/diff/mar10values[0]/jul10values[0]/zoom'
+                url = `http://ec2-54-87-204-186.compute-1.amazonaws.com/api/stats/${type}/diff/mar10values[0]/jul10values[0]/zoom`
                     .replace('values[0]', `${values[0]}`)
                     .replace('values[0]', `${values[0]}`)
                     .replace('zoom', `${zoom}`);
-                return this._http.get(url, {
-                    params: new HttpParams()
-                        .set('poly', `${mask}`)
-                })
-                    .debounceTime(1000)
-                    .retry(3)
-                    .map(res => res);
+                if (card.mask.hasOwnProperty('lat')) {
+                    return this._http.get(url, {
+                        params: new HttpParams()
+                            .set('lat', `${mask.lat}`)
+                            .set('lng', `${mask.lng}`)
+                    })
+                        .debounceTime(1000)
+                        .retry(3)
+                        .map(res => res);
+                } else {
+                    return this._http.get(url, {
+                        params: new HttpParams()
+                            .set('poly', `${mask}`)
+                    })
+                        .debounceTime(1000)
+                        .retry(3)
+                        .map(res => res);
+                }
             default:
                 break;
         }

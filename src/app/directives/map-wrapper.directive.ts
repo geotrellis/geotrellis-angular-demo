@@ -37,8 +37,8 @@ export class MapWrapperDirective implements OnInit, OnChanges, OnDestroy {
   };
   @Input() isCollapsed: boolean;
 
-  @Input() mask = '';
-  @Output() maskChange = new EventEmitter<string>();
+  @Input() mask: any;
+  @Output() maskChange = new EventEmitter<string | { lat: number, lng: number }>();
   @Output() polygonCreated = new EventEmitter<boolean>();
 
   @Input() view: L.Polygon;
@@ -67,21 +67,23 @@ export class MapWrapperDirective implements OnInit, OnChanges, OnDestroy {
 
     this.map.on(L.Draw.Event.CREATED, (e: any) => {
       const newLayer: L.Layer = (e as L.DrawEvents.Created).layer;
-      console.log(newLayer)
-      if (newLayer.hasOwnProperty('_latlng')) {
-        const pts = newLayer['_latlng'];
+      let maskGeojson;
+      if (e.layerType === 'circlemarker') {
+        maskGeojson = newLayer['_latlng'];
       } else {
-      // POLYLINE, must not be polygon, or the first coords and the last one will not be correct
-      const maskGeojson = L.polyline(newLayer['_latlngs']).toGeoJSON();
-      Object.assign(maskGeojson, {
-        geometry: {
-          type: 'Polygon',
-          coordinates: (maskGeojson.geometry.coordinates as number[][][]).map(el => el.map(item => item.reverse()))
-        }
-      });
-      this.maskChange.emit(JSON.stringify(maskGeojson));
+        // POLYLINE, must not be polygon, or the first coords and the last one will not be correct
+        maskGeojson = L.polyline(newLayer['_latlngs']).toGeoJSON();
+        Object.assign(maskGeojson, {
+          geometry: {
+            type: 'Polygon',
+            coordinates: (maskGeojson.geometry.coordinates as number[][][]).map(el => el.map(item => item.reverse()))
+          }
+        });
+        maskGeojson = JSON.stringify(maskGeojson);
+      }
+      this.maskChange.emit(maskGeojson);
       this.hasMaskChange.emit(true);
-    }
+
 
       const bool = this.drawOptions.edit.featureGroup.hasLayer(this.layer);
       if (bool) {
@@ -105,14 +107,14 @@ export class MapWrapperDirective implements OnInit, OnChanges, OnDestroy {
       this.layer = changes.view.currentValue;
       this.drawOptions.edit.featureGroup.addLayer(changes.view.currentValue);
     }
-      if (changes.isCollapsed && !changes.isCollapsed.firstChange && changes.isCollapsed.currentValue !== changes.isCollapsed.previousValue) {
-        setTimeout(() => {
-              this.map.invalidateSize({
-                  animate: true,
-                  duration: 0.1,
-                  easeLinearity: 0.25
-              });
-          }, 10);
-      }
+    if (changes.isCollapsed && !changes.isCollapsed.firstChange && changes.isCollapsed.currentValue !== changes.isCollapsed.previousValue) {
+      setTimeout(() => {
+        this.map.invalidateSize({
+          animate: true,
+          duration: 0.1,
+          easeLinearity: 0.25
+        });
+      }, 10);
+    }
   }
 }

@@ -110,7 +110,7 @@ export const LAYERCARDS: any[] = [
     }, {
         model: 'pointcloud',
         title: 'Point Cloud',
-        thumb: 'https://potsdam.geotrellis.io/tms/hillshade/isprs-potsdam-dsm/18/140577/86109',
+        thumb: 'http://ec2-54-87-204-186.compute-1.amazonaws.com/tms/hillshade/mar10tin/14/3340/6439?colorRamp=blue-to-red',
         info: {
             name: 'creation-render',
             title: 'DEM Creation Method & Render Options',
@@ -130,7 +130,7 @@ export const LAYERCARDS: any[] = [
                 value: undefined
             }],
             actions: ['info', 'weight', 'opacity'],
-            optional: ['summary'],            
+            optional: ['summary'],
             infotext: 'pointcloud pointcloud',
             prtext: [
                 'DEM Creation Method',
@@ -145,12 +145,32 @@ export const LAYERCARDS: any[] = [
         show: true,
         opacity: 0.6,
         server: `http://ec2-54-87-204-186.compute-1.amazonaws.com/tms/values[1]/values[2]values[0]/{z}/{x}/{y}?colorRamp=blue-to-red`,
-        mask: undefined,        
+        mask: undefined,
         summary: undefined,
         expanded: undefined
     }, {
         model: 'pointcloud',
         title: 'Point Cloud',
+        thumb: 'http://ec2-54-87-204-186.compute-1.amazonaws.com/tms/hillshade/mar10tin/14/3340/6439?colorRamp=blue-to-red',
+        // thumb: 'https://potsdam.geotrellis.io/tms/hillshade/isprs-potsdam-dsm/18/140577/86109',
+        info: {
+            name: 'change-detection',
+            title: 'Change Detection',
+            zoom: 12,
+            center: [35.866144, -106.595149],
+            actions: ['info', 'opacity'],
+            optional: ['summary'],
+            infotext: 'compare two datasets',
+        },
+        show: false,
+        opacity: 0.6,
+        server: 'http://ec2-54-87-204-186.compute-1.amazonaws.com/tms/diff-tms/png/mar10idw/jul10idw/{z}/{x}/{y}',
+        mask: undefined,
+        summary: undefined,
+        expanded: undefined
+    }, {
+        model: 'potsdam',
+        title: 'Potsdam',
         thumb: 'https://potsdam.geotrellis.io/tms/hillshade/isprs-potsdam-dsm/18/140577/86109',
         info: {
             name: 'change-detection',

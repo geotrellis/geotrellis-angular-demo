@@ -3,7 +3,9 @@
     (hasMaskChange)="hasMask=$event">
 </gd-sidebar-section>
 <button class="reset" (click)="resetArea()" *ngIf="cards[0].name!=='lm'&&hasMask">Reset Area</button>
-<div #mapContainer class="map-container" [class.-collapsed]="sidebar.isCollapsed" leaflet [leafletOptions]="options" [leafletLayers]="sidebar.layers" (leafletMapReady)="map=$event">
-        <!-- don't need to mount if no analyze function is provided in the model -->
-        <div [isCollapsed]="sidebar.isCollapsed" *ngIf="cards[0].name!=='lm'" gdMapWrapper [(mask)]="mask" [view]="sidebar.view" [(hasMask)]="hasMask"></div>
-    </div>
+<div #mapContainer class="map-container" [class.-collapsed]="sidebar.isCollapsed" leaflet [leafletOptions]="options" [leafletLayers]="sidebar.layers"
+    (leafletMapReady)="map=$event">
+    <!-- don't need to mount if no analyze function is provided in the model -->
+    <div [isCollapsed]="sidebar.isCollapsed" *ngIf="cards[0].name!=='lm'" gdMapWrapper [(mask)]="mask" [view]="sidebar.view"
+        [(hasMask)]="hasMask"></div>
+</div>
