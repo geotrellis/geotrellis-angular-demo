@@ -87,90 +87,80 @@
         <tbody *ngIf="name==='chatta'">
             <tr class="heading">
                 <th></th>
-                <th class="bold">Total Score</th>
-                <th class="bold" style="text-align:right;">{{summary.total}}</th>
+                <th>Total Score</th>
+                <th>{{summary.total}}</th>
             </tr>
             <tr *ngFor="let param of params; index as i">
-                <td style="text-align:right;">{{this.values[i]}}</td>
+                <td>{{this.values[i]}}</td>
                 <td>{{param | rejoin:"_" | titlecase}}</td>
-                <td class="bold" style="text-align:right;">{{summary.layers[i]}}</td>
+                <td>{{summary.layers[i]}}</td>
             </tr>
         </tbody>
         <tbody *ngIf="name==='creation-render'">
             <!-- point -->
-            <ng-container *ngIf="summary.value">
-                <tr class="heading">
-                    <th></th>
-                    <th class="bold">Elevation (m)</th>
-                    <th class="bold" style="text-align:right;">{{summary.value}}</th>
+            <ng-container *ngIf="summary.value || summary.value === 0">
+                <tr>
+                    <td>Elevation (m)</td>
+                    <td>{{summary.value}}</td>
                 </tr>
 
             </ng-container>
             <!-- poly -->
-                        <ng-container *ngIf="summary.mean">
-
-            <tr class="heading">
-                <th></th>
-                <th class="bold">Average Elevation (m)</th>
-                <th class="bold" style="text-align:right;">{{summary.mean}}</th>
+            <ng-container *ngIf="summary.mean || summary.mean === 0">
+            <tr>
+                <td>Average Elevation (m)</td>
+                <td>{{summary.mean}}</td>
             </tr>
-            <tr class="heading">
-                <th></th>
-                <th class="bold">Minimum Elevation (m)</th>
-                <th class="bold" style="text-align:right;">{{summary.min}}</th>
+            <tr>
+                <td>Minimum Elevation (m)</td>
+                <td>{{summary.min}}</td>
             </tr>
-            <tr class="heading">
-                <th></th>
-                <th class="bold">Maximum Elevation (m)</th>
-                <th class="bold" style="text-align:right;">{{summary.max}}</th>
+            <tr>
+                <td>Maximum Elevation (m)</td>
+                <td>{{summary.max}}</td>
             </tr>
                         </ng-container>
 
             <!-- <tr *ngFor="let param of params; index as i">
-                    <td style="text-align:right;">{{this.values[i]}}</td>
+                    <td>{{tdis.values[i]}}</td>
                     <td>{{param | rejoin:"_" | titlecase}}</td>
-                    <td class="bold" style="text-align:right;">{{summary.layers[i]}}</td>
+                    <td>{{summary.layers[i]}}</td>
                 </tr> -->
         </tbody>
 
         <tbody *ngIf="name==='change-detection'">
             <!-- point -->
-            <ng-container *ngIf="summary.value1">
-                <tr *ngFor="let i of ['value1', 'value2']" class="heading">
-                    <th></th>
-                    <th class="bold">Snow {{i==='value1'?'On':'Off'}} Elevation (m)</th>
-                    <th class="bold" style="text-align:right;">{{summary[i]}}</th>
+            <ng-container *ngIf="summary.value1 || summary.value1 === 0">
+                <tr *ngFor="let i of ['value1', 'value2']">
+                    <td>Snow {{i==='value1'?'On':'Off'}} Elevation (m)</td>
+                    <td>{{summary[i]}}</td>
                 </tr>
 
             </ng-container>
             <!-- poly -->
-            <ng-container *ngIf="summary.volume">
-                <tr class="heading">
-                    <th></th>
-                    <th class="bold">Average Elevation (m)</th>
-                    <th class="bold" style="text-align:right;">{{summary.mean}}</th>
+            <ng-container *ngIf="summary.volume || summary.volume === 0">
+                <tr>
+                    <td>Average Elevation (m)</td>
+                    <td>{{summary.mean}}</td>
                 </tr>
-                <tr class="heading">
-                    <th></th>
-                    <th class="bold">Minimum Elevation (m)</th>
-                    <th class="bold" style="text-align:right;">{{summary.min}}</th>
+                <tr>
+                    <td>Minimum Elevation (m)</td>
+                    <td>{{summary.min}}</td>
                 </tr>
-                <tr class="heading">
-                    <th></th>
-                    <th class="bold">Maximum Elevation (m)</th>
-                    <th class="bold" style="text-align:right;">{{summary.max}}</th>
+                <tr>
+                    <td>Maximum Elevation (m)</td>
+                    <td>{{summary.max}}</td>
                 </tr>
-                <tr class="heading">
-                    <th></th>
-                    <th class="bold">Volume Change (m3)</th>
-                    <th class="bold" style="text-align:right;">{{summary.volume}}</th>
+                <tr>
+                    <td>Volume Change (m<sup>3</sup>)</td>
+                    <td>{{summary.volume}}</td>
                 </tr>
             </ng-container>
           
             <!-- <tr *ngFor="let param of params; index as i">
-                        <td style="text-align:right;">{{this.values[i]}}</td>
+                        <td>{{this.values[i]}}</td>
                         <td>{{param | rejoin:"_" | titlecase}}</td>
-                        <td class="bold" style="text-align:right;">{{summary.layers[i]}}</td>
+                        <td>{{summary.layers[i]}}</td>
                     </tr> -->
         </tbody>
     </table>

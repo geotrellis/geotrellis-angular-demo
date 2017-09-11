@@ -4,6 +4,9 @@
     align-items: stretch;
     justify-content: flex-start;
     min-height: 100vh;
+    height: 100%;
+    overflow-y: hidden;
+
     > .sidebar-section {
         width: 36rem;
         flex: none;
@@ -16,6 +19,7 @@
             height: auto;
         }
     }   
+    
     > .map-container {
         flex: auto;
     } 

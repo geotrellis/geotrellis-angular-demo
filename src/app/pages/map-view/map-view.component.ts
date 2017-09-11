@@ -42,6 +42,7 @@ export class MapViewComponent implements OnInit, AfterViewInit {
         this.cards.forEach(el => {
             if (el.hasOwnProperty('summary')) {
                 el.summary = undefined;
+                el.expanded = undefined;
             }
         });
         this.hasMask = false;

@@ -196,7 +196,8 @@ export class LayerService {
                             }),
                             total: Number(response['total'])
                         };
-                    });
+                    }
+                );
 
             case 'creation-render':
                 url = `https://cors-anywhere.herokuapp.com/http://ec2-54-87-204-186.compute-1.amazonaws.com/api/stats/${type}/single/{values[2]}{values[0]}/{zoom}`

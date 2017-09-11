@@ -59,11 +59,15 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
         this.cards.forEach((el, i) => {
             if (el.hasOwnProperty('mask')) {
                 el.mask = view;
-                this._layerService.getLayer(el).subscribe(res => {
-                    this.layersMap.set(el.info.name, res);
-                    this.layers = Array.from(this.layersMap.values());
-                    this.onOpacityChange(el.info.name, el.opacity);
-                });
+                if (el.show === true) {
+                    this._layerService.getLayer(el).subscribe(res => {
+                        res.setOpacity(el.opacity);
+                        this.layersMap.set(el.info.name, res);
+                        if (i === this.cards.length - 1) {
+                            this.layers = Array.from(this.layersMap.values());
+                        }
+                    });
+                }
                 if (el.hasOwnProperty('summary')) {
                     this.isLoading = true;
                     const zoom = this.map.getZoom();
@@ -96,9 +100,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
         // };
         // added a few lines in leaflet-draw.d.ts;
         const polygonDrawer = new L.Draw.Polygon(this.map);
-
         const pointDrawer = new L.Draw.CircleMarker(this.map);
-
         if (type === 'poly') {
             (pointDrawer as L.Handler).disable();
             (polygonDrawer as L.Handler).enable();
@@ -106,8 +108,6 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
         } else {
             (polygonDrawer as L.Handler).disable();
             (pointDrawer as L.Handler).enable();
-
-
         }
     }
 
@@ -160,7 +160,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
             this.layersMap.set(el.info.name, res);
             this.layers = Array.from(this.layersMap.values());
         });
-        if (el.hasOwnProperty('mask') && el.mask !== '') {
+        if (el.hasOwnProperty('mask') && el.mask !== undefined) {
             this.isLoading = true;
             const zoom = this.map.getZoom();
             let values = el.values;
@@ -203,13 +203,15 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
             this.cards.forEach((el, i) => {
                 if (el.hasOwnProperty('mask')) {
                     el.mask = changes.mask.currentValue;
-                    this._layerService.getLayer(el).subscribe(res => {
-                        res.setOpacity(el.opacity);
-                        this.layersMap.set(el.info.name, res);
-                        if (i === this.cards.length - 1) {
-                            this.layers = Array.from(this.layersMap.values());
-                        }
-                    });
+                    if (el.show === true) {
+                        this._layerService.getLayer(el).subscribe(res => {
+                            res.setOpacity(el.opacity);
+                            this.layersMap.set(el.info.name, res);
+                            if (i === this.cards.length - 1) {
+                                this.layers = Array.from(this.layersMap.values());
+                            }
+                        });
+                    }
                     if (changes.mask.currentValue && el.hasOwnProperty('summary')) {
                         this.isLoading = true;
                         const zoom = this.map.getZoom();

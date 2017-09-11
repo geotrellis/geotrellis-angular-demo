@@ -15,17 +15,17 @@
 </select>
 
 <ng-container [class.-hide]="type!=='string'">
-    <select [class.-hide]="value!=='tin' || value=='idw'" #string class="string" (change)="updateValue(string.value)">
+    <select *ngIf="value=='tin' || value=='idw'" #string class="string" (change)="updateValue(string.value)">
       <option *ngFor="let val of ['tin','idw']" [value]="val" [selected]="val===value">{{val | uppercase}}</option>
   </select>
 
 
-    <select [class.-hide]="value!=='hillshade' || value=='png'" #string class="string" (change)="updateValue(string.value)">
+    <select *ngIf="value==='hillshade' || value==='png'" #string class="string" (change)="updateValue(string.value)">
       <option *ngFor="let val of ['hillshade','png']" [value]="val" [selected]="val===value">{{val==='hillshade'?'Hillshade':'Color Ramp'}}</option>
   </select>
 
 
-    <select [class.-hide]="value!=='mar10' || value=='jul10'" #string class="string" (change)="updateValue(string.value)">
+    <select *ngIf="value==='mar10' || value==='jul10'" #string class="string" (change)="updateValue(string.value)">
       <option *ngFor="let val of ['mar10','jul10']" [value]="val" [selected]="val===value">{{val==='mar10'?'Snow On':'Snow Off'}}</option>
   </select>
 </ng-container>
