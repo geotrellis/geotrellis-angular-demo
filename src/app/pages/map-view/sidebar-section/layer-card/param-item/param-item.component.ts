@@ -1,10 +1,12 @@
-import { Component, OnInit, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, HostBinding, Input, Output, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'gd-param-item',
   templateUrl: './param-item.component.html'
 })
 export class ParamItemComponent implements OnInit {
+  @ViewChild('desc') desc: ElementRef;
+  @ViewChild('num') num: ElementRef;
   @Input() value: number | string;
   @Input() param: string;
   @Input() range: number;
@@ -12,6 +14,8 @@ export class ParamItemComponent implements OnInit {
   @HostBinding('class.-inactive') isInactive = false;
 
   @Input() type: string;
+  prevDesc: number;
+  prevNum: number;
 
   abs(num: number): number {
     return Math.abs(num);
@@ -25,18 +29,22 @@ export class ParamItemComponent implements OnInit {
   }
 
   neglectParam(desc: number, num: number): void {
-    // previous state
-    if (this.isInactive) {
-      this.valueChange.emit(desc * num);
-    } else {
+    // record previous state
+    if (this.isInactive === false) {
+      this.prevDesc = desc;
+      this.prevNum = num;
       this.valueChange.emit(0);
+    } else {
+      this.num.nativeElement.value = this.prevNum;
+      this.desc.nativeElement.value = this.prevDesc;
+      this.valueChange.emit(this.prevNum * this.prevDesc);
     }
     this.isInactive = !this.isInactive;
   }
 
   updateValue(desc: number | string, num?: number): void {
     if (num) {
-      this.valueChange.emit(Number(desc) * num);
+      this.valueChange.emit(Number(desc) * Number(num));
     } else {
       this.valueChange.emit(desc);
     }

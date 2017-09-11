@@ -20,7 +20,7 @@ export class LayerService {
         let url = card.server;
         switch (card.info.name) {
             case 'lm':
-                return this._http.get(`https://geotrellis.io/gt/weighted-overlay/breaks`, {
+                return this._http.get(`https://cors-anywhere.herokuapp.com/https://geotrellis.io/gt/weighted-overlay/breaks`, {
                     params: new HttpParams()
                         .set('layers', `${card.params.layers}`)
                         .set('weights', `${card.values}`)
@@ -42,7 +42,7 @@ export class LayerService {
                     });
 
             case 'chatta':
-                return this._http.get(`http://demo.geotrellis.com/chatta/gt/breaks`, {
+                return this._http.get(`https://cors-anywhere.herokuapp.com/http://demo.geotrellis.com/chatta/gt/breaks`, {
                     params: new HttpParams()
                         .set('layers', `${card.params.layers}`)
                         .set('weights', `${card.values}`)
@@ -180,7 +180,7 @@ export class LayerService {
         } else { type = 'point'; }
         switch (name) {
             case 'chatta':
-                return this._http.get(`http://demo.geotrellis.com/chatta/gt/sum`, {
+                return this._http.get(`https://cors-anywhere.herokuapp.com/http://demo.geotrellis.com/chatta/gt/sum`, {
                     params: new HttpParams()
                         .set('layers', 'ImperviousSurfaces_Barren Lands_Open Water,DevelopedLand,Wetlands,ForestedLands,Non-workingProtectedOrPublicLands,PublicallyOwnedWorkingLands,PrivatelyOwnedWorkingLandsWithEasements,FarmlandWithoutPrimeAgriculturalSoils,FarmlandOrForestedLandsWithPrimeAgriculturalSoils')
                         .set('weights', `${values}`)
@@ -199,7 +199,7 @@ export class LayerService {
                     });
 
             case 'creation-render':
-                url = `http://ec2-54-87-204-186.compute-1.amazonaws.com/api/stats/${type}/single/{values[2]}{values[0]}/{zoom}`
+                url = `https://cors-anywhere.herokuapp.com/http://ec2-54-87-204-186.compute-1.amazonaws.com/api/stats/${type}/single/{values[2]}{values[0]}/{zoom}`
                     .replace('{values[0]}', `${values[0]}`)
                     .replace('{values[2]}', `${values[2]}`)
                     .replace('{zoom}', `${zoom}`);
@@ -224,7 +224,7 @@ export class LayerService {
 
 
             case 'change-detection':
-                url = `http://ec2-54-87-204-186.compute-1.amazonaws.com/api/stats/${type}/diff/mar10{values[0]}/jul10{values[0]}/{zoom}`
+                url = `https://cors-anywhere.herokuapp.com/http://ec2-54-87-204-186.compute-1.amazonaws.com/api/stats/${type}/diff/mar10{values[0]}/jul10{values[0]}/{zoom}`
                     .replace('{values[0]}', `${values[0]}`)
                     .replace('{values[0]}', `${values[0]}`)
                     .replace('{zoom}', `${zoom}`);

@@ -12,6 +12,8 @@ import { LayerCard } from '../../../layer-card';
     providers: [LayerService]
 })
 export class SidebarSectionComponent implements OnInit, OnChanges {
+    action: string;
+
     @Input() map: L.Map;
     @Input() cards: LayerCard[];
     @Input() mask: any;
@@ -92,20 +94,20 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
         //     //     clickable: true
         //     // }
         // };
-                // added a few lines in leaflet-draw.d.ts;
-                const polygonDrawer = new L.Draw.Polygon(this.map);
-                
-                            const pointDrawer = new L.Draw.CircleMarker(this.map);
-                
+        // added a few lines in leaflet-draw.d.ts;
+        const polygonDrawer = new L.Draw.Polygon(this.map);
+
+        const pointDrawer = new L.Draw.CircleMarker(this.map);
+
         if (type === 'poly') {
             (pointDrawer as L.Handler).disable();
             (polygonDrawer as L.Handler).enable();
-            
+
         } else {
             (polygonDrawer as L.Handler).disable();
             (pointDrawer as L.Handler).enable();
-            
-            
+
+
         }
     }
 
@@ -160,7 +162,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
         });
         if (el.hasOwnProperty('mask') && el.mask !== '') {
             this.isLoading = true;
-            const zoom = this.map.getZoom();                        
+            const zoom = this.map.getZoom();
             let values = el.values;
             if (el.info.name === 'change-detection') {
                 values = this.cards.filter(pt => pt.info.name === 'creation-render')[0].values;
