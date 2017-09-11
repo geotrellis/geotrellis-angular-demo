@@ -226,13 +226,24 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
                             this.isLoading = false;
                         }, console.error);
                     }
-                    if (!changes.mask.currentValue) {
-                        // close summary panel if is opened;
-                        if (el.expanded === 'summary') {
-                            el.expanded = undefined;
-                        }
-                    }
                 }
+            });
+        }
+
+        if (changes.mask && changes.mask.currentValue === undefined) {
+            const cards = this.cards.filter(el => el.show === true);
+            cards.forEach(el => {
+                el.mask = changes.mask.currentValue;
+                el.summary = undefined;
+                if (el.expanded === 'summary') {
+                    el.expanded = undefined;
+                }
+                this._layerService.getLayer(el).subscribe(res => {
+                    // this.map.addLayer(res);
+                    (res as L.TileLayer).setOpacity(el.opacity);
+                    this.layersMap.set(el.info.name, res);
+                    this.layers = Array.from(this.layersMap.values());
+                });
             });
         }
     }

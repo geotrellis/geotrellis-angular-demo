@@ -69,9 +69,7 @@ export const LAYERCARDS: any[] = [
             ],
             actions: ['info', 'weight', 'opacity'],
             optional: ['summary'],
-            infotext: `This project is a joint effort of the University of Tennessee at Chattanooga and Azavea, with funding from the Lyndhurst Foundation.
-
-            The Center for Academic and Innovative Technologies at the University of Tennessee at Chattanooga (CAIT) (UTC), was funded to develop a geospatial data library and planning applications to support long term regional planning efforts. Original project was named the "Regional Resource Inventory". This decision support system and current demo application are being developed in collaboration with a long term regional planning effort for the Greater Chattanooga area (http://thrive2055.com).`,
+            infotext: `This project is a joint effort of the University of Tennessee at Chattanooga and Azavea, with funding from the Lyndhurst Foundation.`,
             prtext: [
                 'Impervious_Surfaces_Barren_Lands_Open_Water',
                 'Developed_Land',

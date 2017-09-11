@@ -61,6 +61,24 @@ export class MapViewComponent implements OnInit, AfterViewInit {
                     zoom: cards[0].info.zoom,
                     center: cards[0].info.center
                 });
+                if (this.cards[0].model === 'point-cloud') {
+                    this.options.layers = [
+                        L.tileLayer('http://tile.stamen.com/terrain-background/{z}/{x}/{y}@2x.{ext}', {
+                            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                            subdomains: 'abcd',
+                            minZoom: 0,
+                            maxZoom: 20,
+                            ext: 'jpg'
+                        }),
+                        L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}@2x.{ext}', {
+                            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                            subdomains: 'abcd',
+                            minZoom: 0,
+                            maxZoom: 20,
+                            ext: 'png'
+                        })
+                    ];
+                }
             });
     }
 

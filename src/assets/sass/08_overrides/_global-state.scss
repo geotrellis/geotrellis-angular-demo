@@ -8,3 +8,10 @@
 .-disabled {
     @include disabled;
 }
+
+.leaflet-image-layer.leaflet-interactive, .leaflet-marker-icon.leaflet-interactive, .leaflet-pane>svg path.leaflet-interactive {
+    margin-left: .4rem;
+    margin-top: .4rem;
+    width: .8rem;
+    height: .8rem;
+}
