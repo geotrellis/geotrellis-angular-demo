@@ -1,0 +1,12 @@
+.map-container {
+    max-height: 100vh;
+}
+
+// temp
+.reset {
+    position: absolute;
+    left: 37rem;
+    z-index: 1000;
+    margin-top: 1rem;
+    @include buttonify($grey-heavy)
+}

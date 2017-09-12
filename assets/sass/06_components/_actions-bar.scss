@@ -1,0 +1,71 @@
+.actions-bar {
+    display: flex;
+    flex-direction: column;
+    > .group-actions {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 2rem 0.5rem 1.5rem;
+        > .action {
+            font-weight: $font-weight-bold;
+        }
+    } 
+    > .action-panel {
+        background-color: $black;
+        color: $white;
+        padding: 1rem 0.5rem 1rem 1rem;
+
+        > .header {
+            font-size: 1.4rem;
+            font-weight: $font-weight-normal;
+            margin: 0;
+            &:before {
+                margin-left: 0.8rem;
+                margin-right: 1.8rem;
+            }
+        }
+
+        > .icon-close {
+            float: right;            
+            color: $white;
+            font-size: 2rem;
+        }
+
+        > .text {
+            padding: 1rem 0 1rem 4rem;
+            font: $font-caption;
+            font-weight: $font-weight-light;
+        }
+
+        > .btn-group {
+            width: 100%;
+            padding: 1rem 1rem 1rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            > .action {
+                padding: 1rem 0.9rem;
+                font-size: 1.2rem;
+                font-weight: $font-weight-light;
+                
+                &.-multi {
+                    &.poly {
+                        border-radius: .4rem 0 0 .4rem;
+                        border-right: none;
+                        margin-left: .4rem;
+                        padding-right: .6rem
+                    }
+                    &.point {
+                        border-radius: 0 .4rem .4rem 0;
+                        padding-left: .4rem;
+                        width: 8rem;
+                    }
+                }
+                
+            }
+        } 
+
+        &:not(.-expanded) {
+            @include invisible;
+        }  
+    }
+} 

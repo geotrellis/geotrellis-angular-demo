@@ -1,0 +1,49 @@
+.layer-header {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    > .checkbox-label {
+        font-size: 1.5rem;
+        font-weight: $font-weight-bold;
+
+        > .checkbox + .icon {
+            font-size: 1.4rem;
+
+            &:after {
+                font-size: 1.4rem;
+                color: $white;
+                background-color: $white;
+                content: "\e808";
+
+                .layer-card.-on & {
+                    content: "\e808";
+                    color: $white;
+                    background-color: $black;
+                }
+
+                .layer-card.-removed & {
+                    content: "\2002\2002";
+                }
+            }
+        }
+        
+    }
+
+    &.-removed > .checkbox-label > .checkbox + .icon:after {
+        background-color: $black;
+        content: "\2002\2002";
+    }
+
+    > .layer-actions {
+        flex: none;
+
+        > .action:before {
+            margin-left: 0.6rem;
+            font-size: 1.6rem;
+            line-height: 2rem;
+        }
+    }
+
+}
