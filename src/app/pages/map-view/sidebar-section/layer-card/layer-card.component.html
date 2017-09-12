@@ -81,7 +81,7 @@
     </span>
 <!-- end of model-actions -->
 <!-- summary-panel (optional) -->
-<div *ngIf="summary&&show" class="action-panel" [class.-expanded]="'summary'===expanded">
+<div *ngIf="summary&&show" class="action-panel" [class.-loading]="isLoading" [class.-expanded]="'summary'===expanded">
     <div *ngIf="isLoading" class="loading icon-loading animate-spin"></div>
     <table *ngIf="!isLoading" class="summary-table">
         <tbody *ngIf="name==='chatta'">

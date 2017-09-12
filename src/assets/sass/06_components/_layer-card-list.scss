@@ -8,6 +8,10 @@
     > .layer-card {
         margin: 0.4rem 1rem;
     }
+            
+    &.-loading {
+        overflow: hidden;
+    }
 
     &.-action {
         > .layer-card {
