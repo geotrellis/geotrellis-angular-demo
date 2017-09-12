@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/switchMap';
 
-import { Component, ChangeDetectorRef, HostBinding, OnInit, OnChanges, AfterViewInit } from '@angular/core';
+import { Component, ChangeDetectorRef, HostBinding, OnChanges, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { LayerCard } from '../../layer-card.d';
@@ -12,7 +12,7 @@ import * as L from 'leaflet';
     selector: 'gd-map-view',
     templateUrl: './map-view.component.html'
 })
-export class MapViewComponent implements OnInit, AfterViewInit {
+export class MapViewComponent implements AfterViewInit {
     @HostBinding('class.map-view') true;
     hasMask = false;
     map: L.Map;
@@ -68,23 +68,20 @@ export class MapViewComponent implements OnInit, AfterViewInit {
                             subdomains: 'abcd',
                             minZoom: 0,
                             maxZoom: 20,
-                            ext: 'jpg'
+                            ext: 'jpg',
+                            opacity: 0.6,
                         }),
                         L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}@2x.{ext}', {
                             attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
                             subdomains: 'abcd',
                             minZoom: 0,
                             maxZoom: 20,
-                            ext: 'png'
+                            ext: 'png',
+                            opacity: 0.4,
                         })
                     ];
                 }
             });
-    }
-
-    ngOnInit(): void {
-
-
     }
 
     ngAfterViewInit() {

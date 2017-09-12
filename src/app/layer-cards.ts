@@ -118,7 +118,7 @@ export const LAYERCARDS: any[] = [
             name: 'creation-render',
             title: 'DEM Creation Method & Render Options',
             zoom: 12,
-            center: [35.866144, -106.595149],
+            center: [35.866144, -106.575149],
             presets: [{
                 text: 'TIN, Hillshade, Snow On',
                 value: ['tin', 'hillshade', 'mar10']
@@ -180,7 +180,7 @@ export const LAYERCARDS: any[] = [
         info: {
             name: 'potsdam-imagery',
             title: 'Imagery',
-            zoom: 15,
+            zoom: 14,
             center: [52.403269, 13.052745],
             actions: ['info', 'opacity'],
             infotext: 'potsdam-imagery',

@@ -12,7 +12,7 @@
     text-decoration: none;
 
     &:hover {
-        background-color: lighten($grey-medium, 25%);
+        background-color: lighten($grey-light, 2%);
         border-color: lighten($grey-medium, 15%);
         @include shadow(0.1rem, 0.5rem, rgba(0,0,0,0.3));
         transition-duration: 200ms;
