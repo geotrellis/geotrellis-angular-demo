@@ -207,7 +207,7 @@ export const LAYERCARDS: any[] = [
         server: 'https://potsdam.geotrellis.io/tms/imagery/{values[0]}/isprs-potsdam-imagery-{values[1]}/{z}/{x}/{y}',
         expanded: undefined
     }, {
-        model: 'potsdam-dsm',
+        model: 'potsdam',
         title: 'Potsdam',
         thumb: 'https://potsdam.geotrellis.io/tms/hillshade/isprs-potsdam-dsm/18/140577/86109',
         info: {
@@ -231,8 +231,8 @@ export const LAYERCARDS: any[] = [
         server: 'https://potsdam.geotrellis.io/tms/{values[0]}/isprs-potsdam-dsm/{z}/{x}/{y}',
         expanded: undefined
     }, {
-        model: 'potsdam-dsm-gt',
-        title: 'Digital Surface Model (GeoTrellis generated)',
+        model: 'potsdam',
+        title: 'Potsdam',
         thumb: 'https://potsdam.geotrellis.io/tms/hillshade/isprs-potsdam-dsm/18/140577/86109',
         info: {
             name: 'potsdam-dsm-gtn',
@@ -255,8 +255,8 @@ export const LAYERCARDS: any[] = [
         server: 'https://potsdam.geotrellis.io/tms/{values[0]}/isprs-potsdam-dsm-gtn/{z}/{x}/{y}',
         expanded: undefined
     }, {
-        model: 'potsdam-labels',
-        title: 'Ground Trught Labels',
+        model: 'potsdam',
+        title: 'Potsdam',
         thumb: 'https://potsdam.geotrellis.io/tms/hillshade/isprs-potsdam-dsm/18/140577/86109',
         info: {
             name: 'potsdam-labels',
@@ -271,8 +271,8 @@ export const LAYERCARDS: any[] = [
         server: 'https://potsdam.geotrellis.io/tms/labels/isprs-potsdam-labels/{z}/{x}/{y}',
         expanded: undefined
     }, {
-        model: 'unet-predictions',
-        title: 'U-Net Predictions',
+        model: 'potsdam',
+        title: 'Potsdam',
         thumb: 'https://potsdam.geotrellis.io/tms/hillshade/isprs-potsdam-dsm/18/140577/86109',
         info: {
             name: 'potsdam-unet-predictions',
