@@ -135,7 +135,7 @@ export const LAYERCARDS: any[] = [
             actions: ['info', 'weight', 'opacity'],
             optional: ['summary'],
             infotext: `The application demonstrates working with DEMs derived from LiDAR. LiDAR was flown over this area during times when snowpack was present (in winter) and when snowpack was not present (summer). We converted the point cloud data into DEMs using both Inverse Distance Weighted (IDW) and Triangulated Irregular Network (TIN) methods.
-            
+
             Use this demo to explore differences in the DEM methods, on the fly visualizations, and analytics of the difference layer that can indicate locations of snowpack.`,
             prtext: [
                 'DEM Creation Method',
@@ -184,8 +184,8 @@ export const LAYERCARDS: any[] = [
             zoom: 14,
             center: [52.403269, 13.052745],
             actions: ['info', 'opacity'],
-            infotext: `Explore the results of the Raster Vision work on the ISPRS Postdam challenge with this application. 
-            
+            infotext: `Explore the results of the Raster Vision work on the ISPRS Postdam challenge with this application.
+
             We generated multiple layers of results using Fully Convolutional Network (FCN) and U-Net architectures. With this application you can view the results of our models compared to ground truth, as well as discover areas where the architectures do better or worse than one another.`,
             presets: [{
                 text: 'RGB',
