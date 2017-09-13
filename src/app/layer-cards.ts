@@ -113,7 +113,7 @@ export const LAYERCARDS: any[] = [
         // poing cloud
         model: 'point-cloud',
         title: 'Point Cloud',
-        thumb: 'http://ec2-54-87-204-186.compute-1.amazonaws.com/tms/hillshade/mar10tin/14/3340/6439?colorRamp=blue-to-red',
+        thumb: 'assets/img/pc-thumb.png',
         info: {
             name: 'creation-render',
             title: 'DEM Creation Method & Render Options',
@@ -155,7 +155,7 @@ export const LAYERCARDS: any[] = [
     }, {
         model: 'point-cloud',
         title: 'Point Cloud',
-        thumb: 'http://ec2-54-87-204-186.compute-1.amazonaws.com/tms/hillshade/mar10tin/14/3340/6439?colorRamp=blue-to-red',
+        thumb: 'assets/img/pc-thumb.png',
         info: {
             name: 'change-detection',
             title: 'Change Detection',
