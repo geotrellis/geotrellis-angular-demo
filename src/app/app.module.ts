@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { LeafletDrawModule } from '@asymmetrik/ngx-leaflet-draw';
 
-import { CardService } from './services/card.service';
+import { CardService } from './shared/services/card.service';
 
 import { AppComponent } from './app.component';
 
@@ -17,10 +17,10 @@ import { SidebarHeaderComponent } from './pages/map-view/sidebar-section/sidebar
 import { LayerCardComponent } from './pages/map-view/sidebar-section/layer-card/layer-card.component';
 import { ParamItemComponent } from './pages/map-view/sidebar-section/layer-card/param-item/param-item.component';
 
-import { RejoinPipe } from './pipes/rejoin.pipe';
+import { RejoinPipe } from './shared/pipes/rejoin.pipe';
 
-import { MapWrapperDirective } from './directives/map-wrapper.directive';
-import { ActionBtnDirective } from './directives/action-btn.directive';
+import { MapWrapperDirective } from './shared/directives/map-wrapper.directive';
+import { ActionBtnDirective } from './shared/directives/action-btn.directive';
 
 import { GdRoutingModule } from './gd-routing.module';
 

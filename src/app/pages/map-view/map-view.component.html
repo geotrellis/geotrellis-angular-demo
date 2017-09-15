@@ -1,11 +1,11 @@
 <!-- don't change the order, or the sidebar will get the map after being checked -->
 <gd-sidebar-section #sidebar [cards]="cards" [(mask)]="mask" [map]="map" class="sidebar-section" [class.-collapsed]="sidebar.isCollapsed"
-    (hasMaskChange)="hasMask=$event">
+  (hasMaskChange)="hasMask=$event">
 </gd-sidebar-section>
-<button class="reset" (click)="resetArea()" *ngIf="cards[0].model!=='lm'&&hasMask">Reset Area</button>
+<button class="reset" (click)="resetArea()" *ngIf="cards[0].model !== 'lm' && hasMask">Reset Area</button>
 <div #mapContainer class="map-container" [class.-collapsed]="sidebar.isCollapsed" leaflet [leafletOptions]="options" [leafletLayers]="sidebar.layers"
-    (leafletMapReady)="map=$event">
-    <!-- don't need to mount if no analyze function is provided in the model -->
-    <div [isCollapsed]="sidebar.isCollapsed" *ngIf="cards[0].model!=='lm'" gdMapWrapper [(mask)]="mask" [view]="sidebar.view"
-        [(hasMask)]="hasMask"></div>
+  (leafletMapReady)="map=$event">
+  <!-- don't need to mount if no analyze function is provided in the model -->
+  <div [isCollapsed]="sidebar.isCollapsed" *ngIf="cards[0].model !== 'lm'" gdMapWrapper [(mask)]="mask" [view]="sidebar.view"
+    [(hasMask)]="hasMask"></div>
 </div>

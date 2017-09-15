@@ -1,6 +1,6 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
-import { CardService } from '../../services/card.service';
-import { LayerCard } from '../../layer-card.d';
+import { CardService } from '../../shared/services/card.service';
+import { LayerCard } from '../../shared/models/layer-card.d';
 
 
 @Component({
@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
     private cardService: CardService
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.cardService.getModel().then(cards => {
       const cardsMap = new Map();
       cards.forEach(el => {

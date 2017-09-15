@@ -1,10 +1,10 @@
-import { Component, OnInit, EventEmitter, HostBinding, Input, Output, ViewChild, ElementRef } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'gd-param-item',
   templateUrl: './param-item.component.html'
 })
-export class ParamItemComponent implements OnInit {
+export class ParamItemComponent {
   @ViewChild('desc') desc: ElementRef;
   @ViewChild('num') num: ElementRef;
   @Input() value: number | string;
@@ -49,9 +49,4 @@ export class ParamItemComponent implements OnInit {
       this.valueChange.emit(desc);
     }
   }
-  constructor() { }
-
-  ngOnInit() {
-  }
-
 }

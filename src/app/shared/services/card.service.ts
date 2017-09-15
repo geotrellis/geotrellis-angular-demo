@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { LayerCard } from '../layer-card.d';
-import { LAYERCARDS } from '../layer-cards';
+import { LayerCard } from '../models/layer-card.d';
+import { LAYERCARDS } from '../models/layer-cards';
 
 @Injectable()
 export class CardService {
-  // keep for now
   getModel(): Promise<LayerCard[]> {
     return Promise.resolve(LAYERCARDS);
   }
@@ -13,6 +12,4 @@ export class CardService {
     return this.getModel()
                .then(cards => cards.filter(card => card.model === name));
   }
-  constructor() { }
-
 }

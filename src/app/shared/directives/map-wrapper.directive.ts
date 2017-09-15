@@ -50,7 +50,6 @@ export class MapWrapperDirective implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit() {
-
     this.map = this.mapWrapper.getMap();
     // initialize the feature group
     this.map.addLayer(this.drawOptions.edit.featureGroup);
@@ -90,10 +89,6 @@ export class MapWrapperDirective implements OnInit, OnChanges, OnDestroy {
         this.drawOptions.edit.featureGroup.removeLayer(this.layer);
       }
       this.layer = newLayer;
-      // ?'delete' button as tooltip?
-      // this.drawOptions.edit.featureGroup.addLayer(newLayer.bindTooltip('<button class="delete -on" onclick="console.log( ">Delete</button>', {
-      //   permanent: false
-      // }));
       this.drawOptions.edit.featureGroup.addLayer(newLayer);
     });
   }

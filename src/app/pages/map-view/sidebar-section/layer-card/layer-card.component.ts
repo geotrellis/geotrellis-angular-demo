@@ -70,8 +70,6 @@ export class LayerCardComponent implements OnInit, OnChanges {
         }
     }
 
-    constructor() { }
-
     ngOnInit() {
         this.name = this.info.name;
         this.title = this.info.title;
