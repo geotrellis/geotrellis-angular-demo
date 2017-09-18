@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/switchMap';
 
-import { Component, ChangeDetectorRef, HostBinding, OnChanges, AfterViewInit } from '@angular/core';
+import { Component, ChangeDetectorRef, HostBinding, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { LayerCard } from '../../shared/models/layer-card.d';
@@ -12,6 +12,7 @@ import * as L from 'leaflet';
   selector: 'gd-map-view',
   templateUrl: './map-view.component.html'
 })
+
 export class MapViewComponent implements AfterViewInit {
   @HostBinding('class.map-view') true;
   hasMask = false;

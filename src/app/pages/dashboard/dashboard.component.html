@@ -2,10 +2,6 @@
   <header class="heading">
     Demos and Case Studies
   </header>
-  <!-- <nav>
-        <a routerLink="/mapview/lm" routerLinkActive="active">Philadelphia Location Modeling</a>
-        <a routerLink="/mapview/chatta" routerLinkActive="active">Chattanooga</a>
-    </nav> -->
   <nav class="card-tiles">
     <a *ngFor="let card of cards" class="tile-item" [routerLink]="['/mapview', card.model]" routerLinkActive="active">
       <div class="title">{{card.title}}</div>

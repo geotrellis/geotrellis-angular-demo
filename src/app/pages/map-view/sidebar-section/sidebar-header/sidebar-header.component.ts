@@ -1,5 +1,6 @@
-import { Component, EventEmitter, HostBinding, Input, Output, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
+import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'gd-sidebar-header',
   templateUrl: './sidebar-header.component.html'
@@ -10,10 +11,10 @@ export class SidebarHeaderComponent {
   @Input() title: string;
 
   goBack() {
-    this.location.back();
+    this.router.navigateByUrl('/dashboard');
   }
 
   constructor(
-    private location: Location
+    private router: Router,
   ) { }
 }

@@ -1,4 +1,4 @@
-import { Component, ContentChild, EventEmitter, Input, OnInit, OnChanges, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, OnChanges, Output } from '@angular/core';
 
 import { LayerService } from '../../../shared/services/layer.service';
 import * as L from 'leaflet';
@@ -11,6 +11,7 @@ import { LayerCard } from '../../../shared/models/layer-card';
   templateUrl: './sidebar-section.component.html',
   providers: [LayerService]
 })
+
 export class SidebarSectionComponent implements OnInit, OnChanges {
   action: string;
 
@@ -35,6 +36,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
       el.expanded = undefined;
     });
   }
+
   getView(): void {
     this.map.eachLayer(el => {
       if (el.hasOwnProperty('editing')) {
@@ -84,30 +86,16 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
       }
     });
   }
+
   startDraw(type: string): void {
-    // const polygon_options = {
-    //     showArea: false,
-    //     // shapeOptions: {
-    //     //     stroke: true,
-    //     //     color: '#6e83f0',
-    //     //     weight: 4,
-    //     //     opacity: 0.5,
-    //     //     fill: true,
-    //     //     fillColor: null,
-    //     //     fillOpacity: 0.2,
-    //     //     clickable: true
-    //     // }
-    // };
-    // added a few lines in leaflet-draw.d.ts;
     const polygonDrawer = new L.Draw.Polygon(this.map);
     const pointDrawer = new L.Draw.CircleMarker(this.map);
     if (type === 'poly') {
-      (pointDrawer as L.Handler).disable();
-      (polygonDrawer as L.Handler).enable();
-
+      pointDrawer.disable();
+      polygonDrawer.enable();
     } else {
-      (polygonDrawer as L.Handler).disable();
-      (pointDrawer as L.Handler).enable();
+      polygonDrawer.disable();
+      pointDrawer.enable();
     }
   }
 
@@ -133,7 +121,6 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
       this.layersMap.delete(name);
       this.layers = Array.from(this.layersMap.values());
     }
-    // all card panels should be closed;
     el.expanded = undefined;
   }
 
@@ -144,6 +131,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
       }
     })[0];
   }
+
   onPaletteChange(name: string, palette: string): void {
     const el = this.filterByName(name);
     this.layerService.getLayer(el).subscribe(res => {
@@ -179,6 +167,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
     private layerService: LayerService,
   ) {
   }
+
   ngOnInit() {
     this.isSingle = (this.cards && this.cards.length === 1) ? true : false;
   }

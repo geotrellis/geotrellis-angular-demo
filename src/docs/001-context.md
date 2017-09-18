@@ -91,7 +91,9 @@ This project consists of several demos, and the view of each model is assembled 
 #### Reflection
 ##### Type Definition of LayerCard
 The project begins with two weighted-overlay demos, which fits the LayerCard model well, however, with more types of demos, the definition has to be changed to adapt the new model. Please feel free to reorganize the definitions.
-*For example, some properties are duplicated in each layer for now. It could be a chance that we might need to open different maps for each layer (not synced), or probably not. So the final version of the definition should depend on the future demos.*
+
+For example, some properties are duplicated in each layer for now. It could be a chance that we might need to open different maps for each layer (not synced), or probably not. So the final version of the definition should depend on the future demos.
+
 ##### RxJS Observable and Operators
 The Angular 2 adopt observables and operators from [RxJS](http://reactivex.io/rxjs/), which has more functionalities than Promise.
 
