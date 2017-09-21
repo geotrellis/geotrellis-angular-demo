@@ -1,0 +1,67 @@
+.layer-card-list {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    max-height: 85%;
+    overflow-y: auto;
+
+    > .layer-card {
+        margin: 0.4rem 1rem;
+    }
+            
+    &.-loading {
+        overflow: hidden;
+    }
+
+    &.-action {
+        > .layer-card {
+            background: linear-gradient(to right, $black 36px, $white 36px);
+            order: 2;
+            > .action-panel {
+                @include invisible;
+            }
+            > .layer-actions {
+                @include disabled;
+            }
+            > .layer-header {
+                > .model-actions {
+                    @include disabled;
+                }
+                > .checkbox-label > .checkbox {
+                    + .icon:after {
+                        border-color: $white;
+                        background-color: $black;
+                        content: "\2002\2002";
+                    }
+                }
+            }
+            &.-on {
+                > .layer-header > .checkbox-label {
+                    > .checkbox {
+                        + .icon:after {
+                            content: "\2002\2002";
+                       }
+                    }
+                }
+            }
+            &.-selected {
+                order: 1;
+                > .layer-header > .checkbox-label {
+                    > .checkbox {
+                        + .icon:after {
+                            color: $black;
+                            background-color: $white;
+                            content: "\e808";
+                        }
+                    }
+                }
+            }
+        }
+        &.-complete {
+            @extend .-action;
+            >.layer-card:not(.-selected) {
+                @include disabled;
+            }
+        }
+    }
+}

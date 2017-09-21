@@ -1,0 +1,8 @@
+.card-tiles {
+    display: flex;
+    flex-flow: row nowrap;
+
+    > .tile-item {
+        margin: 0 .8rem;
+    }
+}

@@ -1,0 +1,11 @@
+.layer-selector {
+    padding-left: 3.2rem;
+
+    > .dropdown {
+        width: 100%;
+    }
+
+    &.-single {
+        padding-left: 0;
+    }
+}

@@ -1,0 +1,149 @@
+.layer-card > .action-panel {
+    background-color: $white;        
+    border-top: 0.1rem solid $grey-light;
+    font: $font-body;
+    width: 100%;
+
+    > * {
+        margin: 0;
+        padding: 1.2rem 2.4rem;           
+    }
+
+    > .loading {
+        padding: 2.4rem;
+        & {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        font: $font-title;
+    }
+
+    > .text {
+        white-space: pre-line;
+    }
+    
+    > .title {
+        padding-bottom: 0.8rem;
+        display: flex;
+        justify-content: flex-start;
+        padding-left: 12.8rem;
+        justify-content: space-between;
+        > .heading {
+            margin: 0
+        }
+    }
+
+    > .slider-label {
+        display: inline-flex;
+        width: 100%;
+        > .value {
+            padding-left: 1.5rem;
+        }
+        > .slider {
+            position: absolute;
+            right: 1rem;
+        }
+    }
+
+    > .legend {
+        width: 100%;
+        display: inline-flex;
+        justify-content: space-between;
+        vertical-align: center;
+        align-items: center;
+        border-top: 0.1rem solid $grey-light;
+        > .colorspan {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            width: 50%;
+            > .color {
+                width: 9%;
+                height: 1.2rem;
+                line-height: 2rem;
+            }
+            > .selector {
+                border: 0.1rem solid lighten($grey-medium, 20%);
+                border-radius: 0.3rem;
+                padding: 0.4rem;
+                width: 14.5rem;
+                > .legend {
+                    max-width: 13.5rem;
+                    width: auto;
+                    height: 1.2rem;
+                    float: left;
+                }
+            }
+            > .panel {
+                bottom: 100%;
+                position: absolute;
+                margin-top: 2.5rem;
+                overflow-y: overlay;
+                background-color: $white;
+                padding: 0 0.5rem;
+                box-shadow: 0.5px 2px 2px 0 rgba(0,0,0,.1), 0 3px 1px -2px rgba(0,0,0,.01), 0 1px 5px 0 rgba(0,0,0,.01); 
+                z-index: 1000;
+                
+                > .legend-btn {
+                    display: block;
+                    > .image {
+                        max-width: 16rem;
+                        height: 1.2rem;
+                    }
+                }
+            }
+        }
+    }
+
+    > .params-list {
+        padding-top: 0;
+
+        > .param-item {
+            padding-bottom: 0.5rem;
+
+            > .checkbox-label > .checkbox + .icon:after {
+                content: "\e808";
+                color: $white;      
+                background-color: $black;    
+            }
+
+            &.-inactive {
+                opacity: 0.5;
+                > :first-child.checkbox-label > .checkbox + .icon:after {
+                    content: "\2002\2002";
+                    background-color: $white;    
+                }
+                > :not(:first-child) {
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+
+    &:not(.-expanded) {
+        @include invisible;
+    }  
+
+
+    &.string {
+        > .title {
+            padding-left : 2.4rem;
+            padding-right: 6.4rem;
+        }
+
+        > .params-list > .param-item {
+            display: flex;
+            justify-content: space-between;
+
+            > .name {
+                white-space: nowrap;
+            }
+
+            > .string {
+                min-width: 10rem;
+            }
+        }
+    }
+    
+}

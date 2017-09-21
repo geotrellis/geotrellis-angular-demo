@@ -1,0 +1,17 @@
+// @import url('/fonts/fontello/css/fontello.css');
+
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700');
+
+html {
+    color: $black;
+    font-size: 62.5%;
+}
+
+body {
+    font: $font-body;
+    font-weight: $font-weight-normal;
+}
+
+strong {
+    font-weight: $font-weight-bold;
+}

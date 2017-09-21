@@ -1,0 +1,21 @@
+.params-list {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    list-style: none;
+    > .param-item {
+        display: block;
+        > .desc {
+            width: 5.4rem;
+            margin-right: 1rem;
+        }
+        > .name {
+            display: inline-flex;
+            width: 13rem;
+        }
+        > .num {
+            float: right;
+            border: 0.05rem solid $grey-medium;
+        }
+    }
+}
