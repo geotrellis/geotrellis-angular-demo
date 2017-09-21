@@ -1,20 +1,22 @@
 import { Component, EventEmitter, Input, OnInit, OnChanges, Output } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
-import { LayerService } from '../../../shared/services/layer.service';
+
+
+import { LayerService } from '../../../services/layer.service';
 import * as L from 'leaflet';
 import 'leaflet-draw';
 
-import { LayerCard } from '../../../shared/models/layer-card';
+import { LayerCard } from '../../../models/layer-card';
 
 @Component({
   selector: 'gd-sidebar-section',
-  templateUrl: './sidebar-section.component.html',
-  providers: [LayerService]
+  templateUrl: './sidebar-section.component.html'
 })
 
 export class SidebarSectionComponent implements OnInit, OnChanges {
   action: string;
-
+  service: any;
   @Input() map: L.Map;
   @Input() cards: LayerCard[];
   @Input() mask: any;
@@ -62,7 +64,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
       if (el.hasOwnProperty('mask')) {
         el.mask = view;
         if (el.show === true) {
-          this.layerService.getLayer(el).subscribe(res => {
+          this.service.getLayer(el).subscribe(res => {
             res.setOpacity(el.opacity);
             this.layersMap.set(el.info.name, res);
             if (i === this.cards.length - 1) {
@@ -77,7 +79,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
           if (el.info.name === 'change-detection') {
             values = this.cards.filter(pt => pt.info.name === 'creation-render')[0].values;
           }
-          this.layerService.getSummary(el, values, zoom).subscribe(res => {
+          this.service.getSummary(el, values, zoom).subscribe(res => {
             el.summary = res;
             el.expanded = 'summary';
             this.isLoading = false;
@@ -112,7 +114,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
     const lyr = this.layersMap.get(name);
     const el = this.filterByName(name);
     if (show) {
-      this.layerService.getLayer(el).subscribe(res => {
+      this.service.getLayer(el).subscribe(res => {
         (res as L.TileLayer).setOpacity(el.opacity);
         this.layersMap.set(name, res);
         this.layers = Array.from(this.layersMap.values());
@@ -134,7 +136,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
 
   onPaletteChange(name: string, palette: string): void {
     const el = this.filterByName(name);
-    this.layerService.getLayer(el).subscribe(res => {
+    this.service.getLayer(el).subscribe(res => {
       res.setOpacity(el.opacity);
       this.layersMap.set(el.info.name, res);
       this.layers = Array.from(this.layersMap.values());
@@ -143,7 +145,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
 
   onValuesChange(name: string, layer: L.Layer): void {
     const el = this.filterByName(name);
-    this.layerService.getLayer(el).subscribe(res => {
+    this.service.getLayer(el).subscribe(res => {
       res.setOpacity(el.opacity);
       this.layersMap.set(el.info.name, res);
       this.layers = Array.from(this.layersMap.values());
@@ -155,7 +157,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
       if (el.info.name === 'change-detection') {
         values = this.cards.filter(pt => pt.info.name === 'creation-render')[0].values;
       }
-      this.layerService.getSummary(el, values, zoom).subscribe(res => {
+      this.service.getSummary(el, values, zoom).subscribe(res => {
         el.summary = res;
         el.expanded = 'summary';
         this.isLoading = false;
@@ -165,7 +167,10 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
 
   constructor(
     private layerService: LayerService,
+    private route: ActivatedRoute,
+
   ) {
+    this.service = this.layerService.getService(this.route.snapshot.data['name']);
   }
 
   ngOnInit() {
@@ -176,7 +181,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
     if (changes.map && changes.map.currentValue !== undefined) {
       const cards = this.cards.filter(el => el.show === true);
       cards.forEach(el => {
-        this.layerService.getLayer(el).subscribe(res => {
+        this.service.getLayer(el).subscribe(res => {
           (res as L.TileLayer).setOpacity(el.opacity);
           this.layersMap.set(el.info.name, res);
           this.layers = Array.from(this.layersMap.values());
@@ -189,7 +194,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
         if (el.hasOwnProperty('mask')) {
           el.mask = changes.mask.currentValue;
           if (el.show === true) {
-            this.layerService.getLayer(el).subscribe(res => {
+            this.service.getLayer(el).subscribe(res => {
               res.setOpacity(el.opacity);
               this.layersMap.set(el.info.name, res);
               if (i === this.cards.length - 1) {
@@ -200,12 +205,11 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
           if (changes.mask.currentValue && el.hasOwnProperty('summary')) {
             this.isLoading = true;
             const zoom = this.map.getZoom();
-
             let values = el.values;
             if (el.info.name === 'change-detection') {
               values = this.cards.filter(pt => pt.info.name === 'creation-render')[0].values;
             }
-            this.layerService.getSummary(el, values, zoom).subscribe(res => {
+            this.service.getSummary(el, values, zoom).subscribe(res => {
               el.summary = res;
               el.expanded = 'summary';
               this.isLoading = false;
@@ -223,7 +227,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
         if (el.expanded === 'summary') {
           el.expanded = undefined;
         }
-        this.layerService.getLayer(el).subscribe(res => {
+        this.service.getLayer(el).subscribe(res => {
           (res as L.TileLayer).setOpacity(el.opacity);
           this.layersMap.set(el.info.name, res);
           this.layers = Array.from(this.layersMap.values());
