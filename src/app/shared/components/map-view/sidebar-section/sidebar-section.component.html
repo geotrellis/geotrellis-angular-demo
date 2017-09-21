@@ -2,7 +2,7 @@
 </gd-sidebar-header>
 
 <!-- actions-bar -->
-<div *ngIf="cards[0].model !== 'lm' && cards[0].model !== 'potsdam'" class="actions-bar">
+<div *ngIf="cards[0].info.optional" class="actions-bar">
   <!-- group-actions -->
   <div class="group-actions">
     <button gdActionBtn [(expanded)]="expanded" [action]="'analyze'" (expandedChange)="onExpandedChange()" [class]="'action icon-'+ 'analyze'">

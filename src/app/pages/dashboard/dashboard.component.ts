@@ -1,7 +1,7 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
-import { CardService } from '../../shared/services/card.service';
+import { DemoService } from '../../shared/services/demo.service';
 import { LayerCard } from '../../shared/models/layer-card.d';
-
+import { Demo } from '../../shared/models/demo.d';
 
 @Component({
   selector: 'gd-dashboard',
@@ -14,25 +14,19 @@ export class DashboardComponent implements OnInit {
     title: string;
     thumb: string;
   }[] = [];
+  demos: {
+    name: string;
+    title: string;
+    thumb: string;
+  }[] = [];
 
   constructor(
-    private cardService: CardService
+    private demoService: DemoService
   ) { }
 
   ngOnInit() {
-    this.cardService.getModel().then(cards => {
-      const cardsMap = new Map();
-      cards.forEach(el => {
-        // only get info to be displayed
-        if (!cardsMap.has(el.model)) {
-          cardsMap.set(el.model, {
-            model: el.model,
-            title: el.title,
-            thumb: el.thumb
-          });
-        }
-        this.cards = Array.from(cardsMap.values());
-      });
+    this.demoService.getDemosInfo().then(demosInfo => {
+      this.demos = demosInfo;
     });
   }
 }
