@@ -15,10 +15,16 @@ import { LayerCard } from '../../../models/layer-card';
 })
 
 export class SidebarSectionComponent implements OnInit, OnChanges {
+  model: string = this.route.snapshot.data['name'];
+  service = this.layerService.getService(this.route.snapshot.data['name']);
+
   action: string;
-  service: any;
   @Input() map: L.Map;
-  @Input() cards: LayerCard[];
+  @Input() sidebarConfig: {
+    title: string;
+    groupActions: any;
+    layerCards: LayerCard[];
+  };
   @Input() mask: any;
   view: L.Rectangle;
   isSingle: boolean;
@@ -34,7 +40,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
 
   // when group action panel is opened, all card layer's panels should be closed
   onExpandedChange() {
-    this.cards.forEach(el => {
+    this.sidebarConfig.layerCards.forEach(el => {
       el.expanded = undefined;
     });
   }
@@ -60,14 +66,14 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
     }));
     this.maskChange.emit(view);
     this.hasMaskChange.emit(true);
-    this.cards.forEach((el, i) => {
+    this.sidebarConfig.layerCards.forEach((el, i) => {
       if (el.hasOwnProperty('mask')) {
         el.mask = view;
         if (el.show === true) {
           this.service.getLayer(el).subscribe(res => {
             res.setOpacity(el.opacity);
             this.layersMap.set(el.info.name, res);
-            if (i === this.cards.length - 1) {
+            if (i === this.sidebarConfig.layerCards.length - 1) {
               this.layers = Array.from(this.layersMap.values());
             }
           });
@@ -77,7 +83,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
           const zoom = this.map.getZoom();
           let values = el.values;
           if (el.info.name === 'change-detection') {
-            values = this.cards.filter(pt => pt.info.name === 'creation-render')[0].values;
+            values = this.sidebarConfig.layerCards.filter(pt => pt.info.name === 'creation-render')[0].values;
           }
           this.service.getSummary(el, values, zoom).subscribe(res => {
             el.summary = res;
@@ -127,7 +133,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
   }
 
   filterByName(name: string): LayerCard {
-    return this.cards.filter(el => {
+    return this.sidebarConfig.layerCards.filter(el => {
       if (el.info.name === name) {
         return true;
       }
@@ -155,7 +161,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
       const zoom = this.map.getZoom();
       let values = el.values;
       if (el.info.name === 'change-detection') {
-        values = this.cards.filter(pt => pt.info.name === 'creation-render')[0].values;
+        values = this.sidebarConfig.layerCards.filter(pt => pt.info.name === 'creation-render')[0].values;
       }
       this.service.getSummary(el, values, zoom).subscribe(res => {
         el.summary = res;
@@ -168,18 +174,15 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
   constructor(
     private layerService: LayerService,
     private route: ActivatedRoute,
-
-  ) {
-    this.service = this.layerService.getService(this.route.snapshot.data['name']);
-  }
+  ) {  }
 
   ngOnInit() {
-    this.isSingle = (this.cards && this.cards.length === 1) ? true : false;
+    this.isSingle = (this.sidebarConfig.layerCards && this.sidebarConfig.layerCards.length === 1) ? true : false;
   }
 
   ngOnChanges(changes) {
     if (changes.map && changes.map.currentValue !== undefined) {
-      const cards = this.cards.filter(el => el.show === true);
+      const cards = this.sidebarConfig.layerCards.filter(el => el.show === true);
       cards.forEach(el => {
         this.service.getLayer(el).subscribe(res => {
           (res as L.TileLayer).setOpacity(el.opacity);
@@ -190,14 +193,14 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
     }
 
     if (changes.mask && changes.mask.currentValue) {
-      this.cards.forEach((el, i) => {
+      this.sidebarConfig.layerCards.forEach((el, i) => {
         if (el.hasOwnProperty('mask')) {
           el.mask = changes.mask.currentValue;
           if (el.show === true) {
             this.service.getLayer(el).subscribe(res => {
               res.setOpacity(el.opacity);
               this.layersMap.set(el.info.name, res);
-              if (i === this.cards.length - 1) {
+              if (i === this.sidebarConfig.layerCards.length - 1) {
                 this.layers = Array.from(this.layersMap.values());
               }
             });
@@ -207,7 +210,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
             const zoom = this.map.getZoom();
             let values = el.values;
             if (el.info.name === 'change-detection') {
-              values = this.cards.filter(pt => pt.info.name === 'creation-render')[0].values;
+              values = this.sidebarConfig.layerCards.filter(pt => pt.info.name === 'creation-render')[0].values;
             }
             this.service.getSummary(el, values, zoom).subscribe(res => {
               el.summary = res;
@@ -220,7 +223,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
     }
 
     if (changes.mask && changes.mask.currentValue === undefined) {
-      const cards = this.cards.filter(el => el.show === true);
+      const cards = this.sidebarConfig.layerCards.filter(el => el.show === true);
       cards.forEach(el => {
         el.mask = changes.mask.currentValue;
         el.summary = undefined;

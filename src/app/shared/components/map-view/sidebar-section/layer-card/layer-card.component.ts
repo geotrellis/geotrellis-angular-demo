@@ -23,7 +23,7 @@ export class LayerCardComponent implements OnInit, OnChanges {
     title: string;
     presets: any[];
     actions: string[];
-    infotext: string;
+    infoText: string;
     range: number;
     fakeArr: number[];
     type: string;
@@ -74,12 +74,12 @@ export class LayerCardComponent implements OnInit, OnChanges {
         this.name = this.info.name;
         this.title = this.info.title;
         this.range = this.info.range;
-        this.params = this.info.prtext;
+        this.params = this.info.paramsText;
         this.optional = this.info.optional;
         this.palettes = this.info.palettes;
         this.presets = this.info.presets;
         this.actions = this.info.actions;
-        this.infotext = this.info.infotext;
+        this.infoText = this.info.infoText;
     }
 
     ngOnChanges(changes) {

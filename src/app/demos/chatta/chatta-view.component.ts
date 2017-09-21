@@ -10,10 +10,14 @@ import * as chroma from 'chroma-js';
 
 export class ChattaViewComponent {
   layer: L.Layer;
-  mapOptions = {
+  demoConfig = {
     zoom: CHATTADEMO.zoom,
     center: CHATTADEMO.center,
     layers: CHATTADEMO.baseLayer,
   };
-  layerCards = CHATTADEMO.layers;
+  sidebarConfig = {
+    title: CHATTADEMO.title,
+    groupActions: CHATTADEMO.groupActions,
+    layerCards: CHATTADEMO.layers,
+  };
 }

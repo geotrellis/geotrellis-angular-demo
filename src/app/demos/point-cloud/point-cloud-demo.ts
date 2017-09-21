@@ -27,6 +27,13 @@ export const POINTCLOUDDEMO: Demo = {
       opacity: 0.4,
     })
   ],
+  groupActions: {
+    analyze: {
+      view: true,
+      point: true,
+      area: true,
+    }
+  },
   layers: [{
     info: {
       name: 'creation-render',
@@ -45,11 +52,11 @@ export const POINTCLOUDDEMO: Demo = {
         value: undefined
       }],
       actions: ['info', 'weight', 'opacity'],
-      optional: ['summary'],
-      infotext: `The application demonstrates working with DEMs derived from LiDAR. LiDAR was flown over this area during times when snowpack was present (in winter) and when snowpack was not present (summer). We converted the point cloud data into DEMs using both Inverse Distance Weighted (IDW) and Triangulated Irregular Network (TIN) methods.
+      optActions: ['summary'],
+      infoText: `The application demonstrates working with DEMs derived from LiDAR. LiDAR was flown over this area during times when snowpack was present (in winter) and when snowpack was not present (summer). We converted the point cloud data into DEMs using both Inverse Distance Weighted (IDW) and Triangulated Irregular Network (TIN) methods.
 
             Use this demo to explore differences in the DEM methods, on the fly visualizations, and analytics of the difference layer that can indicate locations of snowpack.`,
-      prtext: [
+      paramsText: [
         'DEM Creation Method',
         'Render Options',
         'Dataset',
@@ -70,8 +77,8 @@ export const POINTCLOUDDEMO: Demo = {
       name: 'change-detection',
       title: 'Change Detection',
       actions: ['info', 'opacity'],
-      optional: ['summary'],
-      infotext: 'Comparison between snow-on and snow-off datasets.',
+      optActions: ['summary'],
+      infoText: 'Comparison between snow-on and snow-off datasets.',
     },
     show: false,
     opacity: 0.6,

@@ -6,5 +6,14 @@ export interface Demo {
   zoom: number;
   center: number[];
   baseLayer: L.TileLayer[];
-  layers: LayerCard[];
+  groupActions?: {
+    diff?: boolean;
+    compare?: boolean;
+    analyze?: {
+      view?: boolean;
+      point?: boolean;
+      area?: boolean;
+    }
+  };
+  layers: LayerCard[];  
 }

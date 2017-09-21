@@ -15,12 +15,19 @@ import * as L from 'leaflet';
 export class MapViewComponent implements OnInit, AfterViewInit {
   @HostBinding('class.map-view') true;
   @Input() cards: LayerCard[] = [];
-  @Input() mapOptions: {
+  @Input() groupActions: any = {};
+  @Input() demoConfig: {
+    title: string;
     zoom: number;
     center: number[];
     layers: L.TileLayer[];
   };
-
+  @Input() title: string;
+  @Input() sidebarConfig: {
+    title: string;
+    groupActions: any;
+    layerCards: LayerCard[];
+  };
   hasMask = false;
   map: L.Map;
   mask: any;
@@ -54,9 +61,9 @@ export class MapViewComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.options = Object.assign({}, this.options, {
-      zoom: this.mapOptions.zoom,
-      center: this.mapOptions.center,
-      layers: this.mapOptions.layers,
+      zoom: this.demoConfig.zoom,
+      center: this.demoConfig.center,
+      layers: this.demoConfig.layers,
     });
   }
   ngAfterViewInit() {

@@ -7,9 +7,9 @@ export interface LayerCard {
       value: string[] | number[];
     }[];
     actions: string[];
-    optional?: string[];
-    infotext: string;
-    prtext?: string[];
+    optActions?: string[];
+    infoText: string;
+    paramsText?: string[];
     range?: number;
     palettes?: string[];
   };
