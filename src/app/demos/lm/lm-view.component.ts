@@ -10,10 +10,14 @@ import * as chroma from 'chroma-js';
 
 export class LmViewComponent {
   layer: L.Layer;
-  mapOptions = {
+  demoConfig = {
     zoom: LMDEMO.zoom,
     center: LMDEMO.center,
     layers: LMDEMO.baseLayer,
   };
-  layerCards = LMDEMO.layers;
+  sidebarConfig = {
+    title: LMDEMO.title,
+    groupActions: LMDEMO.groupActions,
+    layerCards: LMDEMO.layers,
+  };
 }

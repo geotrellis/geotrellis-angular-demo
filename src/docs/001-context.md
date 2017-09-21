@@ -53,9 +53,9 @@ This project consists of several demos, and the view of each model is assembled 
         // (optional) e.g., summary
         optional?: string[];
         // text in info panel;
-        infotext: string;
+        infoText: string;
         // (optional) text displayed for each parameter in the weight panel, e.g.: bars, rail stops
-        prtext?: string[];
+        paramsText?: string[];
         // (optional) weight range in the weight panel
         range?: number;
         // (optional) palette selection

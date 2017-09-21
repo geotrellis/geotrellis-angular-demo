@@ -10,10 +10,14 @@ import * as chroma from 'chroma-js';
 
 export class PotsdamViewComponent {
   layer: L.Layer;
-  mapOptions = {
+  demoConfig = {
     zoom: POTSDAMDEMO.zoom,
     center: POTSDAMDEMO.center,
     layers: POTSDAMDEMO.baseLayer,
   };
-  layerCards = POTSDAMDEMO.layers;
+  sidebarConfig = {
+    title: POTSDAMDEMO.title,
+    groupActions: POTSDAMDEMO.groupActions,
+    layerCards: POTSDAMDEMO.layers,
+  };
 }

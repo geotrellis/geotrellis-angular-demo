@@ -13,6 +13,12 @@ export const CHATTADEMO: Demo = {
     subdomains: 'abcd',
     maxZoom: 19
   })],
+  groupActions: {
+    analyze: {
+      view: true,
+      area: true,
+    }
+  },
   layers: [{
     info: {
       name: 'chatta',
@@ -30,9 +36,9 @@ export const CHATTADEMO: Demo = {
         }
       ],
       actions: ['info', 'weight', 'opacity'],
-      optional: ['summary'],
-      infotext: `This project is a joint effort of the University of Tennessee at Chattanooga and Azavea, with funding from the Lyndhurst Foundation.`,
-      prtext: [
+      optActions: ['summary'],
+      infoText: `This project is a joint effort of the University of Tennessee at Chattanooga and Azavea, with funding from the Lyndhurst Foundation.`,
+      paramsText: [
         'Impervious_Surfaces_Barren_Lands_Open_Water',
         'Developed_Land',
         'Wetlands',

@@ -10,10 +10,14 @@ import * as chroma from 'chroma-js';
 
 export class PointCloudViewComponent {
   layer: L.Layer;
-  mapOptions = {
+  demoConfig = {
     zoom: POINTCLOUDDEMO.zoom,
     center: POINTCLOUDDEMO.center,
     layers: POINTCLOUDDEMO.baseLayer,
   };
-  layerCards = POINTCLOUDDEMO.layers;
+  sidebarConfig = {
+    title: POINTCLOUDDEMO.title,
+    groupActions: POINTCLOUDDEMO.groupActions,
+    layerCards: POINTCLOUDDEMO.layers,
+  };
 }
