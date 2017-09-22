@@ -1,0 +1,11 @@
+select {
+    font-family: inherit;
+    background: none;
+    outline: none;
+    border-color: lighten($grey-medium, 10%);
+    height: 3.2rem;
+
+    &.desc, &.num {
+        border: none;
+    }
+}
