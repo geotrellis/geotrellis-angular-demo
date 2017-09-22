@@ -35,10 +35,16 @@ export const LMDEMO: Demo = {
           text: 'Custom'
         }
       ],
-      actions: ['info', 'weight', 'opacity'],
-      infoText: 'This model uses the weighted overlay method, which break the location selection problem into three factors.',
-      paramsText: ['bars', 'grocery_stores', 'rail_stops'],
-      range: 4,
+      layerActions: {
+        info: {
+          infoText: 'This model uses the weighted overlay method, which break the location selection problem into three factors.'
+        },
+        params: {
+          paramsText: ['bars', 'grocery_stores', 'rail_stops'],
+          quant: 4
+        },
+        opacity: true,
+      },
     },
     expanded: undefined,
     params: {

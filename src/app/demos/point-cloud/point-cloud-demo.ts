@@ -51,16 +51,29 @@ export const POINTCLOUDDEMO: Demo = {
         text: 'Custom',
         value: undefined
       }],
-      actions: ['info', 'weight', 'opacity'],
-      optActions: ['summary'],
-      infoText: `The application demonstrates working with DEMs derived from LiDAR. LiDAR was flown over this area during times when snowpack was present (in winter) and when snowpack was not present (summer). We converted the point cloud data into DEMs using both Inverse Distance Weighted (IDW) and Triangulated Irregular Network (TIN) methods.
+      layerActions: {
+        info: {
+          infoText: `The application demonstrates working with DEMs derived from LiDAR. LiDAR was flown over this area during times when snowpack was present (in winter) and when snowpack was not present (summer). We converted the point cloud data into DEMs using both Inverse Distance Weighted (IDW) and Triangulated Irregular Network (TIN) methods.
 
             Use this demo to explore differences in the DEM methods, on the fly visualizations, and analytics of the difference layer that can indicate locations of snowpack.`,
-      paramsText: [
-        'DEM Creation Method',
-        'Render Options',
-        'Dataset',
-      ],
+        },
+        params: {
+          paramsText: [
+            'DEM Creation Method',
+            'Render Options',
+            'Dataset',
+          ],
+          qual: {
+            'DEM Creation Method': [],
+            'Render Options': [],
+            'Dataset': ['snow-on', 'snow-off'],
+          }
+        },
+        opacity: true,
+      },
+      modelActions: {
+        summary: true,
+      }
     },
     params: {
       colorRamp: 'blue-to-red'
@@ -76,9 +89,15 @@ export const POINTCLOUDDEMO: Demo = {
     info: {
       name: 'change-detection',
       title: 'Change Detection',
-      actions: ['info', 'opacity'],
-      optActions: ['summary'],
-      infoText: 'Comparison between snow-on and snow-off datasets.',
+      layerActions: {
+        info: {
+          infoText: 'Comparison between snow-on and snow-off datasets.',
+        },
+        opacity: true,
+      },
+      modelActions: {
+        summary: true,
+      }
     },
     show: false,
     opacity: 0.6,

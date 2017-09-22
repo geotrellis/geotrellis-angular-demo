@@ -6,6 +6,7 @@ import { SidebarHeaderComponent } from './components/map-view/sidebar-section/si
 import { LayerCardComponent } from './components/map-view/sidebar-section/layer-card/layer-card.component';
 import { ParamItemComponent } from './components/map-view/sidebar-section/layer-card/param-item/param-item.component';
 import { RejoinPipe } from './pipes/rejoin.pipe';
+import { KeysPipe } from './pipes/keys.pipe';
 import { MapWrapperDirective } from './directives/map-wrapper.directive';
 import { ActionBtnDirective } from './directives/action-btn.directive';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
@@ -15,12 +16,15 @@ import { LmDemoService } from '../demos/lm/lm-demo.service';
 import { ChattaDemoService } from '../demos/chatta/chatta-demo.service';
 import { PointCloudDemoService } from '../demos/point-cloud/point-cloud-demo.service';
 import { PotsdamDemoService } from '../demos/potsdam/potsdam-demo.service';
+import { InfoPanelComponent } from './components/map-view/sidebar-section/layer-card/layer-action/info-panel/info-panel.component';
+
+import { HostDirective } from './directives/host.directive';
 
 @NgModule({
   imports: [
     CommonModule,
-    LeafletModule.forRoot(),
-    LeafletDrawModule.forRoot()
+    LeafletModule,
+    LeafletDrawModule
   ],
   declarations: [
     MapViewComponent,
@@ -31,17 +35,20 @@ import { PotsdamDemoService } from '../demos/potsdam/potsdam-demo.service';
     ParamItemComponent,
 
     RejoinPipe,
+    KeysPipe,
 
     MapWrapperDirective,
     ActionBtnDirective,
+    InfoPanelComponent,
+HostDirective,
   ],
   exports: [
-    MapViewComponent,
-    SidebarSectionComponent,
-    SidebarHeaderComponent,
-    LayerCardComponent,
-    ParamItemComponent,
+    MapViewComponent
   ],
+  entryComponents: [
+    InfoPanelComponent
+  ],
+
   providers: [
     LayerService,
     LmDemoService,
@@ -49,5 +56,8 @@ import { PotsdamDemoService } from '../demos/potsdam/potsdam-demo.service';
     PointCloudDemoService,
     PotsdamDemoService
   ],
+  bootstrap: [
+    MapViewComponent
+  ]
 })
 export class SharedModule { }

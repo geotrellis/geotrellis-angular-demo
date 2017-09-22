@@ -1,8 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, OnChanges, Output } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-
-
-
 import { LayerService } from '../../../services/layer.service';
 import * as L from 'leaflet';
 import 'leaflet-draw';
@@ -39,7 +36,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
   layers: L.Layer[] = [];
 
   // when group action panel is opened, all card layer's panels should be closed
-  onExpandedChange() {
+  onExpandedChange(): void {
     this.sidebarConfig.layerCards.forEach(el => {
       el.expanded = undefined;
     });

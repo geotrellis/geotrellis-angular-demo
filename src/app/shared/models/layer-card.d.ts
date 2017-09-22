@@ -6,16 +6,25 @@ export interface LayerCard {
       text: string;
       value: string[] | number[];
     }[];
-    actions: string[];
-    optActions?: string[];
-    infoText: string;
-    paramsText?: string[];
-    range?: number;
-    palettes?: string[];
+    layerActions: {
+      info?: {
+        infoText: string;
+        palettes?: string[];
+      };
+      params?: {
+        paramsText: string[];
+        quant?: number;// range
+        qual?: any;// number(quantitative) or string(qualitive)
+      };
+      opacity?: boolean;
+    };
+    modelActions?: {
+      summary?: boolean;
+    }
   };
   values?: number[] | string[];
   show: boolean;
-  opacity: number;
+  opacity?: number;
   mask?: any;
   params?: any;
   server: string;

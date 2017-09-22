@@ -15,8 +15,8 @@ import { PointCloudDemoService } from './point-cloud-demo.service';
       { path: '', component: PointCloudViewComponent },
     ])
   ],
-  declarations: [PointCloudViewComponent],
-  providers: [PointCloudDemoService]
+  declarations: [ PointCloudViewComponent ],
+  providers: [ PointCloudDemoService ]
 })
 
 export class PointCloudModule { }

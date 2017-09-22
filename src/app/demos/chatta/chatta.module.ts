@@ -15,8 +15,8 @@ import { ChattaDemoService } from './chatta-demo.service';
       { path: '', component: ChattaViewComponent },
     ])
   ],
-  declarations: [ChattaViewComponent],
-  providers: [ChattaDemoService]
+  declarations: [ ChattaViewComponent ],
+  providers: [ ChattaDemoService ]
 })
 
 export class ChattaModule { }
