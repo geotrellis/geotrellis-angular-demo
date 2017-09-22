@@ -15,8 +15,8 @@ import { PotsdamDemoService } from './potsdam-demo.service';
       { path: '', component: PotsdamViewComponent },
     ])
   ],
-  declarations: [PotsdamViewComponent],
-  providers: [PotsdamDemoService]
+  declarations: [ PotsdamViewComponent ],
+  providers: [ PotsdamDemoService ]
 })
 
 export class PotsdamModule { }

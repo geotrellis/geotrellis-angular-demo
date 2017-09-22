@@ -35,35 +35,43 @@ export const CHATTADEMO: Demo = {
           text: 'Custom'
         }
       ],
-      actions: ['info', 'weight', 'opacity'],
-      optActions: ['summary'],
-      infoText: `This project is a joint effort of the University of Tennessee at Chattanooga and Azavea, with funding from the Lyndhurst Foundation.`,
-      paramsText: [
-        'Impervious_Surfaces_Barren_Lands_Open_Water',
-        'Developed_Land',
-        'Wetlands',
-        'Forested_Lands',
-        'Non-working_Protected_Or_Public_Lands',
-        'Publically_Owned_Working_Lands',
-        'Privately_Owned_Working_Lands_With_Easements',
-        'Farmland_Without_Prime_Agricultural_Soils',
-        'Farmland_Or_Forested_Lands_With_Prime_Agricultural_Soils'
-      ],
-      range: 6,
-      palettes: [
-        'yellow-to-red-heatmap',
-        'blue-to-yellow-to-red-heatmap',
-        'dark-red-to-yellow-heatmap',
-        'blue-to-red',
-        'green-to-red-orange',
-        'muted-terrain-qualitative',
-        'green-to-orange',
-        'light-to-dark-green',
-        'light-to-dark-sunset',
-        'purple-to-dark-purple-to-white-heatmap',
-        'blue-to-orange',
-        'bold-land-use-qualitative'
-      ],
+      layerActions: {
+        info: {
+          infoText: `This project is a joint effort of the University of Tennessee at Chattanooga and Azavea, with funding from the Lyndhurst Foundation.`,
+          palettes: [
+            'yellow-to-red-heatmap',
+            'blue-to-yellow-to-red-heatmap',
+            'dark-red-to-yellow-heatmap',
+            'blue-to-red',
+            'green-to-red-orange',
+            'muted-terrain-qualitative',
+            'green-to-orange',
+            'light-to-dark-green',
+            'light-to-dark-sunset',
+            'purple-to-dark-purple-to-white-heatmap',
+            'blue-to-orange',
+            'bold-land-use-qualitative'
+          ],
+        },
+        params: {
+          paramsText: [
+            'Impervious_Surfaces_Barren_Lands_Open_Water',
+            'Developed_Land',
+            'Wetlands',
+            'Forested_Lands',
+            'Non-working_Protected_Or_Public_Lands',
+            'Publically_Owned_Working_Lands',
+            'Privately_Owned_Working_Lands_With_Easements',
+            'Farmland_Without_Prime_Agricultural_Soils',
+            'Farmland_Or_Forested_Lands_With_Prime_Agricultural_Soils'
+          ],
+          quant: 6,
+        },
+        opacity: true,
+      },
+      modelActions: {
+        summary: true,
+      },
     },
     params: {
       layers: 'ImperviousSurfaces_Barren Lands_Open Water,DevelopedLand,Wetlands,ForestedLands,Non-workingProtectedOrPublicLands,PublicallyOwnedWorkingLands,PrivatelyOwnedWorkingLandsWithEasements,FarmlandWithoutPrimeAgriculturalSoils,FarmlandOrForestedLandsWithPrimeAgriculturalSoils'

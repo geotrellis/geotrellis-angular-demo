@@ -1,0 +1,22 @@
+<p class="text">
+  {{data.infoText}}
+</p>
+<p *ngIf="data.palette" class="legend">
+  Avoid
+  <span class="colorspan">
+    <ng-container *ngIf="data.palette && !data.palettes">
+      <span class="color" *ngFor="let color of data.palette" [style.background-color]="color"></span>
+    </ng-container>
+    <ng-container *ngIf="data.palette && data.palettes">
+      <button class="selector" (click)="showMenu=!showMenu">
+        <img class="legend" [src]="'http://demo.geotrellis.com/chatta/img/ramps/'+data.palette+'.png'">
+      </button>
+      <div *ngIf="showMenu" class="panel">
+        <button *ngFor="let color of data.palettes" class="legend-btn" (click)="paletteChange.emit(color)">
+          <img #selection class="image" [src]="'http://demo.geotrellis.com/chatta/img/ramps/'+color+'.png'">
+        </button>
+      </div>
+    </ng-container>
+  </span>
+  Prefer
+</p>

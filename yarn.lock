@@ -185,7 +185,13 @@
   dependencies:
     "@types/jasmine" "*"
 
-"@types/leaflet@^1.0.69":
+"@types/leaflet-draw@^0.4.9":
+  version "0.4.9"
+  resolved "https://registry.yarnpkg.com/@types/leaflet-draw/-/leaflet-draw-0.4.9.tgz#fc067c8e86ce9954ae8681ba00eef60d674b5ddc"
+  dependencies:
+    "@types/leaflet" "*"
+
+"@types/leaflet@*", "@types/leaflet@^1.0.69":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@types/leaflet/-/leaflet-1.2.0.tgz#5f15f5012b24d30507f3c4dc3271c88acbe4be49"
   dependencies:

@@ -15,7 +15,7 @@ import { LmDemoService } from './lm-demo.service';
       { path: '', component: LmViewComponent },
     ])
   ],
-  declarations: [LmViewComponent],
-  providers: [LmDemoService]
+  declarations: [ LmViewComponent ],
+  providers: [ LmDemoService ]
 })
 export class LmModule { }

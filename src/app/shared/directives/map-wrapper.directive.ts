@@ -83,7 +83,6 @@ export class MapWrapperDirective implements OnInit, OnChanges, OnDestroy {
       this.maskChange.emit(maskGeojson);
       this.hasMaskChange.emit(true);
 
-
       const bool = this.drawOptions.edit.featureGroup.hasLayer(this.layer);
       if (bool) {
         this.drawOptions.edit.featureGroup.removeLayer(this.layer);
