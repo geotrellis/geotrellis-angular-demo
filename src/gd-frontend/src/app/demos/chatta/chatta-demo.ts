@@ -5,7 +5,7 @@ import { Demo } from '../../shared/models/demo.d';
 export const CHATTADEMO: Demo = {
   model: 'chatta',
   title: 'Chattanooga Agriculture & Forestry Value Model',
-  thumb: 'https://geotrellis.io/img/demo_02.jpg',
+  thumb: 'assets/img/chatta-thumb.png',
   zoom: 8.4,
   center: [34.76192255039478, -85.35140991210938],
   baseLayer: [L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {

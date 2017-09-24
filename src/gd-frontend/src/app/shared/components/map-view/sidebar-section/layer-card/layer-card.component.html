@@ -92,7 +92,7 @@
         <th>Total Score</th>
         <th>{{summary.total}}</th>
       </tr>
-      <tr *ngFor="let param of params; index as i">
+      <tr *ngFor="let param of paramsText; index as i">
         <td>{{this.values[i]}}</td>
         <td>{{param | rejoin:"_" | titlecase}}</td>
         <td>{{summary.layers[i]}}</td>

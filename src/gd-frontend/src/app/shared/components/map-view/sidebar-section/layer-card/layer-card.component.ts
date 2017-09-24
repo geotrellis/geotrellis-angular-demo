@@ -145,6 +145,6 @@ export class LayerCardComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.loadComponents();
+    // this.loadComponents();
   }
 }

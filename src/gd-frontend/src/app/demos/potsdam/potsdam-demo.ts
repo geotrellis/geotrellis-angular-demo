@@ -5,7 +5,7 @@ import { Demo } from '../../shared/models/demo.d';
 export const POTSDAMDEMO: Demo = {
   model: 'potsdam',
   title: 'Potsdam',
-  thumb: 'https://potsdam.geotrellis.io/tms/hillshade/isprs-potsdam-dsm/18/140577/86109',
+  thumb: 'assets/img/potsdam-thumb.png',
   zoom: 14,
   center: [52.403269, 13.052745],
   baseLayer: [L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
