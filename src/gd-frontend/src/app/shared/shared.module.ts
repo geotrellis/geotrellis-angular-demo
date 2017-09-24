@@ -10,7 +10,6 @@ import { KeysPipe } from './pipes/keys.pipe';
 import { MapWrapperDirective } from './directives/map-wrapper.directive';
 import { ActionBtnDirective } from './directives/action-btn.directive';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-import { LeafletDrawModule } from '@asymmetrik/ngx-leaflet-draw';
 import { LayerService } from './services/layer.service';
 import { LmDemoService } from '../demos/lm/lm-demo.service';
 import { ChattaDemoService } from '../demos/chatta/chatta-demo.service';
@@ -24,7 +23,6 @@ import { HostDirective } from './directives/host.directive';
   imports: [
     CommonModule,
     LeafletModule,
-    LeafletDrawModule
   ],
   declarations: [
     MapViewComponent,

@@ -1,4 +1,5 @@
 import { LayerCard } from './layer-card.d';
+import * as L from 'leaflet';
 export interface Demo {
   model: string;
   title: string;

@@ -1,0 +1,14 @@
+version: '2'
+services:
+    app:
+      image: node:6.11
+      working_dir: /usr/src/app
+      ports:
+        - "9090:9090"
+        - "7357:7357"
+      volumes:
+          - ./src/gd-frontend:/usr/src/app
+          - ./dist:/usr/dist
+          - /var/cache/geotrellis-demo-node-modules:/usr/src/app/node_modules
+      command: yarn start
+
