@@ -32,6 +32,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                       guest: 9090, host: 9090, auto_correct: true
                     }.merge(VAGRANT_NETWORK_OPTIONS)
 
+  config.vm.network :forwarded_port, {
+                      guest: 7358, host: 7358, auto_correct: true
+                    }.merge(VAGRANT_NETWORK_OPTIONS)
+
   # Change working directory to /vagrant upon session start.
   config.vm.provision "shell", inline: <<SCRIPT
     if ! grep -q "cd /vagrant" "/home/vagrant/.bashrc"; then

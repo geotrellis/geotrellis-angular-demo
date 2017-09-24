@@ -10,9 +10,14 @@ GIT_COMMIT="${GIT_COMMIT:-latest}"
 
 function usage() {
     echo -n \
-"Usage: $(basename "${0}")
-
+"Usage: $(basename "${0}") [OPTIONS]
 Run linters and tests.
+Options:
+    --app       Lint Typescript, build static assets and run karma test
+    --git       Run Git test
+    --e2e       Run E2E test
+    --karma     Run Karma test
+    -h/--help   Display this help text
 "
 }
 
@@ -22,18 +27,15 @@ function app_tests() {
         shellcheck scripts/*.sh
     fi
 
-    # Lint JavaScript
+    # Lint TypeScript
     ./scripts/lint.sh
 
-    # Build the test bundle
+    # Run Unit Test
+    echo "Run Karma test" | \
     docker-compose \
         -f docker-compose.test.yml \
         run --rm --no-deps app \
-        yarn run test-bundle
-
-    # Run tests
-    echo "xvfb-run node_modules/.bin/testem -f testem.json ci" | \
-    docker-compose -f docker-compose.test.yml run --rm app /bin/bash
+        yarn test
 }
 
 function git_tests() {
@@ -44,16 +46,28 @@ function git_tests() {
     fi
 }
 
-function testem() {
-    GIT_COMMIT="${GIT_COMMIT}" docker-compose \
-              exec app ./node_modules/.bin/testem -f testem.json
+function karma() {
+    echo "Run Karma test" | \
+    docker-compose \
+        -f docker-compose.test.yml \
+        run --rm --no-deps app \
+        yarn test
+}
+
+function e2e() {
+    echo "Run E2E test" | \
+    docker-compose \
+        -f docker-compose.test.yml \
+        run --rm --no-deps app \
+        yarn e2e
 }
 
 if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
     case "${1:-}" in
         -h|--help) usage ;;
         --git)     git_tests ;;
-        --testem)  testem ;;
-        *)         app_tests ;;
+        --karma)   karma ;;
+        --e2e)     e2e ;;
+        --app|*)   app_tests ;;
     esac
 fi

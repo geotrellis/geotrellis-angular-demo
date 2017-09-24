@@ -17,6 +17,6 @@ if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
     if [ "${1:-}" = "--help" ]; then
         usage
     else
-        zip -r geotrellis-demo.zip dist/*
+        zip -r geotrellis-demo.zip src/gd-frontend/dist/*
     fi
 fi

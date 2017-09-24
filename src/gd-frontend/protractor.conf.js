@@ -11,6 +11,9 @@ exports.config = {
   capabilities: {
     'browserName': 'chrome'
   },
+  localSeleniumStandaloneOpts: {
+    port: 7358
+  },
   directConnect: true,
   baseUrl: 'http://localhost:9090/',
   framework: 'jasmine',

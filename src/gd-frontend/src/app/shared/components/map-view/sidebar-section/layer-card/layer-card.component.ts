@@ -33,19 +33,19 @@ export class LayerCardComponent implements OnInit, OnChanges, AfterViewInit {
   title: string;
   presets: any[];
   layerActions: {
-    info?: {
-      infoText?: string;
-      palettes?: string[];
+    info: {
+      infoText: string;
+      palettes: string[];
     };
-    params?: {
+    params: {
       paramsText: string[];
-      quant?: number;
-      qual?: string[];
+      quant: number;
+      qual: string[];
     };
-    opacity?: boolean;
+    opacity: boolean;
   };
-  modelActions?: {
-    summary?: boolean;
+  modelActions: {
+    summary: boolean;
   };
   paramsText: string[];
   infoText: string;
