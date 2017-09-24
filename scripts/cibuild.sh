@@ -32,14 +32,11 @@ if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
         docker-compose run --rm --no-deps app \
                        yarn install $SILENT_FLAG
 
-        # Execute the test suite
-        ./scripts/test.sh
-
         # Build static asset bundle
         docker-compose run --rm --no-deps \
                        -e NODE_ENV="${NODE_ENV:-production}" \
                        -e INSTALL_ENV="${INSTALL_ENV:-azavea}" \
                        -e VERSION="${GIT_COMMIT}" app \
-                       yarn run bundle
+                       yarn build
     fi
 fi

@@ -4,11 +4,11 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve -H 0.0.0.0 -p 9090",
+    "start": "ng serve --host 0.0.0.0 --port 9090",
     "build": "ng build",
-    "test": "ng test -port 7357",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "test": "ng test -port 7357 --colors --watch",
+    "lint": "ng lint --force",
+    "e2e": "ng e2e --port 7358"
   },
   "private": true,
   "dependencies": {

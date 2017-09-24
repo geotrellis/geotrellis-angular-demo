@@ -17,7 +17,6 @@ The other project scripts are meant to execute in the VM in the `/vagrant` direc
 
     vagrant up
     vagrant ssh
-    cd /vagrant
     ./scripts/server.sh
 
 ### Ports
@@ -25,7 +24,8 @@ The other project scripts are meant to execute in the VM in the `/vagrant` direc
 | Port | Service |
 | --- | --- |
 | [9090](http://localhost:9090) | Webpack dev server |
-| [7357](http://localhost:7357) | Test 'em server |
+| [7357](http://localhost:7357) | Karma server |
+| [7358](http://localhost:7358) | E2E server |
 
 ### Testing
 
@@ -36,30 +36,31 @@ To run the tests and linter during development:
 To run unit tests interactively during development:
 
 - Run the container with `./scripts/server.sh`
-- Run the Test'em server with `./scripts/test.sh --testem` and point your browser to [localhost:7357](http://localhost:7357).
-- Update the test bundle with `./scripts/bundletests.sh`
+- Build the test bundle and run the Karma server with `./scripts/test.sh --karma` and point your browser to [localhost:7357](http://localhost:7357).
+
+To run E2E tests during development:
+
+- Run the E2E server with `./scripts/test.sh --e2e` and point your browser to [localhost:7358](http://localhost:7358).
 
 ### Scripts
 
 | Name | Description |
 | --- | --- |
-| `bundletests.sh` | Updates the test bundle |
 | `cibuild.sh` | Build the project for CI server |
 | `cipublish.sh` | Zips assets for deployment |
 | `clean.sh` | Clean up unused Docker resources to free disk space |
 | `console.sh` | Run `docker-compose exec app /bin/sh` |
 | `deploy.sh` | Deploy assets created by cibuild.sh to an S3 bucket |
 | `infra.sh` | Execute Terraform subcommands with remote state management |
-| `lint.sh` | Run ESLint on JavaScript code |
+| `lint.sh` | Run TSLint on TypeScript code |
 | `server.sh` | Run `docker-compose up` and start a server on port 9090 |
 | `setup.sh` | Bring up the VM, and then destroy and rebuild Docker container(s) |
 | `test.sh` | Run unit tests and the linting script |
-| `testem.sh` | Run the testem server |
 | `update.sh` | Rebuild the App container with required `yarn` dependencies |
 
 ### Docker
 
-This project uses a Docker container inside the Vagrant box, so here are a few Docker commands you can use to get oriented to what's happening in the VM. You'll need to `vagrant ssh` into the vm, then `cd /vagrant` to use them:
+This project uses a Docker container inside the Vagrant box, so here are a few Docker commands you can use to get oriented to what's happening in the VM. You'll need to `vagrant ssh` into the vm to use them:
 
 - `docker images` will show you a list of all your VM's installed images
 - `docker rmi <IMAGE>` will delete the specified image
@@ -77,7 +78,7 @@ Here are the
 
 ### Adding `yarn` Packages
 
-To add new yarn packages to the React application:
+To add new yarn packages to the Angular application:
 
 - Manually add the package's name and version number to `package.json` to ensure it will be built in the Docker container.
 - `vagrant ssh` into the virtual machine, then `./scripts/update.sh` to update the app container and install the new package.

@@ -2,8 +2,8 @@
 
 set -e
 
-# Run ESLint on the project's JavaScript code
+# Run TSLint on the project's TypeScript code
 
-echo "Running ESLint:"
-
-docker-compose run --rm -T app node_modules/.bin/eslint js/ --ext .js --ext .jsx
+echo "Running TSLint:"
+    
+docker-compose run --rm --no-deps app yarn lint

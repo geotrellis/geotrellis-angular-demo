@@ -23,12 +23,12 @@ then
         docker-compose \
             -f docker-compose.yml \
             run --rm --no-deps app \
-            yarn install --ignore-optional
+            yarn install -s
 
         # Build bundles
         docker-compose \
             -f docker-compose.yml \
             run --rm --no-deps app \
-            yarn run build
+            yarn build
     fi
 fi
