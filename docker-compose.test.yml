@@ -1,0 +1,15 @@
+version: '2'
+services:
+    app:
+      image: geotrellis-demo-app-test
+      build:
+        context: ./src/gd-frontend
+        dockerfile: Dockerfile
+      ports:
+        - "9090:9090"
+        - "7357:7357"
+      volumes:
+          - ./src/gd-frontend:/usr/src/app
+          - ./dist:/usr/dist
+          - /var/cache/geotrellis-demo-node-modules:/usr/src/app/node_modules
+      command: yarn start
