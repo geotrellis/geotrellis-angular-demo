@@ -28,7 +28,7 @@ export class LmDemoService {
   }
 
   getLayer(card: LayerCard): Observable<L.TileLayer> {
-    return this.http.get(`https://geotrellis.io/gt/weighted-overlay/breaks`, {
+    return this.http.get(`https://cors-anywhere.herokuapp.com/https://geotrellis.io/gt/weighted-overlay/breaks`, {
       params: new HttpParams()
         .set('layers', `${card.params.layers}`)
         .set('weights', `${card.values}`)
