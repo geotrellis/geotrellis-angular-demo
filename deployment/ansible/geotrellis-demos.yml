@@ -10,6 +10,6 @@
     - { role: "azavea.ntp" }
     - { role: "azavea.unzip" }
     - { role: "azavea.terraform" }
-    - { role: "geotrellis-demo.zip" }
-    - { role: "geotrellis-demo.awscli" }
-    - { role: "geotrellis-demo.docker" }
+    - { role: "geotrellis-demos.zip" }
+    - { role: "geotrellis-demos.awscli" }
+    - { role: "geotrellis-demos.docker" }

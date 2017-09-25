@@ -1,5 +1,5 @@
 # geotrellis-demo
-The client-side application of the Geotrellis Demo.
+The client-side application of the Geotrellis Demos.
 
 ### Getting started
 

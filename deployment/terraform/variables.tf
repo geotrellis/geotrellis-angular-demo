@@ -1,9 +1,9 @@
 variable "project" {
-  default = "Geotrellis Demo"
+  default = "Geotrellis Demos"
 }
 
 variable "environment" { }
 
-variable "geotrellis_demo_bucket" { }
+variable "geotrellis_demos_bucket" { }
 
-variable "geotrellis_demo_logs_bucket" { }
+variable "geotrellis_demos_logs_bucket" { }

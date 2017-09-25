@@ -15,7 +15,6 @@ import { LmDemoService } from '../demos/lm/lm-demo.service';
 import { ChattaDemoService } from '../demos/chatta/chatta-demo.service';
 import { PointCloudDemoService } from '../demos/point-cloud/point-cloud-demo.service';
 import { PotsdamDemoService } from '../demos/potsdam/potsdam-demo.service';
-import { InfoPanelComponent } from './components/map-view/sidebar-section/layer-card/layer-action/info-panel/info-panel.component';
 
 import { HostDirective } from './directives/host.directive';
 
@@ -37,14 +36,10 @@ import { HostDirective } from './directives/host.directive';
 
     MapWrapperDirective,
     ActionBtnDirective,
-    InfoPanelComponent,
 HostDirective,
   ],
   exports: [
     MapViewComponent
-  ],
-  entryComponents: [
-    InfoPanelComponent
   ],
 
   providers: [

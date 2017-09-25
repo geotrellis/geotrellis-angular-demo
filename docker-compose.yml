@@ -10,5 +10,5 @@ services:
       volumes:
           - ./src/gd-frontend:/usr/src/app
           - ./dist:/usr/dist
-          - /var/cache/geotrellis-demo-node-modules:/usr/src/app/node_modules
+          - /var/cache/geotrellis-demos-node-modules:/usr/src/app/node_modules
       command: yarn start
