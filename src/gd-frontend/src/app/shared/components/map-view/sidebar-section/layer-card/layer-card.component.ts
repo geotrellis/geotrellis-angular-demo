@@ -1,6 +1,4 @@
-import { Type, Component, EventEmitter, HostBinding, Input, Output, OnInit, OnChanges, AfterViewInit, ViewChild, ComponentFactoryResolver } from '@angular/core';
-import { InfoPanelComponent } from './layer-action/info-panel/info-panel.component';
-import { HostDirective } from '../../../../directives/host.directive';
+import { Component, EventEmitter, HostBinding, Input, Output, OnInit, OnChanges } from '@angular/core';
 interface HostComponent {
   data: any;
   expanded: string;
@@ -9,10 +7,9 @@ interface HostComponent {
   selector: 'gd-layer-card',
   templateUrl: './layer-card.component.html'
 })
-export class LayerCardComponent implements OnInit, OnChanges, AfterViewInit {
+export class LayerCardComponent implements OnInit, OnChanges {
 
   @HostBinding('class.-on') @Input() show: boolean;
-  @ViewChild(HostDirective) gdHost: HostDirective;
 
   @Output() showChange = new EventEmitter<boolean>();
 
@@ -26,9 +23,7 @@ export class LayerCardComponent implements OnInit, OnChanges, AfterViewInit {
 
   @Input() isSingle: boolean;
   @Input() isLoading: boolean;
-  components = {
-    info: (InfoPanelComponent as Type<any>),
-  };
+
   name: string;
   title: string;
   presets: any[];
@@ -65,10 +60,6 @@ export class LayerCardComponent implements OnInit, OnChanges, AfterViewInit {
 
   optional: string[];
 
-  constructor(
-    private componentFactoryResolver: ComponentFactoryResolver
-  ) { }
-
   toAbs(val: number): number {
     return Math.abs(val);
   }
@@ -94,32 +85,6 @@ export class LayerCardComponent implements OnInit, OnChanges, AfterViewInit {
     }
   }
 
-  loadComponents() {
-    Object.keys(this.layerActions).forEach(el => {
-      console.log(el, 'layerActions');
-      el = 'info';
-      const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.components[`${el}`]);
-
-      const viewContainerRef = this.gdHost.viewContainerRef;
-      viewContainerRef.clear();
-
-      const componentRef = viewContainerRef.createComponent(componentFactory);
-      (<HostComponent>componentRef.instance).expanded = this.expanded;
-      switch (el) {
-        case 'info':
-        if (this.palette) {
-          (<HostComponent>componentRef.instance).data = Object.assign(this.layerActions[`${el}`], {
-            palette: this.palette,
-          });
-        }
-          break;
-        default:
-          break;
-      }
-
-    });
-  }
-
   ngOnInit() {
     this.name = this.info.name;
     this.title = this.info.title;
@@ -142,9 +107,5 @@ export class LayerCardComponent implements OnInit, OnChanges, AfterViewInit {
       this.fakeArr = Array(this.values.length).fill(0);
       this.type = Number.isInteger((Number(this.values[0]))) ? 'number' : 'string';
     }
-  }
-
-  ngAfterViewInit() {
-    // this.loadComponents();
   }
 }
