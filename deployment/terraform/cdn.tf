@@ -1,11 +1,11 @@
-resource "aws_cloudfront_distribution" "geotrellis_demo" {
+resource "aws_cloudfront_distribution" "geotrellis_demos" {
   origin {
-    domain_name = "${aws_s3_bucket.geotrellis_demo.id}.s3.amazonaws.com"
-    origin_id   = "geotrellisDemoOriginEastId"
+    domain_name = "${aws_s3_bucket.geotrellis_demos.id}.s3.amazonaws.com"
+    origin_id   = "geotrellisDemosOriginEastId"
   }
 
   enabled             = true
-  comment             = "Geotrellis Demo (${var.environment})"
+  comment             = "Geotrellis Demos (${var.environment})"
   default_root_object = "index.html"
   retain_on_delete    = true
 
@@ -14,7 +14,7 @@ resource "aws_cloudfront_distribution" "geotrellis_demo" {
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD", "OPTIONS"]
-    target_origin_id = "geotrellisDemoOriginEastId"
+    target_origin_id = "geotrellisDemosOriginEastId"
 
     forwarded_values {
       query_string = false
@@ -56,7 +56,7 @@ resource "aws_cloudfront_distribution" "geotrellis_demo" {
 
   logging_config {
     include_cookies = false
-    bucket          = "${aws_s3_bucket.geotrellis_demo_logs.id}.s3.amazonaws.com"
+    bucket          = "${aws_s3_bucket.geotrellis_demos_logs.id}.s3.amazonaws.com"
   }
 
   restrictions {

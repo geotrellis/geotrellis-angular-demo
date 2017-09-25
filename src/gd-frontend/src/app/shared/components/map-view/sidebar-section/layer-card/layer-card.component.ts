@@ -67,11 +67,7 @@ export class LayerCardComponent implements OnInit, OnChanges {
   getPreset(val: string): void {
     const valArray = val.split(',').map(el => {
       if (el === 'undefined') {
-        if (this.layerActions['params'].quant) {
-          this.expanded = 'weight';
-        } else if (this.layerActions['params'].qual) {
           this.expanded = 'params';
-        }
         return undefined;
       } else if (Number.isInteger(Number(el))) {
         // only string with pure number can be returned as Number

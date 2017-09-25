@@ -2,7 +2,7 @@
 
 set -e
 
-if [[ -n "${GEOTRELLIS_DEMO_DEBUG}" ]]; then
+if [[ -n "${GEOTRELLIS_DEMOS_DEBUG}" ]]; then
     set -x
 fi
 
@@ -20,13 +20,13 @@ if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
     if [ "${1:-}" = "--help" ]; then
         usage
     else
-        if [[ -n "${GEOTRELLIS_DEMO_SETTINGS_BUCKET}" ]]; then
-            TF_FILE_BASE_NAME=$(echo "${GEOTRELLIS_DEMO_SETTINGS_BUCKET}" | tr . -)
+        if [[ -n "${GEOTRELLIS_DEMOS_SETTINGS_BUCKET}" ]]; then
+            TF_FILE_BASE_NAME=$(echo "${GEOTRELLIS_DEMOS_SETTINGS_BUCKET}" | tr . -)
 
             pushd "${TERRAFORM_DIR}"
 
             # Stop Terraform from trying to apply incorrect state across environments
-            if [ -f ".terraform/terraform.tfstate" ] && ! grep -q "${GEOTRELLIS_DEMO_SETTINGS_BUCKET}" ".terraform/terraform.tfstate"; then
+            if [ -f ".terraform/terraform.tfstate" ] && ! grep -q "${GEOTRELLIS_DEMOS_SETTINGS_BUCKET}" ".terraform/terraform.tfstate"; then
                 echo "ERROR: Incorrect target environment detected in Terraform state! Please run"
                 echo "       the following command before proceeding:"
                 echo
@@ -35,12 +35,12 @@ if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
                 exit 1
             fi
 
-            aws s3 cp "s3://${GEOTRELLIS_DEMO_SETTINGS_BUCKET}/terraform/terraform.tfvars" "${TF_FILE_BASE_NAME}.tfvars"
+            aws s3 cp "s3://${GEOTRELLIS_DEMOS_SETTINGS_BUCKET}/terraform/terraform.tfvars" "${TF_FILE_BASE_NAME}.tfvars"
 
             terraform remote config \
                       -backend="s3" \
                       -backend-config="region=us-east-1" \
-                      -backend-config="bucket=${GEOTRELLIS_DEMO_SETTINGS_BUCKET}" \
+                      -backend-config="bucket=${GEOTRELLIS_DEMOS_SETTINGS_BUCKET}" \
                       -backend-config="key=terraform/state" \
                       -backend-config="encrypt=true"
 
@@ -68,7 +68,7 @@ if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
 
             popd
         else
-            echo "ERROR: No GEOTRELLIS_DEMO_SETTINGS_BUCKET variable defined."
+            echo "ERROR: No GEOTRELLIS_DEMOS_SETTINGS_BUCKET variable defined."
             exit 1
         fi
     fi

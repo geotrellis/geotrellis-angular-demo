@@ -2,7 +2,7 @@
 
 set -e
 
-if [[ -n "${GEOTRELLIS_DEMO_DEBUG}" ]]; then
+if [[ -n "${GEOTRELLIS_DEMOS_DEBUG}" ]]; then
     set -x
 fi
 
@@ -17,6 +17,6 @@ if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
     if [ "${1:-}" = "--help" ]; then
         usage
     else
-        zip -r geotrellis-demo.zip src/gd-frontend/dist/*
+        zip -r geotrellis-demos.zip src/gd-frontend/dist/*
     fi
 fi

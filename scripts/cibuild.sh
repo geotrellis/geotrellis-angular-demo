@@ -2,7 +2,7 @@
 
 set -e
 
-if [[ -n "${GEOTRELLIS_DEMO_DEBUG}" ]]; then
+if [[ -n "${GEOTRELLIS_DEMOS_DEBUG}" ]]; then
     set -x
 else
     SILENT_FLAG=--silent
