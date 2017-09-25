@@ -28,7 +28,7 @@ export class ChattaDemoService {
   }
 
   getLayer(card: LayerCard): Observable<L.TileLayer> {
-    return this.http.get(`https://cors-anywhere.herokuapp.com/http://demo.geotrellis.com/chatta/gt/breaks`, {
+    return this.http.get(`http://demo.geotrellis.com/chatta/gt/breaks`, {
       params: new HttpParams()
         .set('layers', `${card.params.layers}`)
         .set('weights', `${card.values}`)
@@ -53,7 +53,7 @@ export class ChattaDemoService {
 
   getSummary(card: LayerCard, values: string[] | number[], zoom: number): Observable<any> {
     const mask = card.mask;
-    return this.http.get(`https://cors-anywhere.herokuapp.com/http://demo.geotrellis.com/chatta/gt/sum`, {
+    return this.http.get(`http://demo.geotrellis.com/chatta/gt/sum`, {
       params: new HttpParams()
         .set('layers', 'ImperviousSurfaces_Barren Lands_Open Water,DevelopedLand,Wetlands,ForestedLands,Non-workingProtectedOrPublicLands,PublicallyOwnedWorkingLands,PrivatelyOwnedWorkingLandsWithEasements,FarmlandWithoutPrimeAgriculturalSoils,FarmlandOrForestedLandsWithPrimeAgriculturalSoils')
         .set('weights', `${values}`)

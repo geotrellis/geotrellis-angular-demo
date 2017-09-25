@@ -64,7 +64,7 @@ export class PointCloudDemoService {
     } else { type = 'point'; }
     switch (card.info.name) {
       case 'creation-render':
-        url = `https://cors-anywhere.herokuapp.com/http://ec2-54-87-204-186.compute-1.amazonaws.com/api/stats/${type}/single/{values[2]}{values[0]}/{zoom}`
+        url = `http://ec2-54-87-204-186.compute-1.amazonaws.com/api/stats/${type}/single/{values[2]}{values[0]}/{zoom}`
           .replace('{values[0]}', `${values[0]}`)
           .replace('{values[2]}', `${values[2]}`)
           .replace('{zoom}', `${zoom}`);
@@ -88,7 +88,7 @@ export class PointCloudDemoService {
         }
 
       case 'change-detection':
-        url = `https://cors-anywhere.herokuapp.com/http://ec2-54-87-204-186.compute-1.amazonaws.com/api/stats/${type}/diff/mar10{values[0]}/jul10{values[0]}/{zoom}`
+        url = `http://ec2-54-87-204-186.compute-1.amazonaws.com/api/stats/${type}/diff/mar10{values[0]}/jul10{values[0]}/{zoom}`
           .replace('{values[0]}', `${values[0]}`)
           .replace('{values[0]}', `${values[0]}`)
           .replace('{zoom}', `${zoom}`);
