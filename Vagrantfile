@@ -44,7 +44,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 SCRIPT
 
   config.vm.provision "ansible" do |ansible|
-      ansible.playbook = "deployment/ansible/geotrellis-demos.yml"
+      ansible.playbook = "deployment/ansible/playbook.yml"
       ansible.galaxy_role_file = "deployment/ansible/roles.yml"
   end
 end
