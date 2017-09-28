@@ -1,3 +1,0 @@
----
-- name: Install zip
-  apt: pkg=zip state=present

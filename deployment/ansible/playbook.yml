@@ -7,9 +7,8 @@
       apt: update_cache=yes cache_valid_time=3600
 
   roles:
-    - { role: "azavea.ntp" }
-    - { role: "azavea.unzip" }
     - { role: "azavea.terraform" }
-    - { role: "geotrellis-demos.zip" }
-    - { role: "geotrellis-demos.awscli" }
+    - { role: "azavea.aws-cli" }
+    - { role: "azavea.python-security", when: 'ansible_python_version | version_compare("2.7.9", "<")' }
+    - { role: "geotrellis-demos.environment" }
     - { role: "geotrellis-demos.docker" }
