@@ -1,0 +1,14 @@
+version: '2.1'
+services:
+  terraform:
+    image: "quay.io/azavea/terraform:0.9.6"
+    volumes:
+      - ./:/usr/local/src
+      - ~/.aws:/root/.aws
+    environment:
+      - GEOTRELLIS_DEMO_DEBUG=1
+      - AWS_PROFILE=${AWS_PROFILE:-geotrellis}
+      - GEOTRELLIS_DEMO_SETTINGS_BUCKET=${GEOTRELLIS_DEMO_SETTINGS_BUCKET:-geotrellis-demos-public-beta-config-us-east-1}
+      - GEOTRELLIS_DEMO_SITE_BUCKET=${GEOTRELLIS_DEMO_SITE_BUCKET:-geotrellis-demos-public-beta-origin-us-east-1}
+    working_dir: /usr/local/src
+    entrypoint: bash
