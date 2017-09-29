@@ -1,0 +1,11 @@
+<div class="cards-selector">
+  <header class="heading">
+    Demos and Case Studies
+  </header>
+  <nav class="card-tiles">
+    <a *ngFor="let demo of demos" class="tile-item" [routerLink]="['/', demo.name]" routerLinkActive="active">
+      <div class="title">{{demo.title}}</div>
+      <img class="thumb" [src]="demo.thumb" alt="Loading...">
+    </a>
+  </nav>
+</div>

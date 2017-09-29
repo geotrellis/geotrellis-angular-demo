@@ -1,0 +1,38 @@
+<gd-sidebar-header [title]="sidebarConfig.title" [(isCollapsed)]="isCollapsed" class="sidebar-header">
+</gd-sidebar-header>
+
+<!-- actions-bar -->
+<div *ngIf="sidebarConfig.groupActions?.analyze" class="actions-bar">
+  <!-- group-actions -->
+  <div class="group-actions">
+    <button gdActionBtn [(expanded)]="expanded" [action]="'analyze'" (expandedChange)="onExpandedChange()" [class]="'action icon-'+ 'analyze'">
+      Analyze Area
+    </button>
+  </div>
+  <!-- end of group-actions -->
+  <!-- action-panel group-->
+  <!-- action-panel -->
+  <div class="action-panel" [class.-expanded]="expanded === 'analyze'">
+    <button class="icon-close" (click)="expanded = undefined"></button>
+    <h3 class="header icon-analyze">Analyze an area of interest</h3>
+    <div class="btn-group">
+      <button class="action analyze-view -dark" (click)="getView()">Analyze current view</button>
+      <ng-container *ngIf="sidebarConfig.groupActions?.analyze?.area && sidebarConfig.groupActions?.analyze?.point">
+        <button #draw *ngFor="let val of ['poly', 'point']" [value]="val" [class]="'action -multi draw-area -dark '+val" (click)="startDraw(draw.value)">{{draw.value === 'poly'?'Draw an area':'Place a point'}}</button>
+      </ng-container>
+      <ng-container *ngIf="sidebarConfig.groupActions?.analyze?.area && !sidebarConfig.groupActions?.analyze?.point">
+        <button #draw *ngFor="let val of ['poly']" [value]="val" class="action draw-area -dark" (click)="startDraw(draw.value)">Draw area of interest</button>
+      </ng-container>
+    </div>
+  </div>
+  <!-- end of action-panel -->
+  <!-- end of action-panel group -->
+</div>
+<!-- end of actions-bar -->
+<div class="layer-card-list" [class.-loading]="isLoading" [class.-action]="action !== undefined && expanded !== 'analyze'">
+  <gd-layer-card *ngFor="let card of sidebarConfig.layerCards" [isLoading]="this.isLoading" [isSingle]="this.isSingle" [info]="card.info" [(show)]="card.show"
+    (showChange)="this.onShowChange(card.info.name, card.show)" [(expanded)]="card.expanded" [(values)]="card.values" (valuesChange)="this.onValuesChange(card.info.name, card.values)"
+    [(opacity)]="card.opacity" (opacityChange)="this.onOpacityChange(card.info.name, card.opacity)" [class]="'layer-card ' + card.info.name"
+    [(palette)]="card.palette" (paletteChange)="this.onPaletteChange(card.info.name, card.palette)" [summary]="card.summary">
+  </gd-layer-card>
+</div>
