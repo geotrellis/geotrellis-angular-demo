@@ -4,30 +4,22 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/debounceTime';
 import { Observable } from 'rxjs/Observable';
-import { LayerCard } from '../../shared/models/layer-card.d';
-
 import * as L from 'leaflet';
-import { CHATTADEMO } from './chatta-demo';
-@Injectable()
-export class ChattaDemoService {
 
+@Injectable()
+export class ChattaService {
   constructor(
-    private http: HttpClient,
+    public http: HttpClient,
   ) { }
 
-  getMapConfig(): Promise<{
-    zoom: number;
-    center: number[];
-    baseLayer: L.TileLayer[];
-  }> {
-    return Promise.resolve({
-      zoom: CHATTADEMO.zoom,
-      center: CHATTADEMO.center,
-      baseLayer: CHATTADEMO.baseLayer
-    });
+  getService = () => {
+    return {
+      getLayer: this.getLayer,
+      getSummary: this.getSummary,
+    };
   }
 
-  getLayer(card: LayerCard): Observable<L.TileLayer> {
+  getLayer = (card: GD.LayerCard) => {
     return this.http.get(`http://demo.geotrellis.com/chatta/gt/breaks`, {
       params: new HttpParams()
         .set('layers', `${card.params.layers}`)
@@ -51,7 +43,7 @@ export class ChattaDemoService {
       });
   }
 
-  getSummary(card: LayerCard, values: string[] | number[], zoom: number): Observable<any> {
+  getSummary = (card: GD.LayerCard, values: string[] | number[], zoom: number) => {
     const mask = card.mask;
     return this.http.get(`http://demo.geotrellis.com/chatta/gt/sum`, {
       params: new HttpParams()

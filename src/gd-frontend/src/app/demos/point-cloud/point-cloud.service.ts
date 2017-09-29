@@ -4,30 +4,23 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/debounceTime';
 import { Observable } from 'rxjs/Observable';
-import { LayerCard } from '../../shared/models/layer-card.d';
 
 import * as L from 'leaflet';
-import { POINTCLOUDDEMO } from './point-cloud-demo';
-@Injectable()
-export class PointCloudDemoService {
 
+@Injectable()
+export class PointCloudService {
   constructor(
-    private http: HttpClient,
+    public http: HttpClient,
   ) { }
 
-  getMapConfig(): Promise<{
-    zoom: number;
-    center: number[];
-    baseLayer: L.TileLayer[];
-  }> {
-    return Promise.resolve({
-      zoom: POINTCLOUDDEMO.zoom,
-      center: POINTCLOUDDEMO.center,
-      baseLayer: POINTCLOUDDEMO.baseLayer
-    });
+  getService = () => {
+    return {
+      getLayer: this.getLayer,
+      getSummary: this.getSummary,
+    };
   }
 
-  getLayer(card: LayerCard): Observable<L.TileLayer> {
+  getLayer = (card: GD.LayerCard) => {
     switch (card.info.name) {
       case 'creation-render':
         return new Observable<L.TileLayer>(observer => observer.next(L.tileLayer(
@@ -49,7 +42,7 @@ export class PointCloudDemoService {
     }
   }
 
-  getSummary(card: LayerCard, values: string[] | number[], zoom: number): Observable<any> {
+  getSummary = (card: GD.LayerCard, values: string[] | number[], zoom: number) => {
     let mask = card.mask;
     let url: string;
     let type: string;

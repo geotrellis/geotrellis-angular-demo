@@ -1,21 +1,22 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { LmViewComponent } from './lm-view.component';
-
+import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../../shared/shared.module';
-import { LmDemoService } from './lm-demo.service';
+import { LmService } from './lm.service';
+import { LmComponent } from './lm.component';
+
 
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
     SharedModule,
     RouterModule.forChild([
-      { path: '', component: LmViewComponent },
+      { path: '', component: LmComponent },
     ])
   ],
-  declarations: [ LmViewComponent ],
-  providers: [ LmDemoService ]
+  declarations: [ LmComponent ],
+  providers: [ LmService ]
 })
 export class LmModule { }

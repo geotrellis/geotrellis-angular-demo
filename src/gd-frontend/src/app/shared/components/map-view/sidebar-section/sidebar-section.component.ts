@@ -1,10 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, OnChanges, Output } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { LayerService } from '../../../services/layer.service';
 import * as L from 'leaflet';
 import 'leaflet-draw';
-
-import { LayerCard } from '../../../models/layer-card';
 
 @Component({
   selector: 'gd-sidebar-section',
@@ -12,15 +8,13 @@ import { LayerCard } from '../../../models/layer-card';
 })
 
 export class SidebarSectionComponent implements OnInit, OnChanges {
-  model: string = this.route.snapshot.data['name'];
-  service = this.layerService.getService(this.route.snapshot.data['name']);
-
+  @Input() service: any;
   action: string;
   @Input() map: L.Map;
   @Input() sidebarConfig: {
     title: string;
     groupActions: any;
-    layerCards: LayerCard[];
+    layerCards: GD.LayerCard[];
   };
   @Input() mask: any;
   view: L.Rectangle;
@@ -129,7 +123,7 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
     el.expanded = undefined;
   }
 
-  filterByName(name: string): LayerCard {
+  filterByName(name: string): GD.LayerCard {
     return this.sidebarConfig.layerCards.filter(el => {
       if (el.info.name === name) {
         return true;
@@ -168,71 +162,66 @@ export class SidebarSectionComponent implements OnInit, OnChanges {
     }
   }
 
-  constructor(
-    private layerService: LayerService,
-    private route: ActivatedRoute,
-  ) {  }
-
   ngOnInit() {
     this.isSingle = (this.sidebarConfig.layerCards && this.sidebarConfig.layerCards.length === 1) ? true : false;
   }
 
   ngOnChanges(changes) {
-    if (changes.map && changes.map.currentValue !== undefined) {
-      const cards = this.sidebarConfig.layerCards.filter(el => el.show === true);
-      cards.forEach(el => {
-        this.service.getLayer(el).subscribe(res => {
-          (res as L.TileLayer).setOpacity(el.opacity);
-          this.layersMap.set(el.info.name, res);
-          this.layers = Array.from(this.layersMap.values());
+      if (changes.map && changes.map.currentValue !== undefined) {
+        const cards = this.sidebarConfig.layerCards.filter(el => el.show === true);
+        cards.forEach(el => {
+          this.service.getLayer(el, this.service.http).subscribe(res => {
+            (res as L.TileLayer).setOpacity(el.opacity);
+            this.layersMap.set(el.info.name, res);
+            this.layers = Array.from(this.layersMap.values());
+          });
         });
-      });
-    }
+      }
 
-    if (changes.mask && changes.mask.currentValue) {
-      this.sidebarConfig.layerCards.forEach((el, i) => {
-        if (el.hasOwnProperty('mask')) {
-          el.mask = changes.mask.currentValue;
-          if (el.show === true) {
-            this.service.getLayer(el).subscribe(res => {
-              res.setOpacity(el.opacity);
-              this.layersMap.set(el.info.name, res);
-              if (i === this.sidebarConfig.layerCards.length - 1) {
-                this.layers = Array.from(this.layersMap.values());
-              }
-            });
-          }
-          if (changes.mask.currentValue && el.hasOwnProperty('summary')) {
-            this.isLoading = true;
-            const zoom = this.map.getZoom();
-            let values = el.values;
-            if (el.info.name === 'change-detection') {
-              values = this.sidebarConfig.layerCards.filter(pt => pt.info.name === 'creation-render')[0].values;
+      if (changes.mask && changes.mask.currentValue) {
+        this.sidebarConfig.layerCards.forEach((el, i) => {
+          if (el.hasOwnProperty('mask')) {
+            el.mask = changes.mask.currentValue;
+            if (el.show === true) {
+              this.service.getLayer(el).subscribe(res => {
+                res.setOpacity(el.opacity);
+                this.layersMap.set(el.info.name, res);
+                if (i === this.sidebarConfig.layerCards.length - 1) {
+                  this.layers = Array.from(this.layersMap.values());
+                }
+              });
             }
-            this.service.getSummary(el, values, zoom).subscribe(res => {
-              el.summary = res;
-              el.expanded = 'summary';
-              this.isLoading = false;
-            }, console.error);
+            if (changes.mask.currentValue && el.hasOwnProperty('summary')) {
+              this.isLoading = true;
+              const zoom = this.map.getZoom();
+              let values = el.values;
+              if (el.info.name === 'change-detection') {
+                values = this.sidebarConfig.layerCards.filter(pt => pt.info.name === 'creation-render')[0].values;
+              }
+              this.service.getSummary(el, values, zoom).subscribe(res => {
+                el.summary = res;
+                el.expanded = 'summary';
+                this.isLoading = false;
+              }, console.error);
+            }
           }
-        }
-      });
-    }
-
-    if (changes.mask && changes.mask.currentValue === undefined) {
-      const cards = this.sidebarConfig.layerCards.filter(el => el.show === true);
-      cards.forEach(el => {
-        el.mask = changes.mask.currentValue;
-        el.summary = undefined;
-        if (el.expanded === 'summary') {
-          el.expanded = undefined;
-        }
-        this.service.getLayer(el).subscribe(res => {
-          (res as L.TileLayer).setOpacity(el.opacity);
-          this.layersMap.set(el.info.name, res);
-          this.layers = Array.from(this.layersMap.values());
         });
-      });
-    }
+      }
+
+      if (changes.mask && changes.mask.currentValue === undefined) {
+        const cards = this.sidebarConfig.layerCards.filter(el => el.show === true);
+        cards.forEach(el => {
+          el.mask = changes.mask.currentValue;
+          el.summary = undefined;
+          if (el.expanded === 'summary') {
+            el.expanded = undefined;
+          }
+          this.service.getLayer(el).subscribe(res => {
+            (res as L.TileLayer).setOpacity(el.opacity);
+            this.layersMap.set(el.info.name, res);
+            this.layers = Array.from(this.layersMap.values());
+          });
+        });
+      }
   }
 }

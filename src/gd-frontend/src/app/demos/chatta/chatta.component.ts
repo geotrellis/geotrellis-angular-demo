@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
-import { ChattaDemoService } from './chatta-demo.service';
+import { ChattaService } from './chatta.service';
 import { CHATTADEMO } from './chatta-demo';
 import * as chroma from 'chroma-js';
 
 @Component({
-  selector: 'gd-test',
-  templateUrl: './chatta-view.component.html'
+  selector: 'gd-demo',
+  templateUrl: '../demo.component.html'
 })
 
-export class ChattaViewComponent {
-  layer: L.Layer;
+export class ChattaComponent {
   demoConfig = {
     zoom: CHATTADEMO.zoom,
     center: CHATTADEMO.center,
@@ -20,4 +19,10 @@ export class ChattaViewComponent {
     groupActions: CHATTADEMO.groupActions,
     layerCards: CHATTADEMO.layers,
   };
+  service: any;
+  constructor(
+    service: ChattaService
+  ) {
+    this.service = service.getService();
+  }
 }

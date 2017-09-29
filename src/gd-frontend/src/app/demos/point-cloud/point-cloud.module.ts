@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { PointCloudViewComponent } from './point-cloud-view.component';
-
+import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../../shared/shared.module';
-import { PointCloudDemoService } from './point-cloud-demo.service';
+import { PointCloudService } from './point-cloud.service';
+import { PointCloudComponent } from './point-cloud.component';
 
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
     SharedModule,
     RouterModule.forChild([
-      { path: '', component: PointCloudViewComponent },
+      { path: '', component: PointCloudComponent },
     ])
   ],
-  declarations: [ PointCloudViewComponent ],
-  providers: [ PointCloudDemoService ]
+  declarations: [ PointCloudComponent ],
+  providers: [ PointCloudService ]
 })
 
 export class PointCloudModule { }

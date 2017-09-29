@@ -4,30 +4,22 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/debounceTime';
 import { Observable } from 'rxjs/Observable';
-import { LayerCard } from '../../shared/models/layer-card.d';
-
 import * as L from 'leaflet';
-import { LMDEMO } from './lm-demo';
-@Injectable()
-export class LmDemoService {
 
+@Injectable()
+export class LmService {
   constructor(
-    private http: HttpClient,
+    public http: HttpClient,
   ) { }
 
-  getMapConfig(): Promise<{
-    zoom: number;
-    center: number[];
-    baseLayer: L.TileLayer[];
-  }> {
-    return Promise.resolve({
-      zoom: LMDEMO.zoom,
-      center: LMDEMO.center,
-      baseLayer: LMDEMO.baseLayer
-    });
+  getService = () => {
+    return {
+      getLayer: this.getLayer,
+      getSummary: this.getSummary,
+    };
   }
 
-  getLayer(card: LayerCard): Observable<L.TileLayer> {
+  getLayer = (card: GD.LayerCard) => {
     return this.http.get(`https://cors-anywhere.herokuapp.com/https://geotrellis.io/gt/weighted-overlay/breaks`, {
       params: new HttpParams()
         .set('layers', `${card.params.layers}`)
@@ -50,7 +42,7 @@ export class LmDemoService {
       });
   }
 
-  getSummary(card: LayerCard): Observable<any> {
+  getSummary(card: GD.LayerCard): Observable<any> {
     return null;
   }
 }
