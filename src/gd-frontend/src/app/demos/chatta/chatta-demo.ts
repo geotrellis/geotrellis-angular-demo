@@ -1,8 +1,7 @@
 import * as chroma from 'chroma-js';
 import * as L from 'leaflet';
 
-import { Demo } from '../../shared/models/demo.d';
-export const CHATTADEMO: Demo = {
+export const CHATTADEMO: GD.Demo = {
   model: 'chatta',
   title: 'Chattanooga Agriculture & Forestry Value Model',
   thumb: 'assets/img/chatta-thumb.png',

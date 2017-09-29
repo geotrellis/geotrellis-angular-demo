@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { PotsdamDemoService } from './potsdam-demo.service';
+import { PotsdamService } from './potsdam.service';
 import { POTSDAMDEMO } from './potsdam-demo';
 import * as chroma from 'chroma-js';
 
 @Component({
-  selector: 'gd-test',
-  templateUrl: './potsdam-view.component.html'
+  selector: 'gd-demo',
+  templateUrl: '../demo.component.html'
 })
 
-export class PotsdamViewComponent {
+export class PotsdamComponent {
   layer: L.Layer;
   demoConfig = {
     zoom: POTSDAMDEMO.zoom,
@@ -20,4 +20,10 @@ export class PotsdamViewComponent {
     groupActions: POTSDAMDEMO.groupActions,
     layerCards: POTSDAMDEMO.layers,
   };
+  service: any;
+  constructor(
+    service: PotsdamService
+  ) {
+    this.service = service.getService();
+  }
 }

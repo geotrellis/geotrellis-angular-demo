@@ -2,9 +2,6 @@ import 'rxjs/add/operator/switchMap';
 
 import { Component, Input, ChangeDetectorRef, HostBinding, AfterViewInit, OnInit } from '@angular/core';
 
-import { LayerCard } from '../../models/layer-card.d';
-import { LayerService } from '../../services/layer.service';
-
 import * as L from 'leaflet';
 
 @Component({
@@ -14,7 +11,7 @@ import * as L from 'leaflet';
 
 export class MapViewComponent implements OnInit, AfterViewInit {
   @HostBinding('class.map-view') true;
-  @Input() cards: LayerCard[] = [];
+  @Input() cards: GD.LayerCard[] = [];
   @Input() groupActions: any = {};
   @Input() demoConfig: {
     title: string;
@@ -26,8 +23,9 @@ export class MapViewComponent implements OnInit, AfterViewInit {
   @Input() sidebarConfig: {
     title: string;
     groupActions: any;
-    layerCards: LayerCard[];
+    layerCards: GD.LayerCard[];
   };
+  @Input() service: any;
   hasMask = false;
   map: L.Map;
   mask: any;

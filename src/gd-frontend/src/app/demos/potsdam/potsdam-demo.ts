@@ -1,8 +1,7 @@
 import * as chroma from 'chroma-js';
 import * as L from 'leaflet';
 
-import { Demo } from '../../shared/models/demo.d';
-export const POTSDAMDEMO: Demo = {
+export const POTSDAMDEMO: GD.Demo = {
   model: 'potsdam',
   title: 'Potsdam',
   thumb: 'assets/img/potsdam-thumb.png',

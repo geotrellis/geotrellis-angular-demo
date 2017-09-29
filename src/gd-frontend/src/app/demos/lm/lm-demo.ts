@@ -1,8 +1,7 @@
 import * as chroma from 'chroma-js';
 import * as L from 'leaflet';
 
-import { Demo } from '../../shared/models/demo.d';
-export const LMDEMO: Demo = {
+export const LMDEMO: GD.Demo = {
   model: 'lm',
   title: 'Philly Location Modeling',
   thumb: 'assets/img/lm-thumb.png',
