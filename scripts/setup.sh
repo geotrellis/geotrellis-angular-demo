@@ -19,11 +19,11 @@ then
     then
         usage
     else
-        if ansible --version | grep -q "ansible 2.1."; then
+        if ansible --version | grep -q "ansible 2.3."; then
             vagrant up --provision
             vagrant ssh -c "cd /vagrant && ./scripts/update.sh"
         else
-            echo "ERROR: Version of Ansible installed locally should be in the 2.1.x series."
+            echo "ERROR: Version of Ansible installed locally should be in the 2.3.x series."
             exit 1
         fi
     fi
