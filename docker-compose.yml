@@ -9,6 +9,6 @@ services:
         - "7358:7358"
       volumes:
         - ./src/gd-frontend:/usr/src/app
-        - ./dist:/usr/dist
+        - ./dist:/usr/src/app/dist
         - /var/cache/geotrellis-demos-node-modules:/usr/src/app/node_modules
       command: yarn start
