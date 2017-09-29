@@ -1,6 +1,6 @@
 resource "aws_cloudfront_distribution" "geotrellis_demos" {
   origin {
-    domain_name = "${aws_s3_bucket.geotrellis_demos.id}.s3.amazonaws.com"
+    domain_name = "${module.docs.site_bucket}.s3.amazonaws.com"
     origin_id   = "geotrellisDemosOriginEastId"
   }
 
@@ -56,7 +56,7 @@ resource "aws_cloudfront_distribution" "geotrellis_demos" {
 
   logging_config {
     include_cookies = false
-    bucket          = "${aws_s3_bucket.geotrellis_demos_logs.id}.s3.amazonaws.com"
+    bucket          = "${module.docs.logs_bucket}.s3.amazonaws.com"
   }
 
   restrictions {
@@ -67,5 +67,7 @@ resource "aws_cloudfront_distribution" "geotrellis_demos" {
 
   viewer_certificate {
     cloudfront_default_certificate = true
+    minimum_protocol_version       = "TLSv1"
+    ssl_support_method             = "sni-only"
   }
 }
