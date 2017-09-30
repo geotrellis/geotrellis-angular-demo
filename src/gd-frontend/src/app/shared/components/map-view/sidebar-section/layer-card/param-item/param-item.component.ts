@@ -8,12 +8,14 @@ export class ParamItemComponent {
   @ViewChild('desc') desc: ElementRef;
   @ViewChild('num') num: ElementRef;
   @Input() value: number | string;
+
   @Input() param: string;
-  @Input() range: number;
+  @Input() range: any;
+  @Input() selection: any;
+
   @Output() valueChange = new EventEmitter<number | string>();
   @HostBinding('class.-inactive') isInactive = false;
 
-  @Input() type: string;
   prevDesc: number;
   prevNum: number;
 
@@ -24,8 +26,15 @@ export class ParamItemComponent {
   isNumber(val: any): boolean {
     return Number.isInteger(val);
   }
+
   genRange(num: number): number[] {
     return Array.from({ length: num }, (v, k) => k);
+  }
+
+  objKeys(object: object | undefined): string[] {
+    if (object) {
+      return Object.keys(object);
+    } else { return undefined; }
   }
 
   neglectParam(desc: number, num: number): void {

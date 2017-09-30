@@ -9,7 +9,7 @@
       Analyze Area
     </button>
   </div>
-  <!-- end of group-actions -->
+  <!-- /group-actions -->
   <!-- action-panel group-->
   <!-- action-panel -->
   <div class="action-panel" [class.-expanded]="expanded === 'analyze'">
@@ -25,10 +25,10 @@
       </ng-container>
     </div>
   </div>
-  <!-- end of action-panel -->
-  <!-- end of action-panel group -->
+  <!-- /action-panel -->
+  <!-- /action-panel group -->
 </div>
-<!-- end of actions-bar -->
+<!-- /actions-bar -->
 <div class="layer-card-list" [class.-loading]="isLoading" [class.-action]="action !== undefined && expanded !== 'analyze'">
   <gd-layer-card *ngFor="let card of sidebarConfig.layerCards" [isLoading]="this.isLoading" [isSingle]="this.isSingle" [info]="card.info" [(show)]="card.show"
     (showChange)="this.onShowChange(card.info.name, card.show)" [(expanded)]="card.expanded" [(values)]="card.values" (valuesChange)="this.onValuesChange(card.info.name, card.values)"

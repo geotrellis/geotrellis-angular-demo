@@ -53,18 +53,20 @@ export const CHATTADEMO: GD.Demo = {
           ],
         },
         params: {
-          paramsText: [
-            'Impervious_Surfaces_Barren_Lands_Open_Water',
-            'Developed_Land',
-            'Wetlands',
-            'Forested_Lands',
-            'Non-working_Protected_Or_Public_Lands',
-            'Publically_Owned_Working_Lands',
-            'Privately_Owned_Working_Lands_With_Easements',
-            'Farmland_Without_Prime_Agricultural_Soils',
-            'Farmland_Or_Forested_Lands_With_Prime_Agricultural_Soils'
-          ],
-          quant: 6,
+          quant: {
+            text: [
+              'Impervious_Surfaces_Barren_Lands_Open_Water',
+              'Developed_Land',
+              'Wetlands',
+              'Forested_Lands',
+              'Non-working_Protected_Or_Public_Lands',
+              'Publically_Owned_Working_Lands',
+              'Privately_Owned_Working_Lands_With_Easements',
+              'Farmland_Without_Prime_Agricultural_Soils',
+              'Farmland_Or_Forested_Lands_With_Prime_Agricultural_Soils'
+            ],
+            range: 6
+          },
         },
         opacity: true,
       },

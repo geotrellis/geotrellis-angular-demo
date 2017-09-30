@@ -57,15 +57,19 @@ export const POINTCLOUDDEMO: GD.Demo = {
             Use this demo to explore differences in the DEM methods, on the fly visualizations, and analytics of the difference layer that can indicate locations of snowpack.`,
         },
         params: {
-          paramsText: [
-            'DEM Creation Method',
-            'Render Options',
-            'Dataset',
-          ],
           qual: {
-            'DEM Creation Method': [],
-            'Render Options': [],
-            'Dataset': ['snow-on', 'snow-off'],
+            'DEM Creation Method': {
+              'TIN': 'tin',
+              'IDW': 'idw'
+            },
+            'Render Options': {
+              'Hillshade': 'hillshade',
+              'Color Ramp': 'png'
+            },
+            'Dataset': {
+              'Snow On': 'snow-on',
+              'Snow Off': 'snow-off',
+            }
           }
         },
         opacity: true,
