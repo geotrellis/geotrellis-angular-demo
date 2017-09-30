@@ -1,19 +1,20 @@
-# React Project Structure
+# Angular Project Front-End Structure
 
 ## Context
 
 The starting point of this project a series of existing demos implementing a uniformed UI design.
 
-### Consideration
+### Considerations
 
 With a strong sense that: 
 - New demo could be added, and each demo should be replaced or removed at ease. 
 - UI components should be reusable in each demo.
 
 We decided to export each demo as an [NgModule](https://angular.io/guide/ngmodule), and the shared UI components a shared module.
-In that case, it is easier to extend the current framework with capabilities to switch the demos.
 
-## Decision
+In that case, it is easier to extend the current framework with capabilities to switch the demos. And these sub modules can be lazy loaded asynchronously by the router.
+
+## Decisions
 
 We decided to use `shared` as the folder name that houses shared resources (components, directives, etc...).
 
@@ -29,54 +30,56 @@ Considering these changes, the new project structure looks like this:
 │   ├── demos
 │   │   ├── demo.component.html
 │   │   ├── demos.ts
-│   │   ├── demo1
-│   │   │   ├── demo1-demo.ts
-│   │   │   ├── demo1.component.ts
-│   │   │   ├── demo1.module.ts
-│   │   │   └── demo1.service.ts
-│   │   ├── demo2
-│   │   │   ├── demo2-demo.ts
-│   │   │   ├── demo2.component.ts
-│   │   │   ├── demo2.module.ts
-│   │   │   └── demo2.service.ts
+│   │   ├── foo
+│   │   │   ├── foo-demo.ts
+│   │   │   ├── foo.component.ts
+│   │   │   ├── foo.module.ts
+│   │   │   └── foo.service.ts
 │   │   └── ...
 │   ├── shared
 │   │   ├── components
-│   │   ├── demos.ts
-│   │   ├── demo1
-│   │   │   ├── demo1-demo.ts
-│   │   │   ├── demo1.component.ts
-│   │   │   ├── demo1.module.ts
-│   │   │   └── demo1.service.ts
-│   └── settings.js
-├── detail
-│   ├── actions.js
-│   ├── components
-│   │   ├── index.jsx
-│   │   └── Foo.jsx
-│   ├── index.jsx
-│   └── reducers.js
-├── home
-│   ├── actions.js
-│   ├── components
-│   │   ├── index.jsx
-│   │   └── Bar.jsx
-│   ├── index.jsx
-│   └── reducers.js
-├── main.js
-├── reducer.js
-└── store.js
+│   │   │   ├── foo
+│   │   │   |   ├── foo.component.ts
+│   │   │   |   ├── foo.component.html
+|   │   │   │   └── ...
+│   │   |   └── ...
+│   │   ├── directives
+│   |   │   └── foo.directive.ts
+│   │   ├── pipes
+│   |   │   └── foo.pipe.ts
+│   │   ├── shared.module.ts
+│   ├── typings
+│   |   └── foo.d.ts
+│   ├── gd-routing.module.ts
+│   ├── gd.component.ts
+│   └── gd.module.ts
+├── assets
+└── environmemts
+    ├── environment.prod.ts
+    └── environment.ts
 ```
+### Issues and Decisions
+
+#### Why DashboardModule (landing page) isn't shared?
+
+SharedModule exists to make commonly used components, directives, and pipes available for use in the templates of components in many other modules.
+
+However, the `DashboardComponent` is used only once by the `DashboardModule`. So there's no good reason sharing it.
 
 ## Consequences
 
-It is possible that further reorganizations of the code may need to be done in the future. Each time we reorganize, it has the potential to block other work from being done concurrently, or at least make conflict resolution difficult. It also makes project history harder to track.
+To add/remove the demo:
+- Build the demo folder under `app\demos` and export each demo module with its component, service and model.
+- Include the `Foo-demo.ts` in `app/demos/demos.ts` to display the info in the dashboard.
 
-Two specific things that we may need to consider in the future:
+## To-do
 
-- Eliminate the root component. It is possible that the root component for a module could be combined with the root container of a module. This could simplify the structure of a module.
-- Separating out reducers and actions on a per module basis may result in redundant reducers and actions. We may need to have a top-level actions file along with the top-level reducer to hold shared actions and reducer functions, or to at least connect the various action files.
+- Dynamic Component Loader
+The template uses lost of ngIf directives to check if the piece fits the demo's requirement. But, it could be much elegant to dynamic load that component as described [here](https://angular.io/guide/dynamic-component-loader).
+However, following the tutorial, the component generated does not reponsive to the data binded. It has been an issue on the GitHub.
+
+We could wait the Angular team to fix that issue, or we could find other way round.
 
 ## Further reading
 
-[Slack discussion of these changes.](https://azavea.slack.com/archives/pwd/p1469197052000323)
+- (Angular CLI)[https://cli.angular.io/]
