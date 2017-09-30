@@ -1,4 +1,4 @@
-# Angular Project Front-End Structure
+# Angular Folder Structure
 
 ## Context
 
@@ -48,15 +48,15 @@ Considering these changes, the new project structure looks like this:
 │   │   ├── pipes
 │   |   │   └── foo.pipe.ts
 │   │   ├── shared.module.ts
-│   ├── typings
 │   |   └── foo.d.ts
 │   ├── gd-routing.module.ts
 │   ├── gd.component.ts
 │   └── gd.module.ts
 ├── assets
-└── environmemts
-    ├── environment.prod.ts
-    └── environment.ts
+├── environmemts
+│   ├── environment.prod.ts
+│   └── environment.ts
+└── typings
 ```
 ### Issues and Decisions
 
@@ -69,7 +69,7 @@ However, the `DashboardComponent` is used only once by the `DashboardModule`. So
 ## Consequences
 
 To add/remove the demo:
-- Build the demo folder under `app\demos` and export each demo module with its component, service and model.
+- Build the demo folder under `app/demos` and export each demo module with its component, service and model.
 - Include the `Foo-demo.ts` in `app/demos/demos.ts` to display the info in the dashboard.
 
 ## To-do

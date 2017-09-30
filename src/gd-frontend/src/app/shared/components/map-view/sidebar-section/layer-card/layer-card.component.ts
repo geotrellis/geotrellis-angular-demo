@@ -33,21 +33,18 @@ export class LayerCardComponent implements OnInit, OnChanges {
       palettes: string[];
     };
     params: {
-      paramsText: string[];
       quant: number;
-      qual: string[];
+      qual: any;
     };
     opacity: boolean;
   };
   modelActions: {
     summary: boolean;
   };
-  paramsText: string[];
   infoText: string;
   fakeArr: number[];
-  type: string;
-  quant: number;
-  qual: string[];
+  quant: any;
+  qual: any;
   @Input() summary: JSON;
 
   @Input() expanded: string;
@@ -67,7 +64,7 @@ export class LayerCardComponent implements OnInit, OnChanges {
   getPreset(val: string): void {
     const valArray = val.split(',').map(el => {
       if (el === 'undefined') {
-          this.expanded = 'params';
+        this.expanded = 'params';
         return undefined;
       } else if (Number.isInteger(Number(el))) {
         // only string with pure number can be returned as Number
@@ -81,6 +78,12 @@ export class LayerCardComponent implements OnInit, OnChanges {
     }
   }
 
+  objKeys(object: object | undefined): string[] {
+    if (object) {
+      return Object.keys(object);
+    } else { return undefined; }
+  }
+
   ngOnInit() {
     this.name = this.info.name;
     this.title = this.info.title;
@@ -92,7 +95,6 @@ export class LayerCardComponent implements OnInit, OnChanges {
       this.palettes = this.layerActions['info'].palettes ? this.layerActions['info'].palettes : undefined;
     }
     if (this.layerActions['params']) {
-      this.paramsText = this.layerActions['params'].paramsText;
       this.quant = this.layerActions['params'].quant ? this.layerActions['params'].quant : undefined;
       this.qual = this.layerActions['params'].qual ? this.layerActions['params'].qual : undefined;
     }
@@ -101,7 +103,6 @@ export class LayerCardComponent implements OnInit, OnChanges {
   ngOnChanges(changes) {
     if (changes.values && changes.values.currentValue !== undefined) {
       this.fakeArr = Array(this.values.length).fill(0);
-      this.type = Number.isInteger((Number(this.values[0]))) ? 'number' : 'string';
     }
   }
 }

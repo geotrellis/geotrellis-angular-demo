@@ -11,8 +11,6 @@ import { MapWrapperDirective } from './directives/map-wrapper.directive';
 import { ActionBtnDirective } from './directives/action-btn.directive';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
-import { HostDirective } from './directives/host.directive';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -27,8 +25,7 @@ import { HostDirective } from './directives/host.directive';
     RejoinPipe,
     KeysPipe,
     MapWrapperDirective,
-    ActionBtnDirective,
-    HostDirective,
+    ActionBtnDirective
   ],
   exports: [
     MapViewComponent

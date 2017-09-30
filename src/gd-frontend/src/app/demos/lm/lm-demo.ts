@@ -39,8 +39,10 @@ export const LMDEMO: GD.Demo = {
           infoText: 'This model uses the weighted overlay method, which break the location selection problem into three factors.'
         },
         params: {
-          paramsText: ['bars', 'grocery_stores', 'rail_stops'],
-          quant: 4
+          quant: {
+            text: ['bars', 'grocery_stores', 'rail_stops'],
+            range: 4
+          }
         },
         opacity: true,
       },
