@@ -1,5 +1,5 @@
 <!-- don't change the order, or the sidebar will get the map after being checked -->
-<gd-sidebar-section #sidebar [sidebarConfig]="sidebarConfig" [(mask)]="mask" [map]="map" class="sidebar-section" [class.-collapsed]="sidebar.isCollapsed"
+<gd-sidebar-section #sidebar [service]="service" [sidebarConfig]="sidebarConfig" [(mask)]="mask" [map]="map" class="sidebar-section" [class.-collapsed]="sidebar.isCollapsed"
   (hasMaskChange)="hasMask=$event">
 </gd-sidebar-section>
 <button class="reset" (click)="resetArea()" *ngIf="sidebarConfig.groupActions?.analyze && hasMask">Reset Area</button>

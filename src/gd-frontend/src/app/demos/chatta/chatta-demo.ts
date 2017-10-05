@@ -1,8 +1,7 @@
 import * as chroma from 'chroma-js';
 import * as L from 'leaflet';
 
-import { Demo } from '../../shared/models/demo.d';
-export const CHATTADEMO: Demo = {
+export const CHATTADEMO: GD.Demo = {
   model: 'chatta',
   title: 'Chattanooga Agriculture & Forestry Value Model',
   thumb: 'assets/img/chatta-thumb.png',
@@ -54,18 +53,20 @@ export const CHATTADEMO: Demo = {
           ],
         },
         params: {
-          paramsText: [
-            'Impervious_Surfaces_Barren_Lands_Open_Water',
-            'Developed_Land',
-            'Wetlands',
-            'Forested_Lands',
-            'Non-working_Protected_Or_Public_Lands',
-            'Publically_Owned_Working_Lands',
-            'Privately_Owned_Working_Lands_With_Easements',
-            'Farmland_Without_Prime_Agricultural_Soils',
-            'Farmland_Or_Forested_Lands_With_Prime_Agricultural_Soils'
-          ],
-          quant: 6,
+          quant: {
+            text: [
+              'Impervious_Surfaces_Barren_Lands_Open_Water',
+              'Developed_Land',
+              'Wetlands',
+              'Forested_Lands',
+              'Non-working_Protected_Or_Public_Lands',
+              'Publically_Owned_Working_Lands',
+              'Privately_Owned_Working_Lands_With_Easements',
+              'Farmland_Without_Prime_Agricultural_Soils',
+              'Farmland_Or_Forested_Lands_With_Prime_Agricultural_Soils'
+            ],
+            range: 6
+          },
         },
         opacity: true,
       },

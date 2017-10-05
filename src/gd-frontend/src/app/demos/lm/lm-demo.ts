@@ -1,8 +1,7 @@
 import * as chroma from 'chroma-js';
 import * as L from 'leaflet';
 
-import { Demo } from '../../shared/models/demo.d';
-export const LMDEMO: Demo = {
+export const LMDEMO: GD.Demo = {
   model: 'lm',
   title: 'Philly Location Modeling',
   thumb: 'assets/img/lm-thumb.png',
@@ -40,8 +39,10 @@ export const LMDEMO: Demo = {
           infoText: 'This model uses the weighted overlay method, which break the location selection problem into three factors.'
         },
         params: {
-          paramsText: ['bars', 'grocery_stores', 'rail_stops'],
-          quant: 4
+          quant: {
+            text: ['bars', 'grocery_stores', 'rail_stops'],
+            range: 4
+          }
         },
         opacity: true,
       },

@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ChattaViewComponent } from './chatta-view.component';
-
+import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../../shared/shared.module';
-import { ChattaDemoService } from './chatta-demo.service';
+import { ChattaService } from './chatta.service';
+import { ChattaComponent } from './chatta.component';
 
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
     SharedModule,
     RouterModule.forChild([
-      { path: '', component: ChattaViewComponent },
+      { path: '', component: ChattaComponent },
     ])
   ],
-  declarations: [ ChattaViewComponent ],
-  providers: [ ChattaDemoService ]
+  declarations: [ ChattaComponent ],
+  providers: [ ChattaService ]
 })
 
 export class ChattaModule { }

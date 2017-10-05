@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { PotsdamViewComponent } from './potsdam-view.component';
-
+import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../../shared/shared.module';
-import { PotsdamDemoService } from './potsdam-demo.service';
+import { PotsdamService } from './potsdam.service';
+import { PotsdamComponent } from './potsdam.component';
 
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
     SharedModule,
     RouterModule.forChild([
-      { path: '', component: PotsdamViewComponent },
+      { path: '', component: PotsdamComponent },
     ])
   ],
-  declarations: [ PotsdamViewComponent ],
-  providers: [ PotsdamDemoService ]
+  declarations: [ PotsdamComponent ],
+  providers: [ PotsdamService ]
 })
 
 export class PotsdamModule { }

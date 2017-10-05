@@ -4,30 +4,23 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/debounceTime';
 import { Observable } from 'rxjs/Observable';
-import { LayerCard } from '../../shared/models/layer-card.d';
-
 import * as L from 'leaflet';
-import { POTSDAMDEMO } from './potsdam-demo';
+
 @Injectable()
-export class PotsdamDemoService {
+export class PotsdamService {
 
   constructor(
-    private http: HttpClient,
+    public http: HttpClient,
   ) { }
 
-  getMapConfig(): Promise<{
-    zoom: number;
-    center: number[];
-    baseLayer: L.TileLayer[];
-  }> {
-    return Promise.resolve({
-      zoom: POTSDAMDEMO.zoom,
-      center: POTSDAMDEMO.center,
-      baseLayer: POTSDAMDEMO.baseLayer
-    });
+  getService = () => {
+    return {
+      getLayer: this.getLayer,
+      getSummary: this.getSummary,
+    };
   }
 
-  getLayer(card: LayerCard): Observable<L.TileLayer> {
+  getLayer = (card: GD.LayerCard) => {
     let url = card.server;
     switch (card.info.name) {
       case 'potsdam-imagery':
@@ -117,7 +110,7 @@ export class PotsdamDemoService {
     }
   }
 
-  getSummary(card: LayerCard, values: string[] | number[], zoom: number): Observable<any> {
+  getSummary = (card: GD.LayerCard, values: string[] | number[], zoom: number) => {
     return null;
   }
 }
