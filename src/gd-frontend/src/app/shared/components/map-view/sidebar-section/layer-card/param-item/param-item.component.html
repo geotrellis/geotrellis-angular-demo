@@ -1,0 +1,15 @@
+<label class="checkbox-label" [class.-inactive]="check.checked" [class.-hide]="!range">
+        <input #check class="checkbox" type="checkbox" (click)="neglectParam(desc.value, num.value)">                       
+        <span class="icon"></span>
+      </label>
+<select #desc class="desc" [class.-hide]="!range" (change)="updateValue(desc.value, num.value)">
+        <option value="1" [selected]="value>0">Near</option>
+        <option value="-1" [selected]="value<0">Far</option>
+      </select>
+<span class="name">{{param | rejoin:"_"}}</span>
+<select #num [class.-hide]="!range" class="num" (change)="updateValue(desc.value, num.value)">
+  <option *ngFor="let val of genRange(range)" [value]="val" [selected]="val === this.abs(this.value)">{{val}}</option>
+</select>
+  <select #string [class.-hide]="range" class="string" (change)="updateValue(string.value)">
+      <option *ngFor="let val of objKeys(selection)" [value]="this.selection[val]" [selected]="this.selection[val] === value">{{val}}</option>
+  </select>
