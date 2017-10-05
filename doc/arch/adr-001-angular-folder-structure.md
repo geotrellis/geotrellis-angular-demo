@@ -49,9 +49,9 @@ Considering these changes, the new project structure looks like this:
 │   |   │   └── foo.pipe.ts
 │   │   ├── shared.module.ts
 │   |   └── foo.d.ts
-│   ├── gd-routing.module.ts
-│   ├── gd.component.ts
-│   └── gd.module.ts
+│   ├── app-routing.module.ts
+│   ├── app.component.ts
+│   └── app.module.ts
 ├── assets
 ├── environmemts
 │   ├── environment.prod.ts
@@ -76,7 +76,7 @@ To add/remove the demo:
 
 - Dynamic Component Loader
 The template uses lost of ngIf directives to check if the piece fits the demo's requirement. But, it could be much elegant to dynamic load that component as described [here](https://angular.io/guide/dynamic-component-loader).
-However, following the tutorial, the component generated does not reponsive to the data binded. It has been an issue on the GitHub.
+However, following the tutorial, the component generated does not reponsive to the data binded. It has been an issue on the GitHub. See [here](https://github.com/angular/angular/issues/8164).
 
 We could wait the Angular team to fix that issue, or we could find other way round.
 
