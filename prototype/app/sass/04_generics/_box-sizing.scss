@@ -1,0 +1,15 @@
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    width: 100%;
+}

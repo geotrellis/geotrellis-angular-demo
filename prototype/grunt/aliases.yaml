@@ -1,0 +1,7 @@
+default:
+    - 'sass_import'
+    - 'exec'
+    - 'sass'
+    - 'postcss'
+    - 'browserSync'
+    - 'watch'

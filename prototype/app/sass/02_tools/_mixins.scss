@@ -1,0 +1,65 @@
+@mixin delinkify($color : inherit) {
+    &:link, &:visited, &:focus, &:hover, &:active {
+        color: $color;
+        text-decoration: none;
+    }
+}
+
+@mixin buttonify($color : $black) {
+    display: inline-block;
+    text-align: center;
+    color: $white;
+    background-color: $color;
+    padding: 0 1.5em;
+    border-radius: 1px;
+    text-transform: uppercase;
+}
+
+@mixin invisible {
+    opacity: 0;
+    pointer-events: none;
+}
+
+@mixin visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+@mixin icon-font($content : ' ') {
+    content: $content;
+
+    position: absolute;
+
+    font-family: "fontello";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    /* opacity: .8; */
+
+    /* For safety - reset parent styles, that can break glyph codes*/
+    font-variant: normal;
+    text-transform: none;
+
+    /* fix buttons height, for twitter bootstrap */
+    line-height: 1em;
+
+    /* Animation center compensation - margins should be symmetric */
+    /* remove if not needed */
+    margin-left: .2em;
+
+    /* you can be more comfortable with increased icons size */
+    /* font-size: 120%; */
+
+    /* Font smoothing. That was taken from TWBS */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Uncomment for 3D effect */
+    /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
