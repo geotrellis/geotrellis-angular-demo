@@ -15,6 +15,17 @@
     text-transform: uppercase;
 }
 
+@mixin debuttonify($color : inherit) {
+    appearance: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: $color;
+    text-align: left;
+}
+
 @mixin invisible {
     opacity: 0;
     pointer-events: none;
@@ -38,7 +49,7 @@
     display: inline-block;
     text-decoration: inherit;
     width: 1em;
-    margin-right: .2em;
+    // margin-right: .2em;
     text-align: center;
     /* opacity: .8; */
 
@@ -51,7 +62,7 @@
 
     /* Animation center compensation - margins should be symmetric */
     /* remove if not needed */
-    margin-left: .2em;
+    // margin-left: .2em;
 
     /* you can be more comfortable with increased icons size */
     /* font-size: 120%; */

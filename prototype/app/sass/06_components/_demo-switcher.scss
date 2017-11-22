@@ -1,0 +1,77 @@
+.demo-switcher {
+
+    > .logo-button {
+        @include debuttonify;
+        display: block;
+        height: 100%;
+    }
+
+    > .logo-button > .button-label {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: flex-start;
+        margin: 0;
+        font-size: $font-size-headline;
+        font-weight: $font-weight-normal;
+        white-space: nowrap;
+
+        > .image {
+            margin-right: .8rem;
+            width: 26px;
+            height: 26px;
+        }
+
+        > .demo {
+            display: inline-flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: flex-start;
+            margin-left: .6rem;
+            color: $yellow;
+            font-weight: $font-weight-light;
+        }
+    }
+
+    > .demos-menu {
+        @include invisible;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: $black;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        box-shadow: box-shadow(2);
+
+        &.-on {
+            @include visible;
+        }
+
+        > .demo-item {
+
+            > .link {
+                @include delinkify($white);
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: center;
+                justify-content: flex-start;
+                height: 6.4rem;
+                padding: 0 1.6rem;
+                font: $font-body;
+                font-weight: $font-weight-bold;
+
+                &:hover {
+                    background-color: $yellow;
+                    color: $black;
+                }
+            }
+
+            > .link > .image {
+                margin-right: 1.6rem;
+                width: 48px;
+                height: 48px;
+            }
+        }
+    }
+}

@@ -1,0 +1,27 @@
+.sidebar-tabs {
+    display: flex;
+    flex: none;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    justify-content: space-between;
+
+    > .tab {
+        @include debuttonify;
+        width: 33.333%;
+        border-bottom: 2px solid $dk-gray;
+        font: $font-body;
+        font-weight: $font-weight-bold;
+        text-align: center;
+        text-transform: uppercase;
+
+        &:hover {
+            border-bottom-color: $sky;
+            color: $sky;
+        }
+
+        &.-on {
+            border-bottom-color: $indigo;
+            color: $indigo;
+        }
+    }
+}

@@ -3,14 +3,80 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-    <title>App Name</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ==" crossorigin=""/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <title>GeoTrellis Demo Demo — App</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
+    <link rel="stylesheet" href="https://erasermap.com/map/css/main.7b63ae2f.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
+    <div class="app-root">
+        <header class="app-header">
+            <div class="demo-switcher">
+                <button class="logo-button" type="button">
+                    <h1 class="button-label">
+                        <img class="image" src="/img/logo-icon.png" alt="" width="26" height="26">
+                        <span class="brand">GeoTrellis</span>
+                        <span class="demo">Demo <i class="icon material-icons md-24">arrow_drop_down</i></span>
+                    </h1>
+                </button>
+                <ul class="demos-menu">
+                    <li class="demo-item">
+                        <a class="link" href="#">
+                            <img class="image" src="/img/demo-thumb-locationmodeling.jpg" alt="">
+                            Philly Location Modeling
+                        </a>
+                    </li>
+                    <li class="demo-item">
+                        <a class="link" href="#">
+                            <img class="image" src="/img/demo-thumb-chattanooga.jpg" alt="">
+                            Chattanooga Agriculture &amp; Forestry Value Model
+                        </a>
+                    </li>
+                    <li class="demo-item">
+                        <a class="link" href="#">
+                            <img class="image" src="/img/demo-thumb-pointcloud.jpg" alt="">
+                            Point Cloud
+                        </a>
+                    </li>
+                    <li class="demo-item">
+                        <a class="link" href="#">
+                            <img class="image" src="/img/demo-thumb-potsdam.jpg" alt="">
+                            Potsdam
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <h2 class="heading">
+                <span class="name">Chattanooga Agriculture &amp; Forestry Value Model</span>
+                <button class="button" type="button">
+                    <i class="icon material-icons md-18 md-light">info</i>
+                </button>
+            </h2>
+            <button class="tourbutton" type="button">Tour</button>
+        </header>
+        <main class="app-main">
+            <div class="app-sidebar">
+                <div class="sidebar-tabs">
+                    <button class="tab -on" id="layers-tab" type="button">Layers</button>
+                    <button class="tab" id="mask-tab" type="button">Mask</button>
+                    <button class="tab" id="analysis-tab" type="button">Analysis</button>
+                </div>
+                <div class="sidebar-content">
+
+                </div>
+            </div>
+            <div class="app-map" id="map">
+
+            </div>
+        </main>
+    </div>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js" integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg==" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
+    <script src="https://mapzen.com/tangram/tangram.min.js"></script>
+    <script src="https://erasermap.com/map/bundle.min.js"></script>
     <script src="/js/main.js"></script>
+    <script src="/js/focus-ring.js"></script>
 </body>
 </html>

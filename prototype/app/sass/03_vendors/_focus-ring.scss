@@ -1,0 +1,6 @@
+// Polyfill for `:focus-ring` 
+// https://github.com/wicg/focus-ring
+
+.js-focus-ring :focus:not(.focus-ring) {
+    outline-width: 0;
+}

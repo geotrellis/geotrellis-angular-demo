@@ -2,6 +2,9 @@
   "name": "facade",
   "version": "0.1.1",
   "description": "Adapted from Mantle, Azavea's front end framework for GIS applications",
+  "dependencies": {
+      "wicg-focus-ring": "^2.0.2"
+  },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
     "cssnano": "^3.10",

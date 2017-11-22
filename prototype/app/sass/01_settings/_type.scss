@@ -1,4 +1,4 @@
-$font-family: 'Open Sans', sans-serif;
+$font-family: Lato, 'Helvetica Neue', Helvetica, sans-serif;
 
 $font-weight-light: 300;
 $font-weight-normal: 400;
@@ -6,20 +6,20 @@ $font-weight-bold: 700;
 
 $font-size-small: 1rem;
 $font-size-caption: 1.2rem;
-$font-size-body: 1.4rem;
-$font-size-subheader: 1.6rem;
-$font-size-title: 2rem;
-$font-size-headline: 2.4rem;
-$font-size-display: 3.6rem;
-$font-size-jumbo: 4.8rem;
+$font-size-body: 1.3rem;
+$font-size-subheader: 1.5rem;
+$font-size-title: 1.7rem;
+$font-size-headline: 2rem;
+$font-size-display: 2.4rem;
+$font-size-jumbo: 3.2rem;
 $font-size-mega: 7.2rem;
 
 $font-small: #{$font-size-small}/1.6rem $font-family;
 $font-caption: #{$font-size-caption}/1.6rem $font-family;
 $font-body: #{$font-size-body}/2rem $font-family;
 $font-subheader: #{$font-size-subheader}/2.4rem $font-family;
-$font-title: #{$font-size-title}/3.2rem $font-family;
-$font-headline: #{$font-size-headline}/3.6rem $font-family;
-$font-display: #{$font-size-display}/5.4rem $font-family;
-$font-jumbo: #{$font-size-jumbo}/6.4rem $font-family;
+$font-title: #{$font-size-title}/2.8rem $font-family;
+$font-headline: #{$font-size-headline}/3rem $font-family;
+$font-display: #{$font-size-display}/3.8rem $font-family;
+$font-jumbo: #{$font-size-jumbo}/5rem $font-family;
 $font-mega: #{$font-size-mega}/9.6rem $font-family;

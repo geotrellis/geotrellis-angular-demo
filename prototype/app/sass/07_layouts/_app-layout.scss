@@ -1,0 +1,32 @@
+.app-root {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    height: 100%;
+
+    > .app-header {
+        flex: none;
+        height: 5.6rem;
+    }
+
+    > .app-main {
+        flex: auto;
+    }
+}
+
+.app-main {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+
+    > .app-sidebar {
+        flex: none;
+        width: 36rem;
+    }
+
+    > .app-map {
+        flex: auto;
+    }
+}

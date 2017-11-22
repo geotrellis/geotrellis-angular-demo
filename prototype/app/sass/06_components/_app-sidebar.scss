@@ -1,0 +1,16 @@
+.app-sidebar {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    background-color: $slate;
+
+    > .sidebar-tabs {
+        flex: none;
+        height: 4.8rem;
+    }
+
+    > .sidebar-content {
+        flex: auto;
+    }
+}
