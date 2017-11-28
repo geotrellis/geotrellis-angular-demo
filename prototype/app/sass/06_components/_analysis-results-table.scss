@@ -1,0 +1,45 @@
+.analysis-results-table {
+    width: 100%;
+    font: $font-body;
+    line-height: 1.4;
+    border-collapse: collapse;
+
+    .table-row {
+        border-bottom: 1px solid rgba($md-gray, .15);
+    }
+
+    .tablecell {
+        padding: 1rem 0;
+        vertical-align: top;
+
+        &.-factor {
+            text-align: left;
+        }
+
+        &.-weight {
+            padding-left: 1.6rem;
+            text-align: right;
+        }
+
+        &.-score {
+            padding-left: 1.6rem;
+            font-weight: $font-weight-bold;
+            text-align: right;
+        }
+     }
+
+    > .table-head {
+        color: $dk-gray;
+        font-weight: $font-weight-bold;
+    }
+
+    > .table-foot {
+        font: $font-subheader;
+        font-weight: $font-weight-bold;
+        text-transform: uppercase;
+
+        > .table-row {
+            border-bottom: 0;
+        }
+    }
+}

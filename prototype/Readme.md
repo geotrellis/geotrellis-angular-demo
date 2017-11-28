@@ -2,6 +2,20 @@
 Mostly HTML and SASS. Plus a bit of JS to demonstrate moving between states of
 the app.
 
+## Singleton layers
+- Use `-singleton` class on a layer card when it's the only card.
+
+## TODO
+- Sooner
+  - About
+  - Masks
+  - Floater
+- Sooner or later
+  - Compare
+  - Diff
+  - Tour
+  - Layer groups
+
 ---
 
 ## Installation and Use

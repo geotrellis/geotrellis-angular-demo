@@ -128,7 +128,101 @@
 
                 </div>
                 <div class="sidebar-content -analysis" data-tab="analysis">
-
+                    <section class="analysis-options -on">
+                        <header class="sidebar-header">
+                            <h3 class="heading">Choose an area to analyze</h3>
+                        </header>
+                        <button class="button" type="button">
+                            Draw a custom area
+                        </button>
+                        <button class="button" type="button">
+                            Analyze current viewport
+                        </button>
+                    </section>
+                    <section class="analysis-results">
+                        <header class="sidebar-header">
+                            <h3 class="heading">
+                                Analysis of selected area
+                            </h3>
+                            <button class="button" type="button">
+                                Change area
+                            </button>
+                        </header>
+                        <table class="analysis-results-table">
+                            <thead class="table-head">
+                                <tr class="table-row">
+                                    <td class="tablecell -factor">Factor</td>
+                                    <td class="tablecell -weight">Weight</td>
+                                    <td class="tablecell -score">Score</td>
+                                </tr>
+                            </thead>
+                            <tbody class="table-body">
+                                <tr class="table-row">
+                                    <td class="tablecell -factor">High Intensity Development, Impervious Surfaces, or Open Water</td>
+                                    <td class="tablecell -weight">&minus;5</td>
+                                    <td class="tablecell -score">&minus;88.17</td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td class="tablecell -factor">Developed Land</td>
+                                    <td class="tablecell -weight">&minus;4</td>
+                                    <td class="tablecell -score">&minus;63.36</td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td class="tablecell -factor">Wetlands</td>
+                                    <td class="tablecell -weight">&minus;2</td>
+                                    <td class="tablecell -score">&minus;1.47</td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td class="tablecell -factor">Non-working Protected or Public Lands</td>
+                                    <td class="tablecell -weight">&minus;1</td>
+                                    <td class="tablecell -score">&minus;4.84</td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td class="tablecell -factor">Publically Owned Working Lands</td>
+                                    <td class="tablecell -weight">2</td>
+                                    <td class="tablecell -score">8.10</td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td class="tablecell -factor">Privately Owned Working Lands, with Easements</td>
+                                    <td class="tablecell -weight">4</td>
+                                    <td class="tablecell -score">5.05</td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td class="tablecell -factor">Farmland, without prime Agricultural Soils</td>
+                                    <td class="tablecell -weight">3</td>
+                                    <td class="tablecell -score">18.62</td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td class="tablecell -factor">Farmland or Forested Lands, with prime Agricultural Soils</td>
+                                    <td class="tablecell -weight">5</td>
+                                    <td class="tablecell -score">60.91</td>
+                                </tr>
+                            </tbody>
+                            <tfoot class="table-foot">
+                                <tr class="table-row">
+                                    <td class="tablecell -factor">Total Score</td>
+                                    <td colspan="2" class="tablecell -score">&minus;0.60</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <div class="analysis-results-fineprint">
+                            <h4 class="heading">
+                                About the model score
+                            </h4>
+                            <p class="text">
+                                For each parameter, the number of cells representing
+                                presence within the study area are summed and then
+                                multiplied by the weight applied before running
+                                the model. This value is then divided by the total
+                                number of cells in the study area. All individual
+                                parameter scores are then summed to produce the
+                                total study area score. The score does not represent
+                                a standard metric, but is valuable when comparing
+                                between model results for different study areas
+                                or weighting schemes.
+                            </p>
+                        </div>
+                    </section>
                 </div>
             </section>
             <section class="app-map" id="map">
@@ -137,8 +231,6 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
-    <script src="https://mapzen.com/tangram/tangram.min.js"></script>
-    <script src="https://erasermap.com/map/bundle.min.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/focus-ring.js"></script>
 </body>

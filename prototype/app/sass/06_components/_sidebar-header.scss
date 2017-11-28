@@ -1,0 +1,24 @@
+.sidebar-header {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 4rem;
+
+    > .heading {
+        flex: auto;
+        min-width: 0;
+        margin: 0;
+        font: $font-title;
+        font-weight: $font-weight-bold;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    > .button {
+        @include buttonify($indigo);
+        flex: none;
+        margin-left: 1.6rem;
+        font: $font-caption;
+    }
+}

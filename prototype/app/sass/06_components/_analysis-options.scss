@@ -1,10 +1,8 @@
-.sidebar-content {
+.analysis-options {
     display: none;
     flex-flow: column nowrap;
     align-items: stretch;
     justify-content: flex-start;
-    padding: .8rem 1.6rem;
-    overflow-y: scroll;
 
     &.-on {
         display: flex;
@@ -12,5 +10,12 @@
 
     > .sidebar-header {
         margin: .8rem 0;
+    }
+
+    > .button {
+        @include buttonify($indigo);
+        display: block;
+        margin: 1.6rem;
+        font: $font-subheader;
     }
 }

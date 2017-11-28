@@ -1,0 +1,12 @@
+.analysis-results-fineprint {
+    font: $font-caption;
+
+    > .heading {
+        margin: 0 0 .4rem;
+        font-weight: $font-weight-bold;
+    }
+
+    > .text {
+        margin: 0;
+    }
+}
