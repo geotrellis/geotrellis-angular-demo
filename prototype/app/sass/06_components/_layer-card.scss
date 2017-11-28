@@ -1,0 +1,20 @@
+.layer-card {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    justify-content: center;
+    min-height: 5.6rem;
+    padding: 0 1.6rem;
+    background-color: $white;
+    box-shadow: box-shadow(1);
+
+    &:not(.-singleton) {
+        > .layer-details {
+            display: none;
+        }
+
+        &.-open > .layer-details {
+            display: initial;
+        }
+    }
+}

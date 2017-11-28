@@ -1,0 +1,271 @@
+.slider {
+    position: relative;
+    width: $slider-width;
+    border: 1px solid $white; // fix for FF unable to apply focus style bug
+    border-radius: $slider-border-radius; // required for proper track sizing in FF
+    -webkit-appearance: none;
+
+    // Track
+
+    &::-webkit-slider-runnable-track {
+        width: 100%;
+        height: $slider-track-height;
+        border: 0;
+        border-radius: $slider-border-radius;
+        background: $lt-gray;
+    }
+
+    &::-ms-track {
+        width: 100%;
+        height: $slider-track-height;
+        border-width: 4px 0; // leave room for thumb to overflow
+        border-color: $white; // must use same color as container bg
+        background: $lt-gray;
+        color: transparent; // remove default tick marks
+    }
+
+    &::-moz-range-track {
+        width: 100%;
+        height: $slider-track-height;
+        border: 0;
+        border-radius: $slider-border-radius; // or 50px if that doesn't work
+        background: $lt-gray;
+    }
+
+    // Focus
+
+    &:focus {
+        outline: none;
+    }
+
+    &:-moz-focusring {
+        outline: 1px solid $white;
+        outline-offset: -1px;
+    }
+
+    // Thumb
+
+    &::-webkit-slider-thumb {
+        width: $slider-thumb-diameter;
+        height: $slider-thumb-diameter;
+        margin-top: -5px;
+        border: 3px solid $white;
+        border-radius: 50%;
+        background: $md-gray;
+        box-sizing: border-box;
+        -webkit-appearance: none;
+    }
+
+    &::-moz-range-thumb {
+        width: $slider-thumb-diameter;
+        height: $slider-thumb-diameter;
+        border: 3px solid $white;
+        border-radius: 50%;
+        background: $md-gray;
+        box-sizing: border-box;
+}
+
+    &::-ms-thumb {
+        width: $slider-thumb-diameter;
+        height: $slider-thumb-diameter;
+        margin-top: 0;
+        border: 3px solid $white;
+        border-radius: 50%;
+        background: $md-gray;
+        box-sizing: border-box;
+    }
+
+    // Tooltip
+
+    &::-ms-tooltip {
+        display: none;
+    }
+}
+
+.slider.-unimodal {
+
+    // Thumb
+
+    &::-webkit-slider-thumb {
+        background: $dk-gray;
+    }
+
+    &::-moz-range-thumb {
+        background: $dk-gray;
+    }
+
+    &::-ms-thumb {
+        background: $dk-gray;
+    }
+
+    // Track
+
+    &::-webkit-slider-runnable-track {
+        background: $md-gray;
+    }
+
+    &::-ms-track {
+        background: $md-gray;
+    }
+
+    &::-moz-range-track {
+        background: $md-gray;
+    }
+
+
+    // MS Lower/Upper
+
+    &::-ms-fill-lower {
+        border: 0;
+        background: $md-gray;
+    }
+
+    &::-ms-fill-upper {
+        border: 0;
+        background: $lt-gray;
+    }
+}
+
+.slider.-bimodal {
+
+    &::-ms-fill-lower {
+        border: 0;
+        background: transparent;
+    }
+
+    &::-ms-fill-upper {
+        border: 0;
+        background: transparent;
+    }
+
+    // Thumb
+
+    &[data-val^='neg']::-webkit-slider-thumb {
+        background: $slider-negative-color;
+    }
+
+    &[data-val^='pos']::-webkit-slider-thumb {
+        background: $slider-positive-color;
+    }
+
+    &[data-val^='neg']::-moz-range-thumb {
+        background: $slider-negative-color;
+    }
+
+    &[data-val^='pos']::-moz-range-thumb {
+        background: $slider-positive-color;
+    }
+
+    &[data-val^='neg']::-ms-thumb {
+        background: $slider-negative-color;
+    }
+
+    &[data-val^='pos']::-ms-thumb {
+        background: $slider-positive-color;
+    }
+
+    // Track
+
+    &[data-val='neg-1']::-webkit-slider-runnable-track {
+        background: linear-gradient(to right, $lt-gray 0%, $lt-gray 37.5%, $slider-negative-color 37.5%, $slider-negative-color 50%, $lt-gray 50%, $lt-gray 100%);
+    }
+
+    &[data-val='neg-1']::-moz-range-track {
+        background: linear-gradient(to right, $lt-gray 0%, $lt-gray 37.5%, $slider-negative-color 37.5%, $slider-negative-color 50%, $lt-gray 50%, $lt-gray 100%);
+    }
+
+    &[data-val='neg-1']::-ms-track {
+        background: linear-gradient(to right, $lt-gray 0%, $lt-gray 37.5%, $slider-negative-color 37.5%, $slider-negative-color 50%, $lt-gray 50%, $lt-gray 100%);
+    }
+
+
+    &[data-val='neg-2']::-webkit-slider-runnable-track {
+        background: linear-gradient(to right, $lt-gray 0%, $lt-gray 25%, $slider-negative-color 25%, $slider-negative-color 50%, $lt-gray 50%, $lt-gray 100%);
+    }
+
+    &[data-val='neg-2']::-moz-range-track {
+        background: linear-gradient(to right, $lt-gray 0%, $lt-gray 25%, $slider-negative-color 25%, $slider-negative-color 50%, $lt-gray 50%, $lt-gray 100%);
+    }
+
+    &[data-val='neg-2']::-ms-track {
+        background: linear-gradient(to right, $lt-gray 0%, $lt-gray 25%, $slider-negative-color 25%, $slider-negative-color 50%, $lt-gray 50%, $lt-gray 100%);
+    }
+
+
+    &[data-val='neg-3']::-webkit-slider-runnable-track {
+        background: linear-gradient(to right, $lt-gray 0%, $lt-gray 12.5%, $slider-negative-color 12.5%, $slider-negative-color 50%, $lt-gray 50%, $lt-gray 100%);
+    }
+
+    &[data-val='neg-3']::-moz-range-track {
+        background: linear-gradient(to right, $lt-gray 0%, $lt-gray 12.5%, $slider-negative-color 12.5%, $slider-negative-color 50%, $lt-gray 50%, $lt-gray 100%);
+    }
+
+    &[data-val='neg-3']::-ms-track {
+        background: linear-gradient(to right, $lt-gray 0%, $lt-gray 12.5%, $slider-negative-color 12.5%, $slider-negative-color 50%, $lt-gray 50%, $lt-gray 100%);
+    }
+
+
+    &[data-val='neg-4']::-webkit-slider-runnable-track {
+        background: linear-gradient(to right, $slider-negative-color 0%, $slider-negative-color 50%, $lt-gray 50%, $lt-gray 100%);
+    }
+
+    &[data-val='neg-4']::-moz-range-track {
+        background: linear-gradient(to right, $slider-negative-color 0%, $slider-negative-color 50%, $lt-gray 50%, $lt-gray 100%);
+    }
+
+    &[data-val='neg-4']::-ms-track {
+        background: linear-gradient(to right, $slider-negative-color 0%, $slider-negative-color 50%, $lt-gray 50%, $lt-gray 100%);
+    }
+
+
+    &[data-val='pos-1']::-webkit-slider-runnable-track {
+        background: linear-gradient(to right, $lt-gray 0%, $lt-gray 50%, $slider-positive-color 50%, $slider-positive-color 62.5%, $lt-gray 62.5%, $lt-gray 100%);
+    }
+
+    &[data-val='pos-1']::-moz-range-track {
+        background: linear-gradient(to right, $lt-gray 0%, $lt-gray 50%, $slider-positive-color 50%, $slider-positive-color 62.5%, $lt-gray 62.5%, $lt-gray 100%);
+    }
+
+    &[data-val='pos-1']::-ms-track {
+        background: linear-gradient(to right, $lt-gray 0%, $lt-gray 50%, $slider-positive-color 50%, $slider-positive-color 62.5%, $lt-gray 62.5%, $lt-gray 100%);
+    }
+
+
+    &[data-val='pos-2']::-webkit-slider-runnable-track {
+        background: linear-gradient(to right, $lt-gray 0%, $lt-gray 50%, $slider-positive-color 50%, $slider-positive-color 75%, $lt-gray 75%, $lt-gray 100%);
+    }
+
+    &[data-val='pos-2']::-moz-range-track {
+        background: linear-gradient(to right, $lt-gray 0%, $lt-gray 50%, $slider-positive-color 50%, $slider-positive-color 75%, $lt-gray 75%, $lt-gray 100%);
+    }
+
+    &[data-val='pos-2']::-ms-track {
+        background: linear-gradient(to right, $lt-gray 0%, $lt-gray 50%, $slider-positive-color 50%, $slider-positive-color 75%, $lt-gray 75%, $lt-gray 100%);
+    }
+
+
+    &[data-val='pos-3']::-webkit-slider-runnable-track {
+        background: linear-gradient(to right, $lt-gray 0%, $lt-gray 50%, $slider-positive-color 50%, $slider-positive-color 87.5%, $lt-gray 87.5%, $lt-gray 100%);
+    }
+
+    &[data-val='pos-3']::-moz-range-track {
+        background: linear-gradient(to right, $lt-gray 0%, $lt-gray 50%, $slider-positive-color 50%, $slider-positive-color 87.5%, $lt-gray 87.5%, $lt-gray 100%);
+    }
+
+    &[data-val='pos-3']::-ms-track {
+        background: linear-gradient(to right, $lt-gray 0%, $lt-gray 50%, $slider-positive-color 50%, $slider-positive-color 87.5%, $lt-gray 87.5%, $lt-gray 100%);
+    }
+
+
+    &[data-val='pos-4']::-webkit-slider-runnable-track {
+        background: linear-gradient(to right, $lt-gray 0%, $lt-gray 50%, $slider-positive-color 50%, $slider-positive-color 100%);
+    }
+
+    &[data-val='pos-4']::-moz-range-track {
+        background: linear-gradient(to right, $lt-gray 0%, $lt-gray 50%, $slider-positive-color 50%, $slider-positive-color 100%);
+    }
+
+    &[data-val='pos-4']::-ms-track {
+        background: linear-gradient(to right, $lt-gray 0%, $lt-gray 50%, $slider-positive-color 50%, $slider-positive-color 100%);
+    }
+}

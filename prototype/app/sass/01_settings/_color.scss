@@ -2,7 +2,8 @@ $black: #1c2f3f;
 $white: #fff;
 
 $lt-gray: #ededed;
-$dk-gray: #979797;
+$md-gray: #979797;
+$dk-gray: #4d4d4d;
 
 $yellow: #e5d458;
 $indigo: #3a7bc2;
@@ -14,3 +15,16 @@ $lime: #a6d14e;
 $pink: #e4b8b0;
 
 $slate: #d5dee3;
+
+
+$ramp-neg-4: #c51b7d;
+$ramp-neg-3: #de77ae;
+$ramp-neg-2: #f1b6da;
+$ramp-neg-1: #fde0ef;
+$ramp-pos-1: #e6f5d0;
+$ramp-pos-2: #b8e186;
+$ramp-pos-3: #7fbc41;
+$ramp-pos-4: #4d9221;
+
+$slider-negative-color: $ramp-neg-4;
+$slider-positive-color: $ramp-pos-4;

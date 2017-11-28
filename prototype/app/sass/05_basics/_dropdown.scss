@@ -1,0 +1,25 @@
+.dropdown {
+    display: flex;
+    position: relative;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    justify-content: center;
+
+    > .select {
+        margin: 1.2rem 0;
+        padding: .6rem 2.4rem .6rem .8rem;
+        border: 0;
+        border-radius: 0;
+        background-color: $lt-gray;
+        font: $font-body;
+        font-weight: $font-weight-bold;
+        appearance: none;
+    }
+
+    &:after {
+        @include icon-font('arrow_drop_down');
+        position: absolute;
+        right: .4rem;
+        pointer-events: none;
+    }
+}

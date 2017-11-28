@@ -1,0 +1,38 @@
+.layer-control {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-end;
+
+    > .label {
+        margin-right: auto;
+        font: $font-body;
+        text-align: left;
+    }
+
+    > .value {
+        color: $md-gray;
+        font: $font-caption;
+    }
+
+    > .slider {
+        width: 10rem;
+        margin-left: .8rem;
+    }
+
+    > .legend {
+        width: 9.6rem;
+        height: 1.2rem;
+        margin: 0 .6rem;
+        background: linear-gradient(to right,
+            $ramp-neg-4 0%, $ramp-neg-4 12.5%,
+            $ramp-neg-3 12.5%, $ramp-neg-3 25%,
+            $ramp-neg-2 25%, $ramp-neg-2 37.5%,
+            $ramp-neg-1 37.5%, $ramp-neg-1 50%,
+            $ramp-pos-1 50%, $ramp-pos-1 62.5%,
+            $ramp-pos-2 62.5%, $ramp-pos-2 75%,
+            $ramp-pos-3 75%, $ramp-pos-3 87.5%,
+            $ramp-pos-4 87.5%, $ramp-pos-4 100%
+        );
+    }
+}

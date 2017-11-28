@@ -1,0 +1,16 @@
+.layer-factor {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    > .label {
+        font: $font-body;
+        font-weight: $font-weight-bold;
+    }
+
+    > .slider {
+        width: 10rem;
+        margin-top: .4rem;
+    }
+}

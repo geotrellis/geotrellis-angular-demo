@@ -1,0 +1,31 @@
+.layer-factors {
+    display: flex;
+    position: relative;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: .8rem 0;
+    border-top: 1px solid $lt-gray;
+
+    &::before {
+        position: absolute;
+        top: 2.4rem;
+        right: calc(5rem - 1px);
+        bottom: 2.4rem;
+        width: 0;
+        border-right: 1px dashed $md-gray;
+        content: '';
+        z-index: 0;
+        box-sizing: content-box;
+    }
+
+    > .layer-factors-header {
+        margin: 1.2rem 0 .4rem;
+        z-index: 1;
+    }
+
+    > .layer-factor {
+        margin: .8rem 0;
+        z-index: 1;
+    }
+}

@@ -1,0 +1,31 @@
+.layer-factors-header {
+    display: flex;
+    position: relative;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-end;
+
+    > .heading {
+        margin: 0;
+        color: $md-gray;
+        font: $font-caption;
+        text-align: left;
+
+        &.-factor {
+            margin-right: auto;
+        }
+
+        &.-avoid {
+            position: absolute;
+            right: 5rem;
+            padding-right: .8rem;
+            text-align: right;
+        }
+
+        &.-prefer {
+            position: absolute;
+            left: calc(100% - 5rem);
+            padding-left: .8rem;
+        }
+    }
+}
