@@ -43,6 +43,7 @@
         margin: 0;
         padding: 0;
         box-shadow: box-shadow(2);
+        z-index: $z-index-demos-menu;
 
         &.-on {
             @include visible;
