@@ -6,6 +6,13 @@ $(function() {
     });
 
 
+    // Singleton layer vs Multiple layers toggle
+    $('.app-header').on('click', '.demo-switcher > .demos-menu', function(e) {
+        $('.sidebar-content.-layers').toggleClass('-singleton -multiple-layers');
+        $('.demos-menu').toggleClass('-on');
+    });
+
+
     // Sidebar tabs
     $('.app-sidebar').on('click', '.sidebar-tabs > .tab', function(e) {
         $tab = $(e.target);

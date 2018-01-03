@@ -6,11 +6,12 @@ the app.
 - Use `-singleton` class on a layer card when it's the only card.
 
 ## TODO
+- Multiple layers
+- Layer groups
+- Tour
 - Floater
 - Compare
 - Diff
-- Tour
-- Layer groups
 
 ---
 

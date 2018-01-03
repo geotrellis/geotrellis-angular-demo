@@ -1,4 +1,21 @@
 .sidebar-content.-layers {
+
+    &.-singleton > .layer-card.-singleton {
+        display: block;
+    }
+
+    &.-multiple-layers > .layer-card.-multiple-layers {
+        display: block;
+    }
+
+    &.-multiple-layers > .sidebar-header.-multiple-layers {
+        display: flex;
+    }
+
+    > * {
+        display: none;
+    }
+
     > .layer-card {
         margin: .8rem 0;
     }

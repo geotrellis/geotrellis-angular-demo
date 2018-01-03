@@ -62,14 +62,109 @@
                     <button class="tab" id="mask-tab" data-tab="mask" type="button">Mask</button>
                     <button class="tab" id="analysis-tab" data-tab="analysis" type="button">Analysis</button>
                 </nav>
-                <div class="sidebar-content -layers -on" data-tab="layers">
+                <div class="sidebar-content -layers -singleton -on" data-tab="layers">
+                    <header class="sidebar-header -multiple-layers">
+                        <h3 class="heading">3 layers</h3>
+                        <button type="button" class="button">
+                            <i class="icon material-icons md-18 md-dark">more_vert</i>
+                        </button>
+                    </header>
+                    <section class="layer-card -multiple-layers">
+                        <div class="layer-overview">
+                            <header class="layer-header">
+                                <input class="toggle" type="checkbox" checked>
+                                <h4 class="heading">Chattanooga Agriculture &amp; Forestry</h4>
+                            </header>
+                            <div class="dropdown">
+                                <select class="select">
+                                    <option>Preset 1</option>
+                                    <option>Preset 2</option>
+                                    <option>Preset 3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layer-details">
+                            <div class="layer-controls">
+                                <div class="layer-control -opacity">
+                                    <label class="label">Opacity</label>
+                                    <output class="value">90%</output>
+                                    <input class="slider -unimodal" type="range" name="opacity" min="0" max="1" step=".01" value=".9">
+                                </div>
+                                <div class="layer-control -threshold">
+                                    <label class="label">Show</label>
+                                    <output class="value">Top 80%</output>
+                                    <input class="slider -unimodal" type="range" name="threshold" min="0" max="1" step=".01" value=".8">
+                                </div>
+                                <div class="layer-control -legend">
+                                    <div class="label">Legend</div>
+                                    <!-- <div class="value">Avoid</div> -->
+                                    <div class="legend"></div>
+                                    <!-- <div class="value">Prefer</div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="layer-card -multiple-layers">
+                        <div class="layer-overview">
+                            <header class="layer-header">
+                                <input class="toggle" type="checkbox" checked>
+                                <h4 class="heading">Chattanooga Agriculture &amp; Forestry</h4>
+                            </header>
+                        </div>
+                        <div class="layer-details">
+                            <div class="layer-controls">
+                                <div class="layer-control -opacity">
+                                    <label class="label">Opacity</label>
+                                    <output class="value">90%</output>
+                                    <input class="slider -unimodal" type="range" name="opacity" min="0" max="1" step=".01" value=".9">
+                                </div>
+                                <div class="layer-control -threshold">
+                                    <label class="label">Show</label>
+                                    <output class="value">Top 80%</output>
+                                    <input class="slider -unimodal" type="range" name="threshold" min="0" max="1" step=".01" value=".8">
+                                </div>
+                                <div class="layer-control -legend">
+                                    <div class="label">Legend</div>
+                                    <!-- <div class="value">Avoid</div> -->
+                                    <div class="legend"></div>
+                                    <!-- <div class="value">Prefer</div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="layer-card -multiple-layers">
+                        <div class="layer-overview">
+                            <header class="layer-header">
+                                <input class="toggle" type="checkbox" checked>
+                                <h4 class="heading">Chattanooga Agriculture &amp; Forestry</h4>
+                            </header>
+                        </div>
+                        <div class="layer-details">
+                            <div class="layer-controls">
+                                <div class="layer-control -opacity">
+                                    <label class="label">Opacity</label>
+                                    <output class="value">90%</output>
+                                    <input class="slider -unimodal" type="range" name="opacity" min="0" max="1" step=".01" value=".9">
+                                </div>
+                                <div class="layer-control -threshold">
+                                    <label class="label">Show</label>
+                                    <output class="value">Top 80%</output>
+                                    <input class="slider -unimodal" type="range" name="threshold" min="0" max="1" step=".01" value=".8">
+                                </div>
+                                <div class="layer-control -legend">
+                                    <div class="label">Legend</div>
+                                    <!-- <div class="value">Avoid</div> -->
+                                    <div class="legend"></div>
+                                    <!-- <div class="value">Prefer</div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                     <section class="layer-card -singleton">
                         <div class="layer-overview">
                             <header class="layer-header">
                                 <input class="toggle" type="checkbox">
-                                <h3 class="heading">
-                                    Chattanooga Agriculture &amp; Forestry
-                                </h3>
+                                <h4 class="heading">Chattanooga Agriculture &amp; Forestry</h4>
                             </header>
                             <div class="dropdown">
                                 <select class="select">
@@ -82,9 +177,9 @@
                         <div class="layer-details">
                             <div class="layer-factors">
                                 <div class="layer-factors-header">
-                                    <h4 class="heading -factor">Factor</h4>
-                                    <h4 class="heading -avoid">Avoid</h4>
-                                    <h4 class="heading -prefer">Prefer</h4>
+                                    <h5 class="heading -factor">Factor</h5>
+                                    <h5 class="heading -avoid">Avoid</h5>
+                                    <h5 class="heading -prefer">Prefer</h5>
                                 </div>
                                 <div class="layer-factor">
                                     <label class="label">High Intensity Development, Impervious Surfaces, or Open Water</label>
@@ -127,7 +222,7 @@
                 <div class="sidebar-content -mask" data-tab="mask">
                     <section class="mask-area-controls">
                         <header class="sidebar-header">
-                            <h3 class="heading">Mask an area</h3>
+                            <h4 class="heading">Mask an area</h4>
                         </header>
                         <div class="mask-area-radios">
                             <label class="label -on">
@@ -146,7 +241,7 @@
                     </section>
                     <section class="mask-raster-controls">
                         <header class="sidebar-header">
-                            <h3 class="heading">Mask by land use</h3>
+                            <h4 class="heading">Mask by land use</h4>
                         </header>
                         <ul class="mask-raster-categories">
                             <li class="listitem">
@@ -185,7 +280,7 @@
                 <div class="sidebar-content -analysis" data-tab="analysis">
                     <section class="analysis-options -on">
                         <header class="sidebar-header">
-                            <h3 class="heading">Choose an area to analyze</h3>
+                            <h4 class="heading">Choose an area to analyze</h4>
                         </header>
                         <button class="button" type="button">
                             Draw a custom area
@@ -196,9 +291,7 @@
                     </section>
                     <section class="analysis-results">
                         <header class="sidebar-header">
-                            <h3 class="heading">
-                                Analysis of selected area
-                            </h3>
+                            <h4 class="heading">Analysis of selected area</h4>
                             <button class="button" type="button">
                                 Change area
                             </button>
@@ -261,9 +354,9 @@
                             </tfoot>
                         </table>
                         <div class="analysis-results-fineprint">
-                            <h4 class="heading">
+                            <h5 class="heading">
                                 About the model score
-                            </h4>
+                            </h5>
                             <p class="text">
                                 For each parameter, the number of cells representing
                                 presence within the study area are summed and then

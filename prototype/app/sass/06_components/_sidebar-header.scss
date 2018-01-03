@@ -21,4 +21,18 @@
         margin-left: 1.6rem;
         font: $font-caption;
     }
+
+    &.-multiple-layers {
+        > .heading {
+            padding-left: .8rem;
+            font: $font-body;
+            font-weight: $font-weight-bold;
+        }
+
+        > .button {
+            padding-right: .5em;
+            padding-left: .5em;
+            background-color: transparent;
+        }
+    }
 }
