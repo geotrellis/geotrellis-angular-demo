@@ -125,7 +125,62 @@
                     </section>
                 </div>
                 <div class="sidebar-content -mask" data-tab="mask">
-
+                    <section class="mask-area-controls">
+                        <header class="sidebar-header">
+                            <h3 class="heading">Mask an area</h3>
+                        </header>
+                        <div class="mask-area-radios">
+                            <label class="label -on">
+                                <input class="radio -draw" type="radio" name="mask-area-type" checked>
+                                Draw area
+                            </label>
+                            <label class="label">
+                                <input class="radio -zipcode" name="mask-area-type" type="radio">
+                                Zip code
+                            </label>
+                        </div>
+                        <button class="button -draw -on" type="button">
+                            Draw area
+                        </button>
+                        <input class="field -zipcode" type="text" placeholder="5-digit zip code">
+                    </section>
+                    <section class="mask-raster-controls">
+                        <header class="sidebar-header">
+                            <h3 class="heading">Mask by land use</h3>
+                        </header>
+                        <ul class="mask-raster-categories">
+                            <li class="listitem">
+                                <label class="label">
+                                    <input class="checkbox" type="checkbox">
+                                    Developed (high density)
+                                </label>
+                            </li>
+                            <li class="listitem">
+                                <label class="label">
+                                    <input class="checkbox" type="checkbox">
+                                    Developed (low/medium density)
+                                </label>
+                            </li>
+                            <li class="listitem">
+                                <label class="label">
+                                    <input class="checkbox" type="checkbox">
+                                    Urban open
+                                </label>
+                            </li>
+                            <li class="listitem">
+                                <label class="label">
+                                    <input class="checkbox" type="checkbox">
+                                    Forest
+                                </label>
+                            </li>
+                            <li class="listitem">
+                                <label class="label">
+                                    <input class="checkbox" type="checkbox">
+                                    Other
+                                </label>
+                            </li>
+                        </ul>
+                    </section>
                 </div>
                 <div class="sidebar-content -analysis" data-tab="analysis">
                     <section class="analysis-options -on">

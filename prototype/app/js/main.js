@@ -69,6 +69,20 @@ $(function() {
     });
 
 
+    // Mask controls
+    $('.app-sidebar').on('click', '.mask-area-radios .radio.-draw', function(e) {
+        e.stopPropagation();
+        $('.mask-area-controls > .-zipcode').blur().removeClass('-on');
+        $('.mask-area-controls > .-draw').addClass('-on');
+    });
+
+    $('.app-sidebar').on('click', '.mask-area-radios .radio.-zipcode', function(e) {
+        e.stopPropagation();
+        $('.mask-area-controls > .-draw').removeClass('-on');
+        $('.mask-area-controls > .-zipcode').addClass('-on').focus();
+    });
+
+
     // Analysis options
     $('.app-sidebar').on('click', '.analysis-options > .button', function(e) {
         $('.analysis-options').removeClass('-on');

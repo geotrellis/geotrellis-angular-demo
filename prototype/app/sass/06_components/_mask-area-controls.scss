@@ -1,0 +1,56 @@
+.mask-area-controls {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+
+    > .sidebar-header {
+        margin: .8rem 0;
+    }
+
+    > .mask-area-radios {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: flex-start;
+        margin: 0 1.6rem;
+        font: $font-subheader;
+
+        > .label {
+            flex: auto;
+
+            &.-on {
+                font-weight: $font-weight-bold;
+            }
+
+            > .radio {
+                width: 1.6rem;
+                height: 1.6rem;
+                margin-right: .6rem;
+            }
+        }
+    }
+
+    > .button {
+        @include buttonify($indigo);
+        display: none;
+        margin: 1.6rem;
+        font: $font-subheader;
+
+        &.-on {
+            display: block;
+        }
+    }
+
+    > .field {
+        display: none;
+        height: calc(2.4rem + 1.4em);
+        margin: 1.6rem;
+        padding: 0 .8rem;
+        font: $font-subheader;
+
+        &.-on {
+            display: block;
+        }
+    }
+}

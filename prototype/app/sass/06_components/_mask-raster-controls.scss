@@ -1,0 +1,32 @@
+.mask-raster-controls {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+
+    > .sidebar-header {
+        margin: .8rem 0;
+    }
+
+    > .mask-raster-categories {
+        list-style: none;
+        margin: 0;
+        margin-left: 1.6rem;
+        padding: 0;
+        font: $font-subheader;
+
+        > .listitem {
+            margin-bottom: .8rem;
+        }
+
+        > .listitem > .label {
+
+        }
+
+        > .listitem > .label > .checkbox {
+            width: 1.6rem;
+            height: 1.6rem;
+            margin-right: .6rem;
+        }
+    }
+}
