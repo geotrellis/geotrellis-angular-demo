@@ -1,0 +1,12 @@
+.modal-dialog {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    background-color: $white;
+
+    > .modal-header {
+        flex: none;
+        height: 6.4rem;
+    }
+}

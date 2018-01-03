@@ -81,6 +81,22 @@ $(function() {
     });
 
 
+    // About modal
+    $('.app-header').on('click', '.heading > .button', function(e) {
+        $('.about-modal').addClass('-on');
+    });
+
+    $('.app-root').on('click', '.modal-header > .button', function(e) {
+        $('.modal-overlay').removeClass('-on');
+    });
+
+    $('.app-root').on('click', '.modal-overlay', function(e) {
+        if (e.target === this) {
+            $('.modal-overlay').removeClass('-on');
+        }
+    });
+
+
     // Map
     const map = L.map('map').setView([35.0982149,-85.3787755], 9);
     L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {

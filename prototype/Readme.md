@@ -7,7 +7,6 @@ the app.
 
 ## TODO
 - Sooner
-  - About
   - Masks
   - Floater
 - Sooner or later

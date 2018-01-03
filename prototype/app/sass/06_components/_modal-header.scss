@@ -1,0 +1,42 @@
+.modal-header {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    background-color: $black;
+    color: $white;
+
+    > .modal-logo {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        margin-left: auto;
+        font-size: $font-size-headline;
+        font-weight: $font-weight-normal;
+        white-space: nowrap;
+
+        > .image {
+            margin-right: .8rem;
+            width: 26px;
+            height: 26px;
+        }
+
+        > .demo {
+            display: inline-flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: flex-start;
+            margin-left: .6rem;
+            color: $yellow;
+            font-weight: $font-weight-light;
+        }
+    }
+
+    > .button {
+        @include debuttonify($white);
+        margin-right: 1.6rem;
+        margin-left: auto;
+    }
+}

@@ -1,0 +1,8 @@
+.modal-body {
+    overflow-y: scroll;
+    padding: .8rem 2.4rem;
+
+    .link {
+        @include delinkify($indigo);
+    }
+}
