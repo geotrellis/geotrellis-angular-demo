@@ -32,12 +32,21 @@ $(function() {
             '.layer-card > .layer-overview > .layer-header > .toggle',
             function(e) { e.stopPropagation(); })
         .on('click',
-            '.layer-card > .layer-overview > .picker',
+            '.layer-card > .layer-overview > .dropdown',
             function(e) { e.stopPropagation(); })
         .on('click',
             '.layer-card:not(.-singleton) > .layer-overview',
             function(e) { $(this).parents('.layer-card').toggleClass('-open'); }
         );
+
+
+    // Layer toggle
+    $('.app-sidebar')
+        .on('click',
+            '.layer-header > .toggle, .layer-group-header > .toggle',
+            function(e) {
+                $(this).closest('.layer-card, .layer-group').toggleClass('-on');
+            });
 
 
     // Unimodal sliders

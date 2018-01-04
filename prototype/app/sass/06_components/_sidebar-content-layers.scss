@@ -1,10 +1,10 @@
 .sidebar-content.-layers {
 
-    &.-singleton > .layer-card.-singleton {
+    &.-singleton > .-singleton {
         display: block;
     }
 
-    &.-multiple-layers > .layer-card.-multiple-layers {
+    &.-multiple-layers > .-multiple-layers {
         display: block;
     }
 

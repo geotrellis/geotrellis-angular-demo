@@ -2,12 +2,11 @@
 Mostly HTML and SASS. Plus a bit of JS to demonstrate moving between states of
 the app.
 
-## Singleton layers
-- Use `-singleton` class on a layer card when it's the only card.
+## Singleton vs Multiple layers
+- Use `-singleton` class on a layer card or group when it's the only item.
+- Use `-multiple-layers` class on a layer card or group otherwise.
 
 ## TODO
-- Multiple layers
-- Layer groups
 - Tour
 - Floater
 - Compare

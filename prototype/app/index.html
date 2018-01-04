@@ -69,11 +69,11 @@
                             <i class="icon material-icons md-18 md-dark">more_vert</i>
                         </button>
                     </header>
-                    <section class="layer-card -multiple-layers">
+                    <section class="layer-card -multiple-layers -on">
                         <div class="layer-overview">
                             <header class="layer-header">
                                 <input class="toggle" type="checkbox" checked>
-                                <h4 class="heading">Chattanooga Agriculture &amp; Forestry</h4>
+                                <h4 class="heading">Layer with band picker</h4>
                             </header>
                             <div class="dropdown">
                                 <select class="select">
@@ -104,11 +104,11 @@
                             </div>
                         </div>
                     </section>
-                    <section class="layer-card -multiple-layers">
+                    <section class="layer-card -multiple-layers -on">
                         <div class="layer-overview">
                             <header class="layer-header">
                                 <input class="toggle" type="checkbox" checked>
-                                <h4 class="heading">Chattanooga Agriculture &amp; Forestry</h4>
+                                <h4 class="heading">Simple layer</h4>
                             </header>
                         </div>
                         <div class="layer-details">
@@ -132,35 +132,97 @@
                             </div>
                         </div>
                     </section>
-                    <section class="layer-card -multiple-layers">
-                        <div class="layer-overview">
-                            <header class="layer-header">
-                                <input class="toggle" type="checkbox" checked>
-                                <h4 class="heading">Chattanooga Agriculture &amp; Forestry</h4>
-                            </header>
-                        </div>
-                        <div class="layer-details">
-                            <div class="layer-controls">
-                                <div class="layer-control -opacity">
-                                    <label class="label">Opacity</label>
-                                    <output class="value">90%</output>
-                                    <input class="slider -unimodal" type="range" name="opacity" min="0" max="1" step=".01" value=".9">
-                                </div>
-                                <div class="layer-control -threshold">
-                                    <label class="label">Show</label>
-                                    <output class="value">Top 80%</output>
-                                    <input class="slider -unimodal" type="range" name="threshold" min="0" max="1" step=".01" value=".8">
-                                </div>
-                                <div class="layer-control -legend">
-                                    <div class="label">Legend</div>
-                                    <!-- <div class="value">Avoid</div> -->
-                                    <div class="legend"></div>
-                                    <!-- <div class="value">Prefer</div> -->
+                    <section class="layer-group -multiple-layers -on">
+                        <header class="layer-group-header">
+                            <input class="toggle" type="checkbox" checked>
+                            <h4 class="heading">Layer Group</h4>
+                        </header>
+                        <section class="layer-card -on">
+                            <div class="layer-overview">
+                                <header class="layer-header">
+                                    <input class="toggle" type="checkbox" checked>
+                                    <h4 class="heading">Layer Alpha</h4>
+                                </header>
+                            </div>
+                            <div class="layer-details">
+                                <div class="layer-controls">
+                                    <div class="layer-control -opacity">
+                                        <label class="label">Opacity</label>
+                                        <output class="value">90%</output>
+                                        <input class="slider -unimodal" type="range" name="opacity" min="0" max="1" step=".01" value=".9">
+                                    </div>
+                                    <div class="layer-control -threshold">
+                                        <label class="label">Show</label>
+                                        <output class="value">Top 80%</output>
+                                        <input class="slider -unimodal" type="range" name="threshold" min="0" max="1" step=".01" value=".8">
+                                    </div>
+                                    <div class="layer-control -legend">
+                                        <div class="label">Legend</div>
+                                        <!-- <div class="value">Avoid</div> -->
+                                        <div class="legend"></div>
+                                        <!-- <div class="value">Prefer</div> -->
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </section>
+                        <section class="layer-card -on">
+                            <div class="layer-overview">
+                                <header class="layer-header">
+                                    <input class="toggle" type="checkbox" checked>
+                                    <h4 class="heading">Layer Two</h4>
+                                </header>
+                            </div>
+                            <div class="layer-details">
+                                <div class="layer-controls">
+                                    <div class="layer-control -opacity">
+                                        <label class="label">Opacity</label>
+                                        <output class="value">90%</output>
+                                        <input class="slider -unimodal" type="range" name="opacity" min="0" max="1" step=".01" value=".9">
+                                    </div>
+                                    <div class="layer-control -threshold">
+                                        <label class="label">Show</label>
+                                        <output class="value">Top 80%</output>
+                                        <input class="slider -unimodal" type="range" name="threshold" min="0" max="1" step=".01" value=".8">
+                                    </div>
+                                    <div class="layer-control -legend">
+                                        <div class="label">Legend</div>
+                                        <!-- <div class="value">Avoid</div> -->
+                                        <div class="legend"></div>
+                                        <!-- <div class="value">Prefer</div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="layer-card -on">
+                            <div class="layer-overview">
+                                <header class="layer-header">
+                                    <input class="toggle" type="checkbox" checked>
+                                    <h4 class="heading">Layer C</h4>
+                                </header>
+                            </div>
+                            <div class="layer-details">
+                                <div class="layer-controls">
+                                    <div class="layer-control -opacity">
+                                        <label class="label">Opacity</label>
+                                        <output class="value">90%</output>
+                                        <input class="slider -unimodal" type="range" name="opacity" min="0" max="1" step=".01" value=".9">
+                                    </div>
+                                    <div class="layer-control -threshold">
+                                        <label class="label">Show</label>
+                                        <output class="value">Top 80%</output>
+                                        <input class="slider -unimodal" type="range" name="threshold" min="0" max="1" step=".01" value=".8">
+                                    </div>
+                                    <div class="layer-control -legend">
+                                        <div class="label">Legend</div>
+                                        <!-- <div class="value">Avoid</div> -->
+                                        <div class="legend"></div>
+                                        <!-- <div class="value">Prefer</div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                     </section>
-                    <section class="layer-card -singleton">
+                    <section class="layer-card -singleton -on">
                         <div class="layer-overview">
                             <header class="layer-header">
                                 <input class="toggle" type="checkbox">

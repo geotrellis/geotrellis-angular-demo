@@ -1,0 +1,25 @@
+.layer-group {
+    position: relative;
+
+    &::before {
+        position: absolute;
+        width: 3px;
+        top: 2rem;
+        bottom: 2rem;
+        left: 2.1rem;
+        background-color: $md-gray;
+        content: '';
+        z-index: 1;
+    }
+
+    > .layer-group-header {
+        margin: .8rem 0;
+        z-index: 2;
+    }
+
+    > .layer-card {
+        position: relative;
+        margin: .8rem 0;
+        z-index: 2;
+    }
+}

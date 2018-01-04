@@ -3,36 +3,24 @@
     flex-flow: column nowrap;
     align-items: stretch;
     justify-content: center;
+    min-height: 5.6rem;
     padding: .8rem 0;
 
-    > .layer-header {
-        display: flex;
-        flex-flow: row nowrap;
-        align-items: center;
-        justify-content: flex-start;
-        margin: .8rem 0;
-
-        > .toggle {
-            flex: none;
-            width: 1.8rem;
-            height: 1.8rem;
-            margin: .2rem .8rem 0 0;
-
-            .layer-card.-singleton & {
-                display: none;
-            }
-        }
-
-        > .heading {
-            flex: auto;
-            margin: 0;
-            font: $font-subheader;
-            font-weight: $font-weight-bold;
-            line-height: 1;
-            text-align: left;
-        }
+    .layer-group:not(.-on) & {
+        opacity: .5;
     }
 
-    > .picker {
+    .layer-card.-on:not(.-singleton) & {
+        cursor: pointer;
+    }
+
+    > .layer-header {
+        margin: .8rem 0;
+    }
+
+    > .dropdown {
+        .layer-card:not(.-on) & {
+            opacity: .5;
+        }
     }
 }

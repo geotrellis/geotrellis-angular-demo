@@ -1,0 +1,29 @@
+.layer-group-header {
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    padding: .8rem 1.6rem;
+
+    > .toggle {
+        flex: none;
+        width: 1.8rem;
+        height: 1.8rem;
+        margin: .2rem .8rem 0 0;
+    }
+
+    > .heading {
+        flex: auto;
+        margin: 0;
+        color: $dk-gray;
+        font: $font-subheader;
+        font-weight: $font-weight-bold;
+        line-height: 1;
+        text-align: left;
+
+        .layer-group:not(.-on) & {
+            opacity: .5;
+        }
+    }
+}

@@ -13,6 +13,7 @@
         font-weight: $font-weight-bold;
         text-align: center;
         text-transform: uppercase;
+        cursor: pointer;
 
         &:hover {
             border-bottom-color: $sky;
