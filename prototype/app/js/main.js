@@ -45,7 +45,16 @@ $(function() {
         .on('click',
             '.layer-header > .toggle, .layer-group-header > .toggle',
             function(e) {
-                $(this).closest('.layer-card, .layer-group').toggleClass('-on');
+                const $parent = $(this).closest('.layer-card, .layer-group');
+                $parent.toggleClass('-on');
+
+                // Disable dropdown on disabled Layers
+                $select = $parent.find('.select');
+                if ($parent.hasClass('-on')) {
+                    $select.removeAttr('disabled');
+                } else {
+                    $select.attr('disabled', 'disabled');
+                }
             });
 
 
