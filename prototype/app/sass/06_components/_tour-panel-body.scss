@@ -1,0 +1,27 @@
+.tour-panel-body {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font: $font-body;
+
+    > .text {
+        width: 50%;
+        margin: 0;
+        margin-bottom: 1em;
+        padding-right: 4rem;
+    }
+
+    > .highlights-list {
+        width: 50%;
+        margin: 0;
+        padding-left: 2.4rem;
+        list-style: disc;
+        font-weight: $font-weight-bold;
+
+        > .listitem {
+            margin-bottom: 1em;
+            padding-left: .8rem;
+        }
+    }
+}

@@ -7,7 +7,6 @@ the app.
 - Use `-multiple-layers` class on a layer card or group otherwise.
 
 ## TODO
-- Tour
 - Floater
 - Compare
 - Diff

@@ -1,0 +1,19 @@
+.tour-panel-header {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    > .heading {
+        margin: .8rem 0;
+        font: $font-headline;
+        font-weight: $font-weight-bold;
+        text-align: left;
+    }
+
+    > .button {
+        @include debuttonify();
+        margin: .4rem;
+        cursor: pointer;
+    }
+}

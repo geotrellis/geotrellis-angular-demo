@@ -1,0 +1,7 @@
+.tour-overlay {
+    @include invisible;
+
+    &.-on {
+        @include visible;
+    }
+}

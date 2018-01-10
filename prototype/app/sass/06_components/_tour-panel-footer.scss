@@ -1,0 +1,59 @@
+.tour-panel-footer {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+
+    > .button {
+        @include debuttonify($white);
+        margin: 0 1.6rem;
+        border-width: 2px;
+        border-style: solid;
+        min-width: 10.4rem;
+        padding: .8rem 2.4rem;
+        color: $white;
+        font: $font-subheader;
+        text-align: center;
+        cursor: pointer;
+
+        &.-prev {
+            background-color: transparent;
+            border-color: $white;
+
+            .tour-panel:first-of-type & {
+                @include invisible;
+            }
+        }
+
+        &.-next,
+        &.-done {
+            background-color: rgba($black, .5);
+            border-color: transparent;
+            font-weight: $font-weight-bold;
+        }
+    }
+
+    > .progress-dots {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
+        margin: 0 3.2rem;
+        font-size: $font-size-title;
+
+        > .dot {
+            margin: 0 .4rem;
+            color: $white;
+            opacity: .3;
+
+            .tour-panel:nth-of-type(1) &:nth-of-type(1),
+            .tour-panel:nth-of-type(2) &:nth-of-type(2),
+            .tour-panel:nth-of-type(3) &:nth-of-type(3),
+            .tour-panel:nth-of-type(4) &:nth-of-type(4),
+            .tour-panel:nth-of-type(5) &:nth-of-type(5),
+            .tour-panel:nth-of-type(6) &:nth-of-type(6) {
+                opacity: 1;
+            }
+        }
+    }
+}

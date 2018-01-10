@@ -1,0 +1,27 @@
+.tour-panel {
+    display: none;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    justify-content: flex-end;
+    background-color: $turquoise;
+    padding: .8rem 1.6rem;
+
+    > .tour-panel-header {
+        flex: none;
+        margin: .8rem;
+    }
+
+    > .tour-panel-body {
+        flex: auto;
+        margin: .8rem;
+    }
+
+    > .tour-panel-footer {
+        flex: none;
+        margin: 1.6rem .8rem;
+    }
+
+    &.-on {
+        display: flex;
+    }
+}

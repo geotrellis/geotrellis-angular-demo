@@ -120,11 +120,7 @@ $(function() {
     });
 
 
-    // About modal
-    $('.app-header').on('click', '.heading > .button', function(e) {
-        $('.about-modal').addClass('-on');
-    });
-
+    // Modals
     $('.app-root').on('click', '.modal-header > .button', function(e) {
         $('.modal-overlay').removeClass('-on');
     });
@@ -133,6 +129,45 @@ $(function() {
         if (e.target === this) {
             $('.modal-overlay').removeClass('-on');
         }
+    });
+
+
+    // Tour
+    $('.app-header').on('click', '.tourbutton', function(e) {
+        $('.tour-modal').addClass('-on');
+    });
+
+    $('.app-root').on('click', '.tour-modal .big-button', function(e) {
+        $('.tour-modal').removeClass('-on');
+        $('.tour-overlay').addClass('-on');
+        $('.tour-overlay > .tour-panel:first-of-type').addClass('-on');
+    });
+
+    $('.app-root').on('click', '.tour-panel-header > .button', function(e) {
+        const $button = $(this);
+        const $panel = $button.closest('.tour-panel');
+        $('.tour-panel').removeClass('-on');
+        $('.tour-overlay').removeClass('-on');
+    });
+
+    $('.app-root').on('click', '.tour-panel-footer > .button', function(e) {
+        const $button = $(this);
+        const $panel = $button.closest('.tour-panel');
+        $panel.removeClass('-on');
+        if ($button.hasClass('-prev')) {
+            $panel.prev('.tour-panel').addClass('-on');
+        } else if ($button.hasClass('-next')) {
+            $panel.next('.tour-panel').addClass('-on');
+        } else if ($button.hasClass('-done')) {
+            $('.tour-overlay').removeClass('-on');
+        }
+    });
+
+
+
+    // About modal
+    $('.app-header').on('click', '.heading > .button', function(e) {
+        $('.about-modal').addClass('-on');
     });
 
 
