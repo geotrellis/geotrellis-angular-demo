@@ -16,4 +16,12 @@
             display: flex;
         }
     }
+
+    .sidebar-content.-multiple-layers.-compare-mode &.-selected {
+        background-color: rgba($turquoise, .3);
+    }
+
+    .sidebar-content.-multiple-layers.-diff-mode &.-selected {
+        background-color: rgba($aqua, .3);
+    }
 }

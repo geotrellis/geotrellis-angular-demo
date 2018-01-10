@@ -14,6 +14,10 @@
     background-color: rgba($black, .6);
     z-index: $z-index-modal;
 
+    &.-menu {
+        background-color: transparent;
+    }
+
     &.-on {
         @include visible;
     }
@@ -23,5 +27,11 @@
         max-width: 100%;
         height: 48rem;
         box-shadow: box-shadow(5);
+    }
+
+    > .modal-menu {
+        position: absolute;
+        width: 14.4rem;
+        box-shadow: box-shadow(2);
     }
 }

@@ -8,8 +8,6 @@ the app.
 
 ## TODO
 - Floater
-- Compare
-- Diff
 
 ---
 

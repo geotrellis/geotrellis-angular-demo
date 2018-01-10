@@ -35,7 +35,7 @@ $(function() {
             '.layer-card > .layer-overview > .dropdown',
             function(e) { e.stopPropagation(); })
         .on('click',
-            '.layer-card:not(.-singleton) > .layer-overview',
+            '.sidebar-content:not(.-modal) .layer-card:not(.-singleton) > .layer-overview',
             function(e) { $(this).parents('.layer-card').toggleClass('-open'); }
         );
 
@@ -123,14 +123,59 @@ $(function() {
 
 
     // Modals
-    $('.app-root').on('click', '.modal-header > .button', function(e) {
-        $('.modal-overlay').removeClass('-on');
-    });
-
     $('.app-root').on('click', '.modal-overlay', function(e) {
         if (e.target === this) {
             $('.modal-overlay').removeClass('-on');
         }
+    });
+
+    $('.app-root').on('click', '.modal-header > .button', function(e) {
+        $('.modal-overlay').removeClass('-on');
+    });
+
+
+    // Compare and Diff modes…
+
+    // … sidebar header menu
+    $('.app-sidebar').on('click', '.sidebar-content.-layers > .sidebar-header.-multiple-layers > .button', function(e) {
+        const $button = $(this);
+        const $menu = $('.sidebar-header-menu-modal > .modal-menu');
+        const gutter = 8;
+        let offset = $button.offset();
+        offset.top = offset.top + $button.height() + gutter;
+        offset.left = offset.left + $button.width() - $menu.width() + gutter;
+        $menu.offset(offset);
+        $('.sidebar-header-menu-modal').addClass('-on');
+    });
+
+    // … enter Compare mode
+    $('.app-root').on('click', '.sidebar-header-menu-modal > .modal-menu > .button.-compare', function(e) {
+        $('.modal-overlay').removeClass('-on');
+        $('.sidebar-content.-layers.-on').addClass('-compare-mode -modal');
+    });
+
+    // … enter Diff mode
+    $('.app-root').on('click', '.sidebar-header-menu-modal > .modal-menu > .button.-diff', function(e) {
+        $('.modal-overlay').removeClass('-on');
+        $('.sidebar-content.-layers.-on').addClass('-diff-mode -modal');
+    });
+
+    // … exit Compare and Diff modes
+    $('.app-sidebar').on('click', '.sidebar-content.-layers > .sidebar-header.-modal > .button', function(e) {
+        $('.sidebar-content.-modal .layer-card').removeClass('-selected');
+        $('.sidebar-content.-layers.-on').removeClass('-modal -diff-mode -compare-mode');
+    });
+
+    // … toggle selected cards
+    $('.app-sidebar').on('click',
+        '.sidebar-content.-modal .layer-card',
+        function(e) {
+            const isSelected = $(this).hasClass('-selected');
+            const numSelected = $('.sidebar-content.-modal .layer-card.-selected').length;
+            if (isSelected || numSelected < 2) {
+                $(this).toggleClass('-selected');
+            }
+            e.preventDefault();
     });
 
 

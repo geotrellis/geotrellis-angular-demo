@@ -12,6 +12,15 @@
         display: flex;
     }
 
+    &.-modal > .sidebar-header:not(.-modal) {
+        display: none;
+    }
+
+    &.-compare-mode > .sidebar-header.-compare-mode,
+    &.-diff-mode > .sidebar-header.-diff-mode {
+        display: flex;
+    }
+
     > * {
         display: none;
     }

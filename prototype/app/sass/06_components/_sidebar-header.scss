@@ -36,4 +36,41 @@
             background-color: transparent;
         }
     }
+
+    &.-modal {
+        display: none;
+        align-items: baseline;
+        min-height: 4.8rem;
+        margin-top: -.8rem;
+        margin-right: -1.6rem;
+        margin-left: -1.6rem;
+        padding: .8rem 1.6rem;
+
+        &.-compare-mode {
+            background-color: $turquoise;
+        }
+
+        &.-diff-mode {
+            background-color: $aqua;
+        }
+
+        > .heading {
+            flex: none;
+            margin-right: 1.6rem;
+            font: $font-title;
+        }
+
+        > .text {
+            font: $font-caption;
+        }
+
+        > .button {
+            @include buttonify(transparent);
+            flex: none;
+            align-self: center;
+            margin: 0;
+            margin-left: auto;
+            padding: 0;
+        }
+    }
 }

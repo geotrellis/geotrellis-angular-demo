@@ -1,0 +1,17 @@
+.modal-menu {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    background-color: $white;
+
+    > .button {
+        @include debuttonify($black);
+        padding: .8rem 1.6rem;
+        font: $font-body;
+
+        &:hover {
+            background-color: $lt-gray;
+        }
+    }
+}
