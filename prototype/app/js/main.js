@@ -1,19 +1,19 @@
 $(function() {
 
-    // Demo picker menu
+    // Open demo picker menu on header logo click
     $('.logo-button').on('click', function(e) {
         $('.demos-menu').toggleClass('-on');
     });
 
 
-    // Singleton layer vs Multiple layers toggle
+    // Switch between singleton vs multiple layers on demo picker item click
     $('.app-header').on('click', '.demo-switcher > .demos-menu', function(e) {
         $('.sidebar-content.-layers').toggleClass('-singleton -multiple-layers');
         $('.demos-menu').toggleClass('-on');
     });
 
 
-    // Sidebar tabs
+    // Sidebar tab switching
     $('.app-sidebar').on('click', '.sidebar-tabs > .tab', function(e) {
         $tab = $(e.target);
         $sidebarContent = $('.sidebar-content').filter('[data-tab=' + $tab.data('tab') + ']');
@@ -26,7 +26,7 @@ $(function() {
     });
 
 
-    // Expand/collapse layer card
+    // Expand/collapse layer card onclick
     $('.app-sidebar')
         .on('click',
             '.layer-card > .layer-overview > .layer-header > .toggle',
@@ -40,7 +40,7 @@ $(function() {
         );
 
 
-    // Layer toggle
+    // Toggle layer on checkbox click
     $('.app-sidebar')
         .on('click',
             '.layer-header > .toggle, .layer-group-header > .toggle',
@@ -58,7 +58,8 @@ $(function() {
             });
 
 
-    // Unimodal sliders
+    // Unimodal sliders in expanded layer card
+    // … Opacity slider
     $('.layer-control.-opacity > .slider.-unimodal').on('input', function(e) {
         const $input = $(e.target);
         const $output = $input.siblings('.value');
@@ -66,6 +67,7 @@ $(function() {
         $output.text((val * 100).toFixed(0) + '%');
     });
 
+    // … Threshold slider
     $('.layer-control.-threshold > .slider.-unimodal').on('input', function(e) {
         const $input = $(e.target);
         const $output = $input.siblings('.value');
@@ -80,7 +82,7 @@ $(function() {
     });
 
 
-    // Bimodal sliders
+    // Bimodal sliders in compound layer card
     $('.layer-factor > .slider.-bimodal').on('input', function(e) {
         const $this = $(e.target);
         const val = parseInt($this.val());
@@ -108,7 +110,7 @@ $(function() {
     });
 
 
-    // Analysis options
+    // Analysis controls
     $('.app-sidebar').on('click', '.analysis-options > .button', function(e) {
         $('.analysis-options').removeClass('-on');
         $('.analysis-results').addClass('-on');
@@ -132,17 +134,19 @@ $(function() {
     });
 
 
-    // Tour
+    // Open tour modal on header "Tour" button click
     $('.app-header').on('click', '.tourbutton', function(e) {
         $('.tour-modal').addClass('-on');
     });
 
+    // Open tour on click of button in tours overlay
     $('.app-root').on('click', '.tour-modal .big-button', function(e) {
         $('.tour-modal').removeClass('-on');
         $('.tour-overlay').addClass('-on');
         $('.tour-overlay > .tour-panel:first-of-type').addClass('-on');
     });
 
+    // Close tours on click of header X
     $('.app-root').on('click', '.tour-panel-header > .button', function(e) {
         const $button = $(this);
         const $panel = $button.closest('.tour-panel');
@@ -150,6 +154,7 @@ $(function() {
         $('.tour-overlay').removeClass('-on');
     });
 
+    // Page between tour panels
     $('.app-root').on('click', '.tour-panel-footer > .button', function(e) {
         const $button = $(this);
         const $panel = $button.closest('.tour-panel');
@@ -162,7 +167,6 @@ $(function() {
             $('.tour-overlay').removeClass('-on');
         }
     });
-
 
 
     // About modal
